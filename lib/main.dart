@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/features/home/home.dart';
+import 'package:grow_food/rout_generatoe.dart';
 
 void main() {
   runApp(
@@ -9,12 +10,12 @@ void main() {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
+        return const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: child,
+          initialRoute: '/SignIn',
+          onGenerateRoute: RouteGenerator.generateRoute,
         );
       },
-      child: const HomeView(),
     ),
   );
 }
