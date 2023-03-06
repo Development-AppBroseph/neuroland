@@ -23,60 +23,43 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: ColorsStyles.backgroundColor,
-      body: Stack(
-        children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 55.h),
-              child: Transform.rotate(
-                angle: math.pi / 25,
-                child: Image.asset(
-                  Img.bottomImage,
-                  width: 235.w,
-                  height: 180.h,
-                ),
+      body: SafeArea(
+        child: ListView(
+          children: [
+            Container(
+              height: 380.h,
+              width: double.infinity,
+              margin: EdgeInsets.only(
+                  top: 60.h, right: 24.w, left: 24.w, bottom: 42.h),
+              child: Image.asset(
+                Img.signInBackground,
+                fit: BoxFit.contain,
               ),
             ),
-          ),
-          Column(
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 134.h, bottom: 121.h),
-                child: Image.asset(
-                  Img.logo,
-                  height: 73.h,
-                  width: 220.w,
-                ),
-              ),
-              EntryWidget(
-                controllerNumberOrEmail: controllerNumberOrEmail,
-                controllerPassword: controllerPassword,
-              ),
-              const Spacer(),
-              CustomButton(
-                title: 'Войти',
-                listOfColors: ColorsStyles.gradientRedColor,
-                accentText: true,
-                onTap: () => Navigator.pushNamed(context, '/HomeView'),
-              ),
-              SizedBox(
-                height: 25.h,
-              ),
-              Padding(
-                padding: EdgeInsets.only(bottom: 65.h),
-                child: CustomButton(
-                  title: 'Регистрация',
-                  listOfColors: ColorsStyles.gradientBlueColor,
-                  accentText: true,
-                  onTap: () => Navigator.pushNamed(context, '/SignUp'),
-                ),
-              )
-            ],
-          ),
-        ],
+            EntryWidget(
+              controllerNumberOrEmail: controllerNumberOrEmail,
+              controllerPassword: controllerPassword,
+            ),
+            SizedBox(
+              height: 30.h,
+            ),
+            CustomButton(
+              title: 'Войти',
+              accentText: true,
+              onTap: () => Navigator.pushNamed(context, '/HomeView'),
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            CustomButton(
+              title: 'Регистрация',
+              outLined: true,
+              accentText: true,
+              onTap: () => Navigator.pushNamed(context, '/SignUp'),
+            ),
+          ],
+        ),
       ),
     );
   }

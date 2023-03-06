@@ -20,13 +20,13 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController controllerNumber = TextEditingController();
   final TextEditingController controllerEmail = TextEditingController();
   final TextEditingController controllerPassword = TextEditingController();
+  final TextEditingController compareControllerPassword =
+      TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        centerTitle: true,
         elevation: 0,
         leading: GestureDetector(
           onTap: () => Navigator.of(context).pop(),
@@ -36,101 +36,100 @@ class _SignUpState extends State<SignUp> {
           ),
         ),
         backgroundColor: ColorsStyles.backgroundColor,
-        title: CustomText(
-          title: 'Регистрация',
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w700,
-        ),
       ),
-      body: Stack(
-        children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 55.h),
-              child: Transform.rotate(
-                angle: math.pi / 25,
-                child: Image.asset(
-                  Img.bottomImage,
-                  width: 235.w,
-                  height: 180.h,
-                ),
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 35.w),
-            child: Column(
+      body: Container(
+        margin: EdgeInsets.symmetric(horizontal: 35.w),
+        child: ListView(
+          children: [
+            Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  margin: EdgeInsets.only(top: 50.h, bottom: 84.h),
-                  child: Image.asset(
-                    Img.logo,
-                    height: 73.h,
-                    width: 220.w,
-                  ),
-                ),
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.5),
-                      child: CustomTextField(
-                        color: ColorsStyles.whiteColor,
-                        controller: controllerName,
-                        hintText: 'Имя*',
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.5),
-                      child: CustomTextField(
-                        color: ColorsStyles.whiteColor,
-                        controller: controllerNumber,
-                        hintText: 'Телефон*',
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.5),
-                      child: CustomTextField(
-                        color: ColorsStyles.whiteColor,
-                        controller: controllerEmail,
-                        hintText: 'Почта*',
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.5),
-                      child: CustomTextField(
-                        color: ColorsStyles.whiteColor,
-                        controller: controllerPassword,
-                        hintText: 'Пароль*',
-                        password: true,
-                      ),
-                    ),
-                  ],
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: CustomText(
-                    title: 'Политика конфиденциальности',
-                    fontWeight: FontWeight.w400,
-                    color: Colors.grey.withOpacity(0.4),
-                  ),
-                ),
-                const Spacer(),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 65.h),
-                  child: CustomButton(
-                    title: 'Зарегистрироваться',
-                    listOfColors: ColorsStyles.gradientBlueColor,
-                    accentText: true,
-                    onTap: () => null,
-                    withPadding: false,
+                  padding: EdgeInsets.only(top: 122.h, bottom: 25.h),
+                  child: CustomText(
+                    title: 'Регистрация',
+                    fontSize: 32.sp,
+                    fontWeight: FontWeight.bold,
+                    color: ColorsStyles.mainTextColor,
                   ),
-                )
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.h),
+                  child: CustomTextField(
+                    color: ColorsStyles.backgroundTextField,
+                    controller: controllerName,
+                    hintText: 'Имя',
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.h),
+                  child: CustomTextField(
+                    color: ColorsStyles.backgroundTextField,
+                    controller: controllerNumber,
+                    hintText: 'Телефон',
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.h),
+                  child: CustomTextField(
+                    color: ColorsStyles.backgroundTextField,
+                    controller: controllerEmail,
+                    hintText: 'Почта',
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.h),
+                  child: CustomTextField(
+                    color: ColorsStyles.backgroundTextField,
+                    controller: controllerPassword,
+                    hintText: 'Пароль',
+                    password: true,
+                  ),
+                ),
               ],
             ),
-          ),
-        ],
+            Padding(
+              padding: EdgeInsets.only(top: 5.h, bottom: 20.h),
+              child: CustomText(
+                title:
+                    'Пароль должен состоять из 8 и более символов, содержать заглавные и строчные буквы, цифры',
+                fontWeight: FontWeight.w400,
+                color: ColorsStyles.textFiledHintColor,
+                fontSize: 15.sp,
+                centerTitle: true,
+              ),
+            ),
+            CustomTextField(
+              hintText: 'Подтвердите пароль',
+              color: ColorsStyles.backgroundTextField,
+              controller: compareControllerPassword,
+            ),
+            SizedBox(
+              height: 30.h,
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 15.h),
+              child: CustomButton(
+                title: 'Зарегистрироваться',
+                accentText: true,
+                onTap: () => null,
+                withPadding: false,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 86.h),
+              child: CustomText(
+                title:
+                    'Нажимая кнопку, вы автоматически соглашаетесь с Политикой Конфиденциальности',
+                fontWeight: FontWeight.w400,
+                color: ColorsStyles.textFiledHintColor,
+                fontSize: 15.sp,
+                centerTitle: true,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

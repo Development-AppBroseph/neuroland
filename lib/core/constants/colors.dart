@@ -17,4 +17,8 @@ abstract class ColorsStyles {
   ];
   static const Color blackColor = Color(0xff000000);
   static const Color whiteColor = Color(0xffffffff);
+  static const Color backgroundTextField = Color(0xfff1f1f1);
+  static const Color mainTextColor = Color(0xff363636); 
+  static const Color textFiledHintColor = Color(0xff6B6B6B);
+  static const Color buttonColor = Color(0xff2E3190);
 }

@@ -29,7 +29,6 @@ class CustomText extends StatelessWidget {
               ? title
               : title.substring(0, maxLength! - 1) + '...',
       style: TextStyle(
-        fontFamily: 'Mons',
         fontSize: fontSize,
         fontWeight: fontWeight,
         fontStyle: fontStyle,

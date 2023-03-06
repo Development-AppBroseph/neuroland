@@ -34,25 +34,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 18.h),
+      padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 18.5.h),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.r),
+        borderRadius: BorderRadius.circular(10.r),
         color: widget.color,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: const Offset(0, 1),
-          ),
-        ],
       ),
       child: TextField(
         controller: widget.controller,
         style: TextStyle(
-          fontFamily: 'Mons',
-          fontSize: 20.sp,
+          fontSize: 20.sp,// crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           color: ColorsStyles.blackColor,
           fontWeight: FontWeight.w400,
         ),
@@ -65,10 +57,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
         decoration: InputDecoration.collapsed(
           hintText: widget.hintText,
           hintStyle: TextStyle(
-            fontFamily: 'Mons',
             fontSize: 20.sp,
-            fontWeight: FontWeight.w400,
-            color: const Color(0xff161616).withOpacity(0.4),
+            fontWeight: FontWeight.w500,
+            color: ColorsStyles.textFiledHintColor,
           ),
         ),
       ),

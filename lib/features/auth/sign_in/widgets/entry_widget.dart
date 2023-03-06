@@ -24,42 +24,32 @@ class _EntryWidgetState extends State<EntryWidget> {
       padding: EdgeInsets.symmetric(horizontal: 35.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const CustomText(
-            title: 'Вход',
-            fontWeight: FontWeight.w700,
+          CustomText(
+            title: 'Вход в аккаунт',
+            fontWeight: FontWeight.bold,
+            fontSize: 32.sp,
+            color: ColorsStyles.mainTextColor,
           ),
           SizedBox(
-            height: 25.h,
+            height: 30.h,
           ),
           CustomTextField(
-            color: ColorsStyles.whiteColor,
-            hintText: 'Телефон или почта',
+            color: ColorsStyles.backgroundTextField,
+            hintText: 'Email или телефон',
             controller: widget.controllerNumberOrEmail,
+            type: TextInputType.number,
+            password: false,
           ),
           SizedBox(
-            height: 25.h,
+            height: 10.h,
           ),
           CustomTextField(
-            color: ColorsStyles.whiteColor,
+            color: ColorsStyles.backgroundTextField,
             hintText: 'Пароль',
             controller: widget.controllerPassword,
             password: true,
-          ),
-          SizedBox(
-            height: 33.h,
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: GestureDetector(
-              onTap: () {},
-              child: CustomText(
-                title: 'Политика конфиденциальности',
-                fontWeight: FontWeight.w400,
-                color: Colors.grey.withOpacity(0.4),
-              ),
-            ),
           ),
         ],
       ),

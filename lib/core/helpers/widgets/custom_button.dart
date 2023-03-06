@@ -8,16 +8,16 @@ import 'custom_text.dart';
 class CustomButton extends StatelessWidget {
   final String title;
   final Function()? onTap;
-  final List<Color> listOfColors;
   final bool accentText;
   final bool withPadding;
+  final bool outLined;
   const CustomButton({
     super.key,
     required this.title,
-    required this.listOfColors,
     this.onTap,
     required this.accentText,
     this.withPadding = true,
+    this.outLined = false,
   });
 
   @override
@@ -31,20 +31,23 @@ class CustomButton extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: withPadding ? 35.w : 0.w),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [
-              ...listOfColors,
-            ],
-          ),
+          border: outLined
+              ? Border.all(
+                  color: ColorsStyles.mainTextColor,
+                  width: 2.w,
+                )
+              : Border.all(
+                  color: ColorsStyles.buttonColor,
+                ),
           borderRadius: BorderRadius.circular(10.r),
+          color: outLined ? ColorsStyles.whiteColor : ColorsStyles.buttonColor,
         ),
         child: CustomText(
           title: title,
           fontSize: 18.sp,
           fontWeight: accentText ? FontWeight.w700 : null,
-          color: ColorsStyles.whiteColor,
+          color:
+              outLined ? ColorsStyles.mainTextColor : ColorsStyles.whiteColor,
         ),
       ),
     );
