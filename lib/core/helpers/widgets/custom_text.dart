@@ -27,7 +27,7 @@ class CustomText extends StatelessWidget {
           ? title
           : title.length < maxLength!
               ? title
-              : title.substring(0, maxLength! - 1) + '...',
+              : '${title.substring(0, maxLength! - 1)}...',
       style: TextStyle(
         fontSize: fontSize,
         fontWeight: fontWeight,

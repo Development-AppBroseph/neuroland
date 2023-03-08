@@ -9,14 +9,16 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController? controller;
   final TextInputType? type;
   final String hintText;
-  final bool password;
+  final bool isEmailOrPassword;
+  final bool isText;
   const CustomTextField({
     super.key,
     required this.color,
     required this.controller,
     this.type,
     required this.hintText,
-    this.password = false,
+    this.isEmailOrPassword = false,
+    required this.isText,
   });
 
   @override
@@ -43,17 +45,19 @@ class _CustomTextFieldState extends State<CustomTextField> {
       child: TextField(
         controller: widget.controller,
         style: TextStyle(
-          fontSize: 20.sp,// crossAxisAlignment: CrossAxisAlignment.center,
-          // mainAxisAlignment: MainAxisAlignment.center,
+          fontSize: 20.sp, 
           color: ColorsStyles.blackColor,
           fontWeight: FontWeight.w400,
         ),
         // maxLength: widget.password ? 18 : ,
         textAlignVertical: TextAlignVertical.center,
         cursorColor: ColorsStyles.blackColor,
-        inputFormatters: widget.password ? [] : [CustomInputFormatterNumber()],
+        textCapitalization: widget.isText ? TextCapitalization.sentences : TextCapitalization.none,
+        inputFormatters: widget.isEmailOrPassword || widget.isText
+            ? []
+            : [CustomInputFormatterNumber()],
         keyboardType: widget.type,
-        obscureText: widget.password,
+        obscureText: widget.isEmailOrPassword,
         decoration: InputDecoration.collapsed(
           hintText: widget.hintText,
           hintStyle: TextStyle(

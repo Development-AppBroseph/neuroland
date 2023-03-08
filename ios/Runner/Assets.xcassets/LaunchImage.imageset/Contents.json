@@ -1,34 +1,51 @@
 {
   "images" : [
     {
+      "filename" : "LaunchImage.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "LaunchImageDark.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "LaunchImage@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "LaunchImageDark@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "LaunchImage@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
     {
-      "filename" : "4-1~iphone@1x.png",
-      "idiom" : "iphone",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "4-1~iphone@2x.png",
-      "idiom" : "iphone",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "4-1~iphone@3x.png",
-      "idiom" : "iphone",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "LaunchImageDark@3x.png",
+      "idiom" : "universal",
       "scale" : "3x"
     }
   ],

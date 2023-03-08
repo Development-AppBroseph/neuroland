@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:grow_food/features/home/home.dart';
+import 'package:grow_food/features/presentation/auth/presentation/sign_in/view/sign_in.dart';
+import 'package:grow_food/features/presentation/auth/presentation/sign_up/view/sign_up.dart';
+import 'package:grow_food/features/presentation/home/home.dart';
 
-import 'features/auth/sign_in/view/sign_in.dart';
-import 'features/auth/sign_up/view/sign_up.dart';
 
 class RouteGenerator {
-  static Route<dynamic> generateRoute(RouteSettings settings) {
+  static Route<dynamic>   generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/SignIn':
         return MaterialPageRoute(
