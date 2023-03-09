@@ -1,14 +1,12 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:grow_food/core/constants/colors.dart';
+import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/core/helpers/widgets/custom_button.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text_field.dart';
 import 'package:grow_food/core/helpers/widgets/my_behavior.dart';
-import 'package:grow_food/core/helpers/widgets/push_error.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_up/controller/sign_up_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_up/controller/sign_up_state.dart';
 
@@ -49,56 +47,11 @@ class _SignUpState extends State<SignUp> {
         email.isEmpty ||
         password.isEmpty ||
         comparePassword.isEmpty) {
-      SmartDialog.show(
-        animationType: SmartAnimationType.fade,
-        maskColor: Colors.transparent,
-        displayTime: const Duration(seconds: 2),
-        clickMaskDismiss: false,
-        usePenetrate: true,
-        useSystem: true,
-        builder: (context) => const SafeArea(
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: PushError(
-              title: 'Есть не заполненые поля',
-            ),
-          ),
-        ),
-      );
+      SmartDilogFunctions.showErrorDilog(title: 'Есть не заполненные поля');
     } else if (controllerPassword.text != compareControllerPassword.text) {
-      SmartDialog.show(
-        animationType: SmartAnimationType.fade,
-        maskColor: Colors.transparent,
-        displayTime: const Duration(seconds: 2),
-        clickMaskDismiss: false,
-        usePenetrate: true,
-        useSystem: true,
-        builder: (context) => const SafeArea(
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: PushError(
-              title: 'Пароли не совпадают',
-            ),
-          ),
-        ),
-      );
+      SmartDilogFunctions.showErrorDilog(title: 'Пароли не совпадают');
     } else if (!controllerEmail.text.contains('@')) {
-      SmartDialog.show(
-        animationType: SmartAnimationType.fade,
-        maskColor: Colors.transparent,
-        displayTime: const Duration(seconds: 2),
-        clickMaskDismiss: false,
-        usePenetrate: true,
-        useSystem: true,
-        builder: (context) => const SafeArea(
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: PushError(
-              title: 'Ввели не правильный Email',
-            ),
-          ),
-        ),
-      );
+      SmartDilogFunctions.showErrorDilog(title: 'Ввели не правильный Email');
     } else {
       await onSuccess();
     }
@@ -221,8 +174,12 @@ class _SignUpState extends State<SignUp> {
                               phoneNumber: controllerNumber.text,
                               email: controllerEmail.text,
                               password: controllerPassword.text,
-                              onSuccess: () => Navigator.pushNamedAndRemoveUntil(
-                                  context, '/HomeView', (route) => false),
+                              onSuccess: () =>
+                                  Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                '/HomeView',
+                                (route) => false,
+                              ),
                             ),
                       ),
                       withPadding: false,

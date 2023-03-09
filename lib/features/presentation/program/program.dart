@@ -195,7 +195,7 @@ class ProgramView extends StatelessWidget {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 10,
-      shadowColor: Color.fromRGBO(0, 0, 0, 0.122),
+      shadowColor: const Color.fromRGBO(0, 0, 0, 0.122),
       centerTitle: false,
       actions: [
         Padding(

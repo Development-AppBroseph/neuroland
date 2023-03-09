@@ -13,34 +13,28 @@ class PushError extends StatelessWidget {
       height: 64.h,
       margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
       decoration: BoxDecoration(
-        color: const Color(0xffF01111),
-        borderRadius: BorderRadius.circular(8),
-      ),
+          // color: const Color(0xffBE272E),
+          borderRadius: BorderRadius.circular(8),
+          gradient: const LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: [...ColorsStyles.gradientBlueColor],
+          )),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: EdgeInsets.only(top: 8.h, bottom: 8.h, left: 10.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomText(
-                  title: 'Ошибка',
-                  color: ColorsStyles.whiteColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.sp,
-                ),
-                SizedBox(
-                  width: 343,
-                  child: CustomText(
-                    title: title,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                    color: ColorsStyles.whiteColor,
-                  ),
-                ),
-              ],
-            ),
-          )
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomText(
+                title: title,
+                fontSize: 22.sp,
+                fontWeight: FontWeight.bold,
+                color: ColorsStyles.whiteColor,
+              ),
+            ],
+          ),
         ],
       ),
     );

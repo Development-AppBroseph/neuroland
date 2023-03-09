@@ -12,8 +12,8 @@ abstract class ColorsStyles {
     Color(0xffBE272E)
   ];
   static const List<Color> gradientBlueColor = [
-    Color(0xff32348B),
     Color(0xff4246CF),
+    Color(0xff32348B),
   ];
   static const Color blackColor = Color(0xff000000);
   static const Color whiteColor = Color(0xffffffff);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
-import 'package:grow_food/features/widgets/buttons.dart';
 import 'package:scale_button/scale_button.dart';
 
 class OrdersView extends StatelessWidget {

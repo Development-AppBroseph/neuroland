@@ -27,7 +27,7 @@ class ProfileView extends StatelessWidget {
     );
   }
 
-  Container _thirdInfo(BuildContext context) {
+  Container thirdInfo(BuildContext context) {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 15.w),
@@ -36,7 +36,7 @@ class ProfileView extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.r),
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, 0),
+            offset: const Offset(0, 0),
             color: Colors.grey[300]!,
             blurRadius: 10,
           )
@@ -76,7 +76,7 @@ class ProfileView extends StatelessWidget {
     );
   }
 
-  Container _secondInfo(BuildContext context) {
+  Container secondInfo(BuildContext context) {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 15.w),
@@ -85,7 +85,7 @@ class ProfileView extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.r),
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, 0),
+            offset: const Offset(0, 0),
             color: Colors.grey[300]!,
             blurRadius: 10,
           )
@@ -110,7 +110,7 @@ class ProfileView extends StatelessWidget {
     return Container(
       width: double.infinity,
       // margin: EdgeInsets.symmetric(horizontal: 15.w),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         // borderRadius: BorderRadius.circular(15.r),
         // boxShadow: [
@@ -201,7 +201,7 @@ class ProfileView extends StatelessWidget {
                     ),
                   )
                 : null,
-            trailing: Icon(Icons.arrow_forward_ios_rounded),
+            trailing: const Icon(Icons.arrow_forward_ios_rounded),
           ),
         ),
       ),
