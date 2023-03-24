@@ -50,12 +50,16 @@ class _SignInState extends State<SignIn> {
             child: ListView(
               children: [
                 Container(
-                  height: 380.h,
-                  width: double.infinity,
+                  height: 106.h,
+                  width: 320.w,
                   margin: EdgeInsets.only(
-                      top: 60.h, right: 24.w, left: 24.w, bottom: 42.h),
+                    top: 170.h,
+                    right: 24.w,
+                    left: 24.w,
+                    bottom: 206.h,
+                  ),
                   child: Image.asset(
-                    Img.signInBackground,
+                    Img.logo,
                     fit: BoxFit.contain,
                   ),
                 ),

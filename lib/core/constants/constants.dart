@@ -1,7 +1,7 @@
 enum Endpoints {
-  users,
+  registration,
   usersMe,
-  signIn,
+  authentication,
 }
 
 const String baseUrl = 'http://158.160.44.207:8007';
@@ -9,12 +9,12 @@ const String baseUrl = 'http://158.160.44.207:8007';
 extension EndpointsExtension on Endpoints {
   String get endpoint {
     switch (this) {
-      case Endpoints.users:
-        return '/api/users/';
+      case Endpoints.registration:
+        return '/users_alfacrm/registration/';
       case Endpoints.usersMe:
         return '/api/users/me/';
-      case Endpoints.signIn:
-        return '/api/auth/token/login/';
+      case Endpoints.authentication:
+        return '/users_alfacrm/authentication/';
     }
   }
 }

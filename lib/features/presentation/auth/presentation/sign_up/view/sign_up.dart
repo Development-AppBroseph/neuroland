@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/helpers/functions/functions.dart';
+import 'package:grow_food/core/helpers/models/towns_model.dart';
 import 'package:grow_food/core/helpers/widgets/custom_button.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text_field.dart';
@@ -24,6 +27,21 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController controllerPassword = TextEditingController();
   final TextEditingController compareControllerPassword =
       TextEditingController();
+  final ScrollController scrollController = ScrollController();
+  final controller = StreamController<int>();
+
+  bool isSelectCity = false;
+  double rotate = 1 / 4;
+  double maxScroll = 0.0;
+  List<TownsModel> towns = [
+    TownsModel(id: 7, name: 'Нейролэнд / Абакан'),
+    TownsModel(id: 8, name: 'Нейролэнд / Усть-Абакан'),
+    TownsModel(id: 9, name: 'Нейролэнд / Черногорск'),
+    TownsModel(id: 10, name: 'Нейролэнд / Саяногорск'),
+    TownsModel(id: 11, name: 'Нейролэнд / Аскиз'),
+    TownsModel(id: 12, name: 'Нейролэнд / Абаза'),
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -32,21 +50,16 @@ class _SignUpState extends State<SignUp> {
     controllerEmail.addListener(() {});
     controllerPassword.addListener(() {});
     compareControllerPassword.addListener(() {});
+    scrollController.addListener(() {});
   }
 
   Future<void> onSuccessRegistration(
     String name,
     String number,
     String email,
-    String password,
-    String comparePassword,
     Future<void> Function() onSuccess,
   ) async {
-    if (name.isEmpty ||
-        number.isEmpty ||
-        email.isEmpty ||
-        password.isEmpty ||
-        comparePassword.isEmpty) {
+    if (name.isEmpty || number.isEmpty || email.isEmpty) {
       SmartDilogFunctions.showErrorDilog(title: 'Есть не заполненные поля');
     } else if (controllerPassword.text != compareControllerPassword.text) {
       SmartDilogFunctions.showErrorDilog(title: 'Пароли не совпадают');
@@ -61,146 +74,223 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return BlocBuilder<SignUpCubit, SignUpState>(
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            elevation: 0,
-            leading: GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
-              child: const Icon(
-                Icons.arrow_back_ios_new,
-                color: ColorsStyles.blackColor,
-              ),
-            ),
-            backgroundColor: ColorsStyles.backgroundColor,
-          ),
-          body: Container(
-            margin: EdgeInsets.symmetric(horizontal: 35.w),
-            child: ScrollConfiguration(
-              behavior: MyBehavior(),
-              child: ListView(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 122.h, bottom: 25.h),
-                        child: CustomText(
-                          title: 'Регистрация',
-                          fontSize: 32.sp,
-                          fontWeight: FontWeight.bold,
-                          color: ColorsStyles.mainTextColor,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5.h),
-                        child: CustomTextField(
-                          color: ColorsStyles.backgroundTextField,
-                          controller: controllerName,
-                          hintText: 'Имя',
-                          type: TextInputType.name,
-                          isText: true,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5.h),
-                        child: CustomTextField(
-                          color: ColorsStyles.backgroundTextField,
-                          controller: controllerNumber,
-                          hintText: 'Телефон',
-                          type: TextInputType.number,
-                          isText: false,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5.h),
-                        child: CustomTextField(
-                          color: ColorsStyles.backgroundTextField,
-                          controller: controllerEmail,
-                          hintText: 'Почта',
-                          type: TextInputType.emailAddress,
-                          isText: true,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5.h),
-                        child: CustomTextField(
-                          color: ColorsStyles.backgroundTextField,
-                          controller: controllerPassword,
-                          hintText: 'Пароль',
-                          isEmailOrPassword: true,
-                          type: TextInputType.text,
-                          isText: false,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 5.h, bottom: 20.h),
-                    child: CustomText(
-                      title:
-                          'Пароль должен состоять из 8 и более символов, содержать заглавные и строчные буквы, цифры',
-                      fontWeight: FontWeight.w400,
-                      color: ColorsStyles.textFiledHintColor,
-                      fontSize: 15.sp,
-                      centerTitle: true,
+        return StreamBuilder<int>(
+            stream: controller.stream,
+            builder: (context, snapshot) {
+              return Scaffold(
+                appBar: AppBar(
+                  automaticallyImplyLeading: false,
+                  elevation: 0,
+                  leading: GestureDetector(
+                    onTap: () => Navigator.of(context).pop(),
+                    child: const Icon(
+                      Icons.arrow_back_ios_new,
+                      color: ColorsStyles.blackColor,
                     ),
                   ),
-                  CustomTextField(
-                    hintText: 'Подтвердите пароль',
-                    color: ColorsStyles.backgroundTextField,
-                    controller: compareControllerPassword,
-                    isText: false,
-                    isEmailOrPassword: true,
-                    type: TextInputType.text,
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 15.h),
-                    child: CustomButton(
-                      title: 'Зарегистрироваться',
-                      accentText: true,
-                      onTap: () => onSuccessRegistration(
-                        controllerName.text,
-                        controllerNumber.text,
-                        controllerEmail.text,
-                        controllerPassword.text,
-                        compareControllerPassword.text,
-                        () => context.read<SignUpCubit>().signUp(
-                              userName: controllerName.text,
-                              phoneNumber: controllerNumber.text,
-                              email: controllerEmail.text,
-                              password: controllerPassword.text,
-                              onSuccess: () =>
-                                  Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                '/HomeView',
-                                (route) => false,
+                  backgroundColor: ColorsStyles.backgroundColor,
+                ),
+                body: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 35.w),
+                  child: ScrollConfiguration(
+                    behavior: MyBehavior(),
+                    child: ListView(
+                      cacheExtent: double.infinity,
+                      controller: scrollController,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(top: 248.h, bottom: 25.h),
+                              child: CustomText(
+                                title: 'Регистрация',
+                                fontSize: 32.sp,
+                                fontWeight: FontWeight.bold,
+                                color: ColorsStyles.mainTextColor,
                               ),
                             ),
-                      ),
-                      withPadding: false,
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5.h),
+                              child: CustomTextField(
+                                color: ColorsStyles.backgroundTextField,
+                                controller: controllerName,
+                                hintText: 'Имя',
+                                type: TextInputType.name,
+                                isText: true,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5.h),
+                              child: CustomTextField(
+                                color: ColorsStyles.backgroundTextField,
+                                controller: controllerNumber,
+                                hintText: 'Мобильный телефон',
+                                type: TextInputType.number,
+                                isText: false,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5.h),
+                              child: CustomTextField(
+                                color: ColorsStyles.backgroundTextField,
+                                controller: controllerEmail,
+                                hintText: 'Email',
+                                type: TextInputType.emailAddress,
+                                isText: true,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  if (!isSelectCity) {
+                                    isSelectCity = true;
+                                    rotate = 1 / 1.35;
+                                    Future.delayed(
+                                            const Duration(milliseconds: 400))
+                                        .then(
+                                      (value) => scrollController.animateTo(
+                                        scrollController
+                                            .position.maxScrollExtent,
+                                        duration:
+                                            const Duration(milliseconds: 200),
+                                        curve: Curves.ease,
+                                      ),
+                                    );
+                                  } else {
+                                    isSelectCity = false;
+                                    rotate = 1 / 4;
+                                  }
+                                });
+                              },
+                              child: Container(
+                                width: double.infinity,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 30.w, vertical: 18.5.h),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  color: ColorsStyles.backgroundTextField,
+                                ),
+                                child: Row(
+                                  children: [
+                                    CustomText(
+                                      title: 'Город проживания',
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: ColorsStyles.textFiledHintColor,
+                                    ),
+                                    const Spacer(),
+                                    AnimatedRotation(
+                                      turns: rotate,
+                                      duration: const Duration(
+                                        milliseconds: 400,
+                                      ),
+                                      curve: Curves.ease,
+                                      child: const Icon(
+                                        Icons.arrow_back_ios_new_rounded,
+                                        color: ColorsStyles.textFiledHintColor,
+                                        size: 20,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            AnimatedContainer(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.ease,
+                              height: isSelectCity ? 300 : 0,
+                              margin: EdgeInsets.only(top: 10.h),
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.r),
+                                color: ColorsStyles.backgroundTextField,
+                              ),
+                              child: ListView.builder(
+                                itemCount: towns.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      controller.sink.add(index);
+                                    },
+                                    child: Container(
+                                      height: 60,
+                                      alignment: Alignment.centerLeft,
+                                      padding: EdgeInsets.only(
+                                        left: 30.w,
+                                        right: 30.w,
+                                        top: 19.h,
+                                        bottom: 19.h,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: snapshot.data == index
+                                            ? ColorsStyles.buttonColor
+                                            : null,
+                                        borderRadius:
+                                            BorderRadius.circular(10.r),
+                                      ),
+                                      child: CustomText(
+                                        title: towns[index].name,
+                                        color: snapshot.data == index
+                                            ? ColorsStyles.whiteColor
+                                            : ColorsStyles.textFiledHintColor,
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30.h,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 15.h),
+                          child: CustomButton(
+                            title: 'Зарегистрироваться',
+                            accentText: true,
+                            onTap: () => onSuccessRegistration(
+                              controllerName.text,
+                              controllerNumber.text,
+                              controllerEmail.text,
+                              () => context.read<SignUpCubit>().signUp(
+                                    userName: controllerName.text,
+                                    phoneNumber: controllerNumber.text,
+                                    email: controllerEmail.text,
+                                    id: towns[snapshot.data!].id,
+                                    onSuccess: () =>
+                                        Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      '/SignIn',
+                                      (route) => false,
+                                    ),
+                                  ),
+                            ),
+                            withPadding: false,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 86.h),
+                          child: CustomText(
+                            title:
+                                'Нажимая кнопку, вы автоматически соглашаетесь с Политикой Конфиденциальности',
+                            fontWeight: FontWeight.w400,
+                            color: ColorsStyles.textFiledHintColor,
+                            fontSize: 15.sp,
+                            centerTitle: true,
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 86.h),
-                    child: CustomText(
-                      title:
-                          'Нажимая кнопку, вы автоматически соглашаетесь с Политикой Конфиденциальности',
-                      fontWeight: FontWeight.w400,
-                      color: ColorsStyles.textFiledHintColor,
-                      fontSize: 15.sp,
-                      centerTitle: true,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        );
+                ),
+              );
+            });
       },
     );
   }

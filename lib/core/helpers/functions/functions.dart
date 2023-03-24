@@ -45,4 +45,23 @@ class SmartDilogFunctions {
       ),
     );
   }
+
+  static Future<void> showInfoDilog({required String title}) {
+    return SmartDialog.show(
+      animationType: SmartAnimationType.fade,
+      maskColor: Colors.transparent,
+      displayTime: const Duration(seconds: 1),
+      clickMaskDismiss: false,
+      usePenetrate: true,
+      useSystem: true,
+      builder: (context) => SafeArea(
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: PushError(
+            title: title,
+          ),
+        ),
+      ),
+    );
+  }
 }

@@ -40,20 +40,20 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     required String userName,
     required String phoneNumber,
     required String email,
-    required String password,
+    required int id,
   }) async {
     Map<String, String> headers = {
       "Accept": "application/json",
       "Content-Type": "application/json",
     };
     final userData = jsonEncode({
-      "phone_number": phoneNumber,
-      "username": userName,
-      "password": password,
+      "name": userName,
       "email": email,
+      "phone": phoneNumber,
+      "branch_ids": id,
     });
     final Response response = await _dio.post(
-      Endpoints.users.endpoint,
+      Endpoints.registration.endpoint,
       data: userData,
       options: Options(
         followRedirects: true,
@@ -76,7 +76,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       "email_or_phone": emailOrPhoneNumber,
     });
     final Response response = await _dio.post(
-      Endpoints.signIn.endpoint,
+      Endpoints.authentication.endpoint,
       data: userData,
       options: Options(
         followRedirects: true,

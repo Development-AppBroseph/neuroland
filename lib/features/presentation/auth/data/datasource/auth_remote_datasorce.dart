@@ -6,7 +6,7 @@ abstract class AuthRemoteDatasource {
     required String userName,
     required String phoneNumber,
     required String email,
-    required String password,
+    required int id,
   });
   Future<UserSignInModel> signInUser({
     required String emailOrPhoneNumber,

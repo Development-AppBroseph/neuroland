@@ -12,7 +12,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     required String userName,
     required String phoneNumber,
     required String email,
-    required String password,
+    required int id,
     required Function() onSuccess,
   }) async {
     try {
@@ -25,7 +25,7 @@ class SignUpCubit extends Cubit<SignUpState> {
           userName: userName,
           phoneNumber: phoneNumber,
           email: email,
-          password: password,
+          id: id,
         ),
       );
       result.fold(
@@ -37,6 +37,8 @@ class SignUpCubit extends Cubit<SignUpState> {
         (data) async {
           emit(SignUpLoadedState());
           await SmartDialog.dismiss();
+          await SmartDilogFunctions.showInfoDilog(
+              title: 'Данные для входа придут на почту');
           await onSuccess();
         },
       );
