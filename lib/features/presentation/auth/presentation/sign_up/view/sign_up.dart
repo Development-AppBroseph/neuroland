@@ -57,16 +57,16 @@ class _SignUpState extends State<SignUp> {
     String name,
     String number,
     String email,
+    String password,
     AsyncSnapshot<int> snapshot,
     Future<void> Function() onSuccess,
   ) async {
     if (name.isEmpty ||
         number.isEmpty ||
         email.isEmpty ||
-        snapshot.data == null) {
+        snapshot.data == null ||
+        password.isEmpty) {
       SmartDilogFunctions.showErrorDilog(title: 'Есть не заполненные поля');
-    } else if (controllerPassword.text != compareControllerPassword.text) {
-      SmartDilogFunctions.showErrorDilog(title: 'Пароли не совпадают');
     } else if (!controllerEmail.text.contains('@')) {
       SmartDilogFunctions.showErrorDilog(title: 'Ввели не правильный Email');
     } else {
@@ -99,6 +99,7 @@ class _SignUpState extends State<SignUp> {
                   child: ScrollConfiguration(
                     behavior: MyBehavior(),
                     child: ListView(
+                      physics: const BouncingScrollPhysics(),
                       cacheExtent: double.infinity,
                       controller: scrollController,
                       children: [
@@ -124,6 +125,7 @@ class _SignUpState extends State<SignUp> {
                                 hintText: 'Имя',
                                 type: TextInputType.name,
                                 isText: true,
+                                emailOrNumber: false,
                               ),
                             ),
                             Padding(
@@ -134,6 +136,7 @@ class _SignUpState extends State<SignUp> {
                                 hintText: 'Мобильный телефон',
                                 type: TextInputType.number,
                                 isText: false,
+                                emailOrNumber: false,
                               ),
                             ),
                             Padding(
@@ -144,6 +147,19 @@ class _SignUpState extends State<SignUp> {
                                 hintText: 'Email',
                                 type: TextInputType.emailAddress,
                                 isText: true,
+                                emailOrNumber: false,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5.h),
+                              child: CustomTextField(
+                                color: ColorsStyles.backgroundTextField,
+                                controller: controllerPassword,
+                                hintText: 'Пароль',
+                                isEmailOrPassword: true,
+                                type: TextInputType.text,
+                                isText: false,
+                                emailOrNumber: false,
                               ),
                             ),
                             GestureDetector(
@@ -173,6 +189,7 @@ class _SignUpState extends State<SignUp> {
                                 width: double.infinity,
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 30.w, vertical: 18.5.h),
+                                margin: EdgeInsets.only(top: 5.h),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10.r),
                                   color: ColorsStyles.backgroundTextField,
@@ -262,16 +279,18 @@ class _SignUpState extends State<SignUp> {
                               controllerName.text,
                               controllerNumber.text,
                               controllerEmail.text,
+                              controllerPassword.text,
                               snapshot,
                               () => context.read<SignUpCubit>().signUp(
                                     userName: controllerName.text,
                                     phoneNumber: controllerNumber.text,
                                     email: controllerEmail.text,
+                                    password: controllerPassword.text,
                                     id: towns[snapshot.data!].id,
                                     onSuccess: () =>
                                         Navigator.pushNamedAndRemoveUntil(
                                       context,
-                                      '/SignIn',
+                                      '/HomeView',
                                       (route) => false,
                                     ),
                                   ),
@@ -279,16 +298,13 @@ class _SignUpState extends State<SignUp> {
                             withPadding: false,
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 86.h),
-                          child: CustomText(
-                            title:
-                                'Нажимая кнопку, вы автоматически соглашаетесь с Политикой Конфиденциальности',
-                            fontWeight: FontWeight.w400,
-                            color: ColorsStyles.textFiledHintColor,
-                            fontSize: 15.sp,
-                            centerTitle: true,
-                          ),
+                        CustomText(
+                          title:
+                              'Нажимая кнопку, вы автоматически соглашаетесь с Политикой Конфиденциальности',
+                          fontWeight: FontWeight.w400,
+                          color: ColorsStyles.textFiledHintColor,
+                          fontSize: 15.sp,
+                          centerTitle: true,
                         )
                       ],
                     ),

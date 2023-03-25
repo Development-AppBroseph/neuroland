@@ -40,7 +40,8 @@ class _EntryWidgetState extends State<EntryWidget> {
             hintText: 'Email или телефон',
             controller: widget.controllerNumberOrEmail,
             type: TextInputType.text,
-            isText: true,
+            isText: false,
+            emailOrNumber: true,
           ),
           SizedBox(
             height: 10.h,
@@ -51,6 +52,7 @@ class _EntryWidgetState extends State<EntryWidget> {
             controller: widget.controllerPassword,
             isText: false,
             isEmailOrPassword: true,
+            emailOrNumber: false,
           ),
         ],
       ),

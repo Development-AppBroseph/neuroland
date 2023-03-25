@@ -10,11 +10,11 @@ extension EndpointsExtension on Endpoints {
   String get endpoint {
     switch (this) {
       case Endpoints.registration:
-        return '/users_alfacrm/registration/';
+        return '/api/registration/';
       case Endpoints.usersMe:
         return '/api/users/me/';
       case Endpoints.authentication:
-        return '/users_alfacrm/authentication/';
+        return '/api/auth/token/login/';
     }
   }
 }

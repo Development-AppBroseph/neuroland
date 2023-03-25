@@ -14,12 +14,15 @@ class AuthRepositoryImpl implements AuthRepository {
       {required String userName,
       required String phoneNumber,
       required String email,
+    required String password,
+
       required int id}) async {
     try {
       final userSignUp = await authRemotehDatasource.signUpUser(
         userName: userName,
         phoneNumber: phoneNumber,
         email: email,
+        password: password,
         id: id, 
       );
       return Right(userSignUp);

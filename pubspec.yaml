@@ -24,6 +24,7 @@ dependencies:
   flutter_secure_storage: ^6.1.0
   flutter_native_splash: ^2.2.18
   http: ^0.13.5
+  regexpattern: ^2.1.0
 
 dev_dependencies:
   flutter_test:

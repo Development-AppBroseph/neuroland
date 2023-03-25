@@ -40,6 +40,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     required String userName,
     required String phoneNumber,
     required String email,
+    required String password,
     required int id,
   }) async {
     Map<String, String> headers = {
@@ -51,6 +52,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       "email": email,
       "phone": phoneNumber,
       "branch_ids": id,
+      "password": password,
     });
     final Response response = await _dio.post(
       Endpoints.registration.endpoint,
