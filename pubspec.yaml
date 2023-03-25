@@ -23,6 +23,7 @@ dependencies:
   flutter_smart_dialog: 4.2.5
   flutter_secure_storage: ^6.1.0
   flutter_native_splash: ^2.2.18
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:

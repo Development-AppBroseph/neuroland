@@ -57,9 +57,13 @@ class _SignUpState extends State<SignUp> {
     String name,
     String number,
     String email,
+    AsyncSnapshot<int> snapshot,
     Future<void> Function() onSuccess,
   ) async {
-    if (name.isEmpty || number.isEmpty || email.isEmpty) {
+    if (name.isEmpty ||
+        number.isEmpty ||
+        email.isEmpty ||
+        snapshot.data == null) {
       SmartDilogFunctions.showErrorDilog(title: 'Есть не заполненные поля');
     } else if (controllerPassword.text != compareControllerPassword.text) {
       SmartDilogFunctions.showErrorDilog(title: 'Пароли не совпадают');
@@ -258,6 +262,7 @@ class _SignUpState extends State<SignUp> {
                               controllerName.text,
                               controllerNumber.text,
                               controllerEmail.text,
+                              snapshot,
                               () => context.read<SignUpCubit>().signUp(
                                     userName: controllerName.text,
                                     phoneNumber: controllerNumber.text,
