@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
 
-import '../custom_input_formatter_number.dart';
+import '../custom_input_formaters/custom_input_formatter_number.dart';
 
 class CustomTextField extends StatefulWidget {
   final Color color;
   final TextEditingController? controller;
   final TextInputType? type;
   final String hintText;
-  final bool isEmailOrPassword;
+  final bool isPassword;
+  final bool emailOrNumber;
   final bool isText;
   const CustomTextField({
     super.key,
@@ -17,8 +18,9 @@ class CustomTextField extends StatefulWidget {
     required this.controller,
     this.type,
     required this.hintText,
-    this.isEmailOrPassword = false,
-    required this.isText,
+    this.emailOrNumber = false,
+    this.isText = true,
+    this.isPassword = false,
   });
 
   @override
@@ -49,17 +51,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
           color: ColorsStyles.blackColor,
           fontWeight: FontWeight.w400,
         ),
-        // maxLength: widget.password ? 18 : ,
         textAlignVertical: TextAlignVertical.center,
         cursorColor: ColorsStyles.blackColor,
         textCapitalization: widget.isText
             ? TextCapitalization.sentences
             : TextCapitalization.none,
-        inputFormatters: widget.isEmailOrPassword || widget.isText
-            ? []
-            : [CustomInputFormatterNumber()],
+        inputFormatters: widget.emailOrNumber ? [CustomInputFormatterNumberOrEmail()] : widget.isText || widget.isPassword  ? [] : [CustomInputFormatterNumber()],
         keyboardType: widget.type,
-        obscureText: widget.isEmailOrPassword,
+        obscureText: widget.isPassword,
         decoration: InputDecoration.collapsed(
           hintText: widget.hintText,
           hintStyle: TextStyle(

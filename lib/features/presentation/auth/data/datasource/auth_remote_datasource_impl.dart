@@ -78,7 +78,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       "email_or_phone": emailOrPhoneNumber,
     });
     final Response response = await _dio.post(
-      Endpoints.authentication.endpoint,
+      Endpoints.authentication.endpoint,  
       data: userData,
       options: Options(
         followRedirects: true,

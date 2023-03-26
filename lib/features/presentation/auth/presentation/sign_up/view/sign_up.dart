@@ -153,7 +153,7 @@ class _SignUpState extends State<SignUp> {
                                 color: ColorsStyles.backgroundTextField,
                                 controller: controllerPassword,
                                 hintText: 'Пароль',
-                                isEmailOrPassword: true,
+                                isPassword: true,
                                 type: TextInputType.text,
                                 isText: false,
                               ),
