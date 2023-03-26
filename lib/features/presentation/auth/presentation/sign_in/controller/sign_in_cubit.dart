@@ -28,7 +28,7 @@ class SignInCubit extends Cubit<SignInState> {
         (error) async {
           emit(SignInErrorState(message: 'Error epta'));
           await SmartDialog.dismiss();
-          SmartDilogFunctions.showErrorDilog(title: error.toString());
+          SmartDilogFunctions.showErrorDilog(title: 'Неверный логин или пароль');
         },
         (data) async {
           emit(SignInLoadedState());

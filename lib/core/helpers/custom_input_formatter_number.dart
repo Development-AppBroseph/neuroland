@@ -1,26 +1,22 @@
 import 'package:flutter/services.dart';
-import 'package:regexpattern/regexpattern.dart';
 
 class CustomInputFormatterNumber extends TextInputFormatter {
-  final bool numberAndEmail;
-
-  CustomInputFormatterNumber({required this.numberAndEmail});
   @override
   TextEditingValue formatEditUpdate(
     TextEditingValue oldValue,
     TextEditingValue newValue,
   ) {
     List<String> text = <String>[];
-    bool number = newValue.text.contains(RegExp(r'[\d]+'));
-    bool email = newValue.text.contains(RegExp(r'[а-я]+'));
-    if (numberAndEmail && number) {
+    bool number = newValue.text.contains(RegExp(r'[7-9]+'));
+    if (number) {
       final digitsOnly = newValue.text.replaceAll(RegExp(r'[^\d]+'), '');
-      final digitsOnlyChar = digitsOnly;
+      final digitsOnlyChar = digitsOnly.split('');
       for (var i = 0; i < digitsOnlyChar.length; i++) {
         if (i == 0) {
           if (digitsOnlyChar[0] == "7" || digitsOnlyChar[0] == "8") {
             text.add("+7 (");
           } else {
+            text.add("+7 (");
             text.add(digitsOnlyChar[i]);
           }
         } else if (i == 4) {

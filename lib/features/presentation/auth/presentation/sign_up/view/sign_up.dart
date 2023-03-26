@@ -125,7 +125,6 @@ class _SignUpState extends State<SignUp> {
                                 hintText: 'Имя',
                                 type: TextInputType.name,
                                 isText: true,
-                                emailOrNumber: false,
                               ),
                             ),
                             Padding(
@@ -136,7 +135,6 @@ class _SignUpState extends State<SignUp> {
                                 hintText: 'Мобильный телефон',
                                 type: TextInputType.number,
                                 isText: false,
-                                emailOrNumber: false,
                               ),
                             ),
                             Padding(
@@ -147,7 +145,6 @@ class _SignUpState extends State<SignUp> {
                                 hintText: 'Email',
                                 type: TextInputType.emailAddress,
                                 isText: true,
-                                emailOrNumber: false,
                               ),
                             ),
                             Padding(
@@ -159,7 +156,6 @@ class _SignUpState extends State<SignUp> {
                                 isEmailOrPassword: true,
                                 type: TextInputType.text,
                                 isText: false,
-                                emailOrNumber: false,
                               ),
                             ),
                             GestureDetector(

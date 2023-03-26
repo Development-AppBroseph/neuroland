@@ -5,6 +5,7 @@ import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/constants/svg_and_img.dart';
 import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/core/helpers/widgets/custom_button.dart';
+import 'package:grow_food/core/helpers/widgets/my_behavior.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_state.dart';
 
@@ -47,56 +48,60 @@ class _SignInState extends State<SignIn> {
         return Scaffold(
           backgroundColor: ColorsStyles.backgroundColor,
           body: SafeArea(
-            child: ListView(
-              children: [
-                Container(
-                  height: 106.h,
-                  width: 320.w,
-                  margin: EdgeInsets.only(
-                    top: 170.h,
-                    right: 24.w,
-                    left: 24.w,
-                    bottom: 206.h,
+            child: ScrollConfiguration(
+              behavior: MyBehavior(),
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                children: [
+                  Container(
+                    height: 106.h,
+                    width: 320.w,
+                    margin: EdgeInsets.only(
+                      top: 170.h,
+                      right: 24.w,
+                      left: 24.w,
+                      bottom: 206.h,
+                    ),
+                    child: Image.asset(
+                      Img.logo,
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                  child: Image.asset(
-                    Img.logo,
-                    fit: BoxFit.contain,
+                  EntryWidget(
+                    controllerNumberOrEmail: controllerNumberOrEmail,
+                    controllerPassword: controllerPassword,
                   ),
-                ),
-                EntryWidget(
-                  controllerNumberOrEmail: controllerNumberOrEmail,
-                  controllerPassword: controllerPassword,
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
-                CustomButton(
-                  title: 'Войти',
-                  accentText: true,
-                  onTap: () => onSuccessRegistration(
-                    controllerNumberOrEmail.text,
-                    controllerPassword.text,
-                    () => context.read<SignInCubit>().signIn(
-                          emailOrPhoneNumber: controllerNumberOrEmail.text,
-                          password: controllerPassword.text,
-                          onSuccess: () => Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            '/HomeView',
-                            (route) => false,
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  CustomButton(
+                    title: 'Войти',
+                    accentText: true,
+                    onTap: () => onSuccessRegistration(
+                      controllerNumberOrEmail.text,
+                      controllerPassword.text,
+                      () => context.read<SignInCubit>().signIn(
+                            emailOrPhoneNumber: controllerNumberOrEmail.text,
+                            password: controllerPassword.text,
+                            onSuccess: () => Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              '/HomeView',
+                              (route) => false,
+                            ),
                           ),
-                        ),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                CustomButton(
-                  title: 'Регистрация',
-                  outLined: true,
-                  accentText: true,
-                  onTap: () => Navigator.pushNamed(context, '/SignUp'),
-                ),
-              ],
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  CustomButton(
+                    title: 'Регистрация',
+                    outLined: true,
+                    accentText: true,
+                    onTap: () => Navigator.pushNamed(context, '/SignUp'),
+                  ),
+                ],
+              ),
             ),
           ),
         );

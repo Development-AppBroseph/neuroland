@@ -11,7 +11,6 @@ import 'injection.container.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
-
   runApp(
     MultiBlocProvider(
       providers: [
@@ -28,10 +27,10 @@ Future<void> main() async {
         splitScreenMode: true,
         builder: (context, child) {
           return MaterialApp(
-            navigatorObservers: [FlutterSmartDialog.observer],
+            // navigatorObservers: [FlutterSmartDialog.observer],
             builder: FlutterSmartDialog.init(),
             debugShowCheckedModeBanner: false,
-            initialRoute: '/SignIn',
+            initialRoute: '/',
             onGenerateRoute: RouteGenerator.generateRoute,
           );
         },

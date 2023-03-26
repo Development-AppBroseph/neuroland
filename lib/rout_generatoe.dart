@@ -7,7 +7,7 @@ import 'package:grow_food/features/presentation/home/home.dart';
 class RouteGenerator {
   static Route<dynamic>   generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case '/SignIn':
+      case '/':
         return MaterialPageRoute(
           builder: (context) => const SignIn(),
         );
@@ -27,7 +27,9 @@ Route<dynamic> _errorRoute() {
   return MaterialPageRoute(builder: (_) {
     return const Scaffold(
       body: Center(
-        child: Text('Error!'),
+        child: Text('Error!', style: TextStyle(
+          fontSize: 30
+        ),),
       ),
     );
   });
