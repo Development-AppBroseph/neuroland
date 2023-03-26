@@ -56,7 +56,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         textCapitalization: widget.isText
             ? TextCapitalization.sentences
             : TextCapitalization.none,
-        inputFormatters: widget.emailOrNumber ? [CustomInputFormatterNumberOrEmail()] : widget.isText || widget.isPassword  ? [] : [CustomInputFormatterNumber()],
+        inputFormatters: widget.emailOrNumber ? [CustomInputFormatterNumberOrEmail(widget.controller!)] : widget.isText || widget.isPassword  ? [] : [CustomInputFormatterNumber()],
         keyboardType: widget.type,
         obscureText: widget.isPassword,
         decoration: InputDecoration.collapsed(

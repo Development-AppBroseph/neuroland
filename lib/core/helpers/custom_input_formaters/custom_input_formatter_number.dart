@@ -1,14 +1,18 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CustomInputFormatterNumberOrEmail extends TextInputFormatter {
+  final TextEditingController controller;
+
+  CustomInputFormatterNumberOrEmail(this.controller);
   @override
   TextEditingValue formatEditUpdate(
     TextEditingValue oldValue,
     TextEditingValue newValue,
   ) {
     List<String> text = <String>[];
-    bool number = newValue.text.contains(RegExp(r'[7-9]+'));
-    if (number) {
+    print(newValue.text);
+    if (newValue.text[0].contains(RegExp(r'[7-9+]'))) {
       final digitsOnly = newValue.text.replaceAll(RegExp(r'[^\d]+'), '');
       final digitsOnlyChar = digitsOnly.split('');
       for (var i = 0; i < digitsOnlyChar.length; i++) {
