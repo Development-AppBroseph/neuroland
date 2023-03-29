@@ -3,8 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:grow_food/core/constants/constants.dart';
-import 'package:grow_food/core/error/exception.dart';
-import 'package:grow_food/features/presentation/auth/data/datasource/auth_remote_datasorce.dart';
+import 'package:grow_food/features/presentation/auth/data/datasource/remote_datasource/auth_remote_datasorce.dart';
 import 'package:grow_food/features/presentation/auth/data/models/user_sign_in_model.dart';
 import 'package:grow_food/features/presentation/auth/data/models/user_sign_up_model.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -66,7 +65,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     if (response.statusCode! >= 200 && response.statusCode! < 400) {
       return UserSignUpModel.fromJson(response.data);
     } else {
-      throw ServerException();
+      throw response.data['error'];
     }
   }
 
@@ -75,10 +74,10 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       {required String emailOrPhoneNumber, required String password}) async {
     final userData = jsonEncode({
       "password": password,
-      "email_or_phone": emailOrPhoneNumber,
+      "email": emailOrPhoneNumber,
     });
     final Response response = await _dio.post(
-      Endpoints.authentication.endpoint,  
+      Endpoints.authentication.endpoint,
       data: userData,
       options: Options(
         followRedirects: true,
@@ -88,7 +87,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     if (response.statusCode! >= 200 && response.statusCode! < 400) {
       return UserSignInModel.fromJson(response.data);
     } else {
-      throw ServerException();
+      throw response.data['error'];
     }
   }
 }

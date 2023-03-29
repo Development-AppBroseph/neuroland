@@ -28,6 +28,18 @@ class SmartDilogFunctions {
   }
 
   static Future<void> showErrorDilog({required String title}) {
+    // return SmartDialog.showToast(
+    //   '',
+    //   animationType: SmartAnimationType.fade,
+    //   maskColor: Colors.transparent,
+    //   displayTime: const Duration(seconds: 2),
+    //   clickMaskDismiss: false,
+    //   alignment: Alignment.topCenter,
+    //   usePenetrate: true,
+    //   builder: (context) => PushError(
+    //     title: title,
+    //   ),
+    // );
     return SmartDialog.show(
       animationType: SmartAnimationType.fade,
       maskColor: Colors.transparent,
@@ -35,12 +47,10 @@ class SmartDilogFunctions {
       clickMaskDismiss: false,
       usePenetrate: true,
       useSystem: true,
+      alignment: Alignment.topCenter,
       builder: (context) => SafeArea(
-        child: Align(
-          alignment: Alignment.topCenter,
-          child: PushError(
-            title: title,
-          ),
+        child: PushError(
+          title: title,
         ),
       ),
     );

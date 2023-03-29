@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class CustomInputFormatterNumberOrEmail extends TextInputFormatter {
   final TextEditingController controller;
@@ -88,3 +89,8 @@ class CustomInputFormatterNumber extends TextInputFormatter {
     );
   }
 }
+var maskFormatter = MaskTextInputFormatter(
+    mask: '+7 (###) ###-##-##',
+    filter: {"#": RegExp(r'[0-9A-Za-zа-яА-я]')},
+    type: MaskAutoCompletionType.lazy,
+  );

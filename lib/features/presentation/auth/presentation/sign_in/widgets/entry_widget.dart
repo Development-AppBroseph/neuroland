@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
+import 'package:grow_food/core/helpers/custom_input_formaters/custom_input_formatter_number.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text_field.dart';
 
@@ -18,6 +20,22 @@ class EntryWidget extends StatefulWidget {
 }
 
 class _EntryWidgetState extends State<EntryWidget> {
+  List<TextInputFormatter> formater = [];
+
+  List<TextInputFormatter> getFormaters() {
+    try {
+      if (widget.controllerNumberOrEmail.text[0] == '7' ||
+          widget.controllerNumberOrEmail.text[0] == '8' ||
+          widget.controllerNumberOrEmail.text[0] == '+' ||
+          widget.controllerNumberOrEmail.text[0] == '9') {
+        return [maskFormatter];
+      }
+      return [];
+    } catch (_) {
+      return [];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -35,12 +53,34 @@ class _EntryWidgetState extends State<EntryWidget> {
           SizedBox(
             height: 30.h,
           ),
-          CustomTextField(
-            color: ColorsStyles.backgroundTextField,
-            hintText: 'Email или телефон',
-            controller: widget.controllerNumberOrEmail,
-            type: TextInputType.text,
-            emailOrNumber: true,
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 18.5.h),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.r),
+              color: ColorsStyles.backgroundTextField,
+            ),
+            child: TextField(
+              controller: widget.controllerNumberOrEmail,
+              style: TextStyle(
+                fontSize: 20.sp,
+                color: ColorsStyles.blackColor,
+                fontWeight: FontWeight.w400,
+              ),
+              textAlignVertical: TextAlignVertical.center,
+              cursorColor: ColorsStyles.blackColor,
+              textCapitalization: TextCapitalization.none,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration.collapsed(
+                hintText: 'Email',
+                hintStyle: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w500,
+                  color: ColorsStyles.textFiledHintColor,
+                ),
+              ),
+            ),
           ),
           SizedBox(
             height: 10.h,

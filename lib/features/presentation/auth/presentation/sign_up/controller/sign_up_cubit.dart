@@ -34,7 +34,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         (error) async {
           emit(SignUpErrorState(message: "Поломалось епта"));
           await SmartDialog.dismiss();
-          SmartDilogFunctions.showErrorDilog(title: error.toString());
+          SmartDilogFunctions.showErrorDilog(title: error.error);
         },
         (data) async {
           emit(SignUpLoadedState());

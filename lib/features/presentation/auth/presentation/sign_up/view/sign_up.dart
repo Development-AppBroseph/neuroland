@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
+import 'package:grow_food/core/helpers/custom_input_formaters/custom_input_formatter_number.dart';
 import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/core/helpers/models/towns_model.dart';
 import 'package:grow_food/core/helpers/widgets/custom_button.dart';
@@ -143,7 +144,7 @@ class _SignUpState extends State<SignUp> {
                                 color: ColorsStyles.backgroundTextField,
                                 controller: controllerEmail,
                                 hintText: 'Email',
-                                type: TextInputType.emailAddress,
+                                type: TextInputType.text,
                                 isText: true,
                               ),
                             ),
@@ -279,7 +280,8 @@ class _SignUpState extends State<SignUp> {
                               snapshot,
                               () => context.read<SignUpCubit>().signUp(
                                     userName: controllerName.text,
-                                    phoneNumber: controllerNumber.text,
+                                    phoneNumber:
+                                        '+7${maskFormatter.getUnmaskedText()}',
                                     email: controllerEmail.text,
                                     password: controllerPassword.text,
                                     id: towns[snapshot.data!].id,

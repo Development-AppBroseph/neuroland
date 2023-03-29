@@ -10,7 +10,6 @@ class CustomTextField extends StatefulWidget {
   final TextInputType? type;
   final String hintText;
   final bool isPassword;
-  final bool emailOrNumber;
   final bool isText;
   const CustomTextField({
     super.key,
@@ -18,7 +17,6 @@ class CustomTextField extends StatefulWidget {
     required this.controller,
     this.type,
     required this.hintText,
-    this.emailOrNumber = false,
     this.isText = true,
     this.isPassword = false,
   });
@@ -33,6 +31,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
     widget.controller!.addListener(() {});
     super.initState();
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
         textCapitalization: widget.isText
             ? TextCapitalization.sentences
             : TextCapitalization.none,
-        inputFormatters: widget.emailOrNumber ? [CustomInputFormatterNumberOrEmail(widget.controller!)] : widget.isText || widget.isPassword  ? [] : [CustomInputFormatterNumber()],
+        inputFormatters: widget.isText || widget.isPassword  
+                ? []
+                : [maskFormatter],
         keyboardType: widget.type,
         obscureText: widget.isPassword,
         decoration: InputDecoration.collapsed(

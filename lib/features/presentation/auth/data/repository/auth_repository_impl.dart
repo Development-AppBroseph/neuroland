@@ -1,4 +1,5 @@
-import 'package:grow_food/features/presentation/auth/data/datasource/auth_remote_datasorce.dart';
+import 'package:grow_food/features/presentation/auth/data/datasource/local_datasource/auth_local_datasource.dart';
+import 'package:grow_food/features/presentation/auth/data/datasource/remote_datasource/auth_remote_datasorce.dart';
 import 'package:grow_food/features/presentation/auth/domain/entiti/user_sign_in_entiti.dart';
 import 'package:grow_food/features/presentation/auth/domain/entiti/user_sign_up_entiti.dart';
 import 'package:grow_food/core/error/failure.dart';
@@ -7,15 +8,18 @@ import 'package:grow_food/features/presentation/auth/domain/repository/auth_repo
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDatasource authRemotehDatasource;
+  final AuthLocalDatasource authLocalDatasource;
 
-  AuthRepositoryImpl({required this.authRemotehDatasource});
+  AuthRepositoryImpl({
+    required this.authRemotehDatasource,
+    required this.authLocalDatasource,
+  });
   @override
   Future<Either<Failure, UserSignUpEntiti>> signUpUser(
       {required String userName,
       required String phoneNumber,
       required String email,
-    required String password,
-
+      required String password,
       required int id}) async {
     try {
       final userSignUp = await authRemotehDatasource.signUpUser(
@@ -23,12 +27,13 @@ class AuthRepositoryImpl implements AuthRepository {
         phoneNumber: phoneNumber,
         email: email,
         password: password,
-        id: id, 
+        id: id,
       );
+      authLocalDatasource.saveUserToken(userSignUp.authToken);
       return Right(userSignUp);
-    } catch (e) {
-      print('$e Ошибка в репозитории: SignUpUser');
-      return Left(ServerFailure());
+    } catch (error) {
+      print('$error Ошибка в репозитории: SignUpUser');
+      return Left(ServerFailure(error: error.toString()));
     }
   }
 
@@ -40,10 +45,11 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final userSignIn = await authRemotehDatasource.signInUser(
           emailOrPhoneNumber: emailOrPhoneNumber, password: password);
+      authLocalDatasource.saveUserToken(userSignIn.authToken);
       return Right(userSignIn);
-    } catch (e) {
-      print('$e Ошибка в репозитории: SignInUser');
-      return Left(ServerFailure());
+    } catch (error) {
+      print('$error Ошибка в репозитории: SignInUser');
+      return Left(ServerFailure(error: error.toString()));
     }
   }
 }
