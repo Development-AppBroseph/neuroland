@@ -52,4 +52,14 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(ServerFailure(error: error.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> logOut() async {
+    try {
+      final userLogOut = await authLocalDatasource.deleteUserToken();
+      return Right(userLogOut);
+    } catch (e) {
+      return Left(CacheFailure(error: e.toString()));
+    }
+  }
 }

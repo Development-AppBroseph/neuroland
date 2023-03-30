@@ -11,6 +11,7 @@ import 'package:grow_food/core/helpers/widgets/custom_button.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text_field.dart';
 import 'package:grow_food/core/helpers/widgets/my_behavior.dart';
+import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_up/controller/sign_up_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_up/controller/sign_up_state.dart';
 
@@ -60,7 +61,7 @@ class _SignUpState extends State<SignUp> {
     String email,
     String password,
     AsyncSnapshot<int> snapshot,
-    Future<void> Function() onSuccess,
+    Function() onSuccess,
   ) async {
     if (name.isEmpty ||
         number.isEmpty ||
@@ -286,11 +287,21 @@ class _SignUpState extends State<SignUp> {
                                     password: controllerPassword.text,
                                     id: towns[snapshot.data!].id,
                                     onSuccess: () =>
-                                        Navigator.pushNamedAndRemoveUntil(
-                                      context,
-                                      '/HomeView',
-                                      (route) => false,
-                                    ),
+                                        context.read<SignInCubit>().signIn(
+                                              emailOrPhoneNumber:
+                                                  controllerEmail.text,
+                                              password: controllerPassword.text,
+                                              onSuccess: () {
+                                                if (mounted) {
+                                                  return Navigator
+                                                      .pushNamedAndRemoveUntil(
+                                                    context,
+                                                    '/HomeView',
+                                                    (route) => false,
+                                                  );
+                                                }
+                                              },
+                                            ),
                                   ),
                             ),
                             withPadding: false,

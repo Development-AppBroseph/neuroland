@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:grow_food/core/constants/colors.dart';
-import 'package:grow_food/features/widgets/buttons.dart';
+import 'package:grow_food/core/helpers/widgets/custom_button.dart';
+import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
+import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_state.dart';
 import 'package:scale_button/scale_button.dart';
 
 import '../categories/category/category.dart';
@@ -12,18 +15,26 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: _appBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 20.h),
-            _topInfo(context),
-            AccentButton(onTap: () {}, title: '123123')
-          ],
-        ),
-      ),
+    return BlocBuilder<SignInCubit, SignInStates>(
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: backgroundColor,
+          appBar: _appBar(),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: 20.h),
+                _topInfo(context),
+                CustomButton(
+                  title: 'Выйти из аккаунта',
+                  accentText: true,
+                  onTap: () => context.read<SignInCubit>().logOut(),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 

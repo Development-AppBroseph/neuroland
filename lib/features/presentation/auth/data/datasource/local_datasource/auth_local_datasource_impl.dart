@@ -14,4 +14,9 @@ class AuthLocalDatasourceImpl implements AuthLocalDatasource {
       value: jsonEncode(token),
     );
   }
+
+  @override
+  Future<void> deleteUserToken() async {
+    return await flutterSecureStorage.delete(key: BackConstants.savedUSerToken);
+  }
 }

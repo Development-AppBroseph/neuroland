@@ -6,6 +6,7 @@ import 'package:grow_food/features/presentation/auth/data/datasource/remote_data
 import 'package:grow_food/features/presentation/auth/data/datasource/remote_datasource/auth_remote_datasource_impl.dart';
 import 'package:grow_food/features/presentation/auth/data/repository/auth_repository_impl.dart';
 import 'package:grow_food/features/presentation/auth/domain/repository/auth_repository.dart';
+import 'package:grow_food/features/presentation/auth/domain/usecases/log_out.dart';
 import 'package:grow_food/features/presentation/auth/domain/usecases/sign_in_user.dart';
 import 'package:grow_food/features/presentation/auth/domain/usecases/sign_up_user.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
@@ -25,7 +26,7 @@ Future<void> init() async {
     () => SignUpCubit(signUpUser: sl()),
   );
   sl.registerFactory(
-    () => SignInCubit(signInUser: sl()),
+    () => SignInCubit(signInUser: sl(), userLogOut: sl()),
   );
   sl.registerFactory(
     () => RootScreenCubit(
@@ -43,6 +44,7 @@ Future<void> init() async {
   sl.registerLazySingleton(
     () => GetToken(rootScreenRepository: sl()),
   );
+  sl.registerLazySingleton(() => UserLogOut(authRepository: sl()));
   //Repository
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(
