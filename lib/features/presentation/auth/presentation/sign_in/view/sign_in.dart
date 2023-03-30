@@ -31,19 +31,19 @@ class _SignInState extends State<SignIn> {
   Future<void> onSuccessRegistration(
     String emailOrPhoneNumber,
     String password,
-    Future<void> Function() onSuccess,
+    Function() onSuccess,
   ) async {
     if (emailOrPhoneNumber.isEmpty || password.isEmpty) {
       SmartDilogFunctions.showErrorDilog(title: 'Есть не заполненные поля');
     } else {
-      await onSuccess();
+      onSuccess();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     // Size size = MediaQuery.of(context).size;
-    return BlocBuilder<SignInCubit, SignInState>(
+    return BlocBuilder<SignInCubit, SignInStates>(
       builder: (context, state) {
         return Scaffold(
           backgroundColor: ColorsStyles.backgroundColor,
@@ -77,19 +77,19 @@ class _SignInState extends State<SignIn> {
                   CustomButton(
                     title: 'Войти',
                     accentText: true,
-                    onTap: () => onSuccessRegistration(
-                      controllerNumberOrEmail.text,
-                      controllerPassword.text,
-                      () => context.read<SignInCubit>().signIn(
-                            emailOrPhoneNumber: controllerNumberOrEmail.text,
-                            password: controllerPassword.text,
-                            onSuccess: () => Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              '/HomeView',
-                              (route) => false,
-                            ),
-                          ),
-                    ),
+                    onTap: () => context.read<SignInCubit>().signIn(
+                          emailOrPhoneNumber: controllerNumberOrEmail.text,
+                          password: controllerPassword.text,
+                          onSuccess: () {
+                            if (mounted) {
+                              return Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                '/HomeView',
+                                (route) => false,
+                              );
+                            }
+                          },
+                        ),
                   ),
                   SizedBox(
                     height: 10.h,

@@ -28,7 +28,10 @@ Future<void> init() async {
     () => SignInCubit(signInUser: sl()),
   );
   sl.registerFactory(
-    () => RootScreenCubit(getToken: sl()),
+    () => RootScreenCubit(
+      getToken: sl(),
+      localDatasource: sl(),
+    ),
   );
   //Usecase
   sl.registerLazySingleton(

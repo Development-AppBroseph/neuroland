@@ -1,21 +1,37 @@
 import 'package:equatable/equatable.dart';
 
-abstract class RootScreenState extends Equatable {
-  @override
-  List<Object?> get props => [];
+enum ScreenState {
+  rootScreenInitialState,
+  rootScreenHaveTokenState,
+  rootScreenNotHaveTokenState,
 }
 
-class RootScreenInitialState extends RootScreenState {
+class RootScreenState extends Equatable {
+  final ScreenState screenState;
+  const RootScreenState(
+      {this.screenState = ScreenState.rootScreenInitialState});
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [screenState];
+
+  // factory RootScreenState.fromJson(Map<String, dynamic> json) =>
+  //     RootScreenState(screenState: json['screenState']);
+
+  // Map<String, dynamic> toJson() => {
+  //       'screenState': screenState,
+  //     };
 }
 
-class RootScreenHaveTokenState extends RootScreenState {
-  @override
-  List<Object?> get props => [];
-}
+// class RootScreenInitialState extends RootScreenState {
+//   @override
+//   List<Object?> get props => [];
+// }
 
-class RootScreenNotHaveTokenState extends RootScreenState {
-  @override
-  List<Object?> get props => [];
-}
+// class RootScreenHaveTokenState extends RootScreenState {
+//   @override
+//   List<Object?> get props => [];
+// }
+
+// class RootScreenNotHaveTokenState extends RootScreenState {
+//   @override
+//   List<Object?> get props => [];
+// }

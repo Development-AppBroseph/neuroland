@@ -6,12 +6,18 @@ import 'package:grow_food/features/presentation/auth/presentation/sign_up/contro
 import 'package:grow_food/features/presentation/root_screen/presentation/root_screen/controllers/root_screen_cubit.dart';
 import 'package:grow_food/rout_generatoe.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'injection.container.dart' as di;
 import 'injection.container.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory(),
+  );
+
   runApp(
     MultiBlocProvider(
       providers: [

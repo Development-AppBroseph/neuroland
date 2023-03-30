@@ -1,3 +1,3 @@
 abstract class LocalDatasource{
-  Future<String?> getToken();
+  Future<String> getToken();
 }

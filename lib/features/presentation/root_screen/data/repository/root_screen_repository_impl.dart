@@ -11,7 +11,7 @@ class RootScreenRepositoryImpl extends RootScreenRepository {
   Future<Either<Failure, String>> getToken() async {
     try {
       final token = await localDatasource.getToken();
-      return Right(token!);
+      return Right(token);
     } catch (e) {
       return Left(CacheFailure(error: e.toString()));
     }

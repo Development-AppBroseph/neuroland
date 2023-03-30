@@ -1,29 +1,41 @@
 import 'package:equatable/equatable.dart';
 
-abstract class SignInState extends Equatable {
-  @override
-  List<Object?> get props => [];
+enum SignInStates {
+  signInEmptyState,
+  signInLoadingState,
+  signInLoadedState,
+  signInErrorState,
 }
 
-class SignInEmptyState extends SignInState {
+class SignInState extends Equatable {
+  final SignInStates signInStates;
+
+  const SignInState({
+    this.signInStates = SignInStates.signInEmptyState,
+  });
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [signInStates];
 }
 
-class SignInLoadingState extends SignInState {
-  @override
-  List<Object?> get props => [];
-}
+// class SignInEmptyState extends SignInState {
+//   @override
+//   List<Object?> get props => [];
+// }
 
-class SignInLoadedState extends SignInState {
-  @override
-  List<Object?> get props => [];
-}
+// class SignInLoadingState extends SignInState {
+//   @override
+//   List<Object?> get props => [];
+// }
 
-class SignInErrorState extends SignInState {
-  final String message;
+// class SignInLoadedState extends SignInState {
+//   @override
+//   List<Object?> get props => [];
+// }
 
-  SignInErrorState({required this.message});
-  @override
-  List<Object?> get props => [];
-}
+// class SignInErrorState extends SignInState {
+//   final String message;
+
+//   SignInErrorState({required this.message});
+//   @override
+//   List<Object?> get props => [];
+// }

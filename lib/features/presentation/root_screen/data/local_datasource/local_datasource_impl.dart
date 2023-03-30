@@ -7,7 +7,8 @@ class LocalDatasourceImpl implements LocalDatasource {
 
   LocalDatasourceImpl({required this.flutterSecureStorage});
   @override
-  Future<String?> getToken() async {
-    return await flutterSecureStorage.read(key: BackConstants.savedUSerToken);
+  Future<String> getToken() async {
+    return await flutterSecureStorage.read(key: BackConstants.savedUSerToken) ??
+        '';
   }
 }
