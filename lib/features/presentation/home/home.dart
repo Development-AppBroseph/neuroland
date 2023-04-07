@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:grow_food/core/constants/colors.dart';
+import 'package:grow_food/core/constants/svg_and_img.dart';
 import 'package:grow_food/features/presentation/categories/categories.dart';
 import 'package:grow_food/features/presentation/chat/chat.dart';
 import 'package:grow_food/features/presentation/orders/orders.dart';
 import 'package:grow_food/features/presentation/profile/profile.dart';
-import 'package:grow_food/features/presentation/program/program.dart';
+import 'package:grow_food/features/presentation/program/presentation/view/actual_courses_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -17,9 +18,13 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int _selectedIndex = 0;
-
-  final _pageController = PageController(initialPage: 0);
-
+  List pages = [
+    const StudiesView(),
+    CategoriesView(),
+    const OrdersView(),
+    const ProfileView(),
+    const ChatView(),
+  ];
   @override
   void initState() {
     super.initState();
@@ -29,34 +34,11 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: PageView(
-        physics: const NeverScrollableScrollPhysics(),
-        controller: _pageController,
-        onPageChanged: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        children: [
-          const ProgramView(),
-          CategoriesView(),
-          OrdersView(
-            onTap: () {
-              setState(() {
-                _selectedIndex = 1;
-                _pageController.jumpToPage(1);
-              });
-            },
-          ),
-          const ChatView(),
-          const ProfileView(),
-        ],
-      ),
       bottomNavigationBar: BottomNavigationBar(
+        elevation: .5,
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
-            _pageController.jumpToPage(index);
           });
         },
         backgroundColor: Colors.white,
@@ -67,82 +49,58 @@ class _HomeViewState extends State<HomeView> {
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: TextStyle(
           color: accentColor,
-          fontSize: 12.sp,
-          fontWeight: FontWeight.w500,
+          fontSize: 15.sp,
+          fontWeight: FontWeight.w700,
         ),
         unselectedLabelStyle: TextStyle(
           color: Colors.grey,
-          fontSize: 12.sp,
-          fontWeight: FontWeight.w500,
+          fontSize: 15.sp,
+          fontWeight: FontWeight.w700,
         ),
         items: [
           BottomNavigationBarItem(
-            icon: SizedBox(
-              height: 33.h,
-              child: SvgPicture.asset(
-                'assets/icons/home.svg',
-                height: 30.h,
-                color: _selectedIndex == 0
-                    ? accentColor
-                    : const Color.fromARGB(255, 176, 176, 176),
-              ),
+            icon: SvgPicture.asset(
+              SvgImg.studies,
+              height: 25.h,
+              width: 40.w,
+              color:
+                  _selectedIndex == 0 ? accentColor : const Color(0xffCECECE),
             ),
-            label: 'Главная',
+            label: 'Учёба',
           ),
           BottomNavigationBarItem(
-            icon: SizedBox(
-              height: 33.h,
-              child: SvgPicture.asset(
-                'assets/icons/plus.svg',
-                height: 27.h,
-                color: _selectedIndex == 1
-                    ? accentColor
-                    : const Color.fromARGB(255, 176, 176, 176),
-              ),
+            icon: SvgPicture.asset(
+              SvgImg.cupones,
+              height: 25.h,
+              width: 40.w,
+              color:
+                  _selectedIndex == 1 ? accentColor : const Color(0xffCECECE),
             ),
-            label: 'Курсы',
+            label: 'Купоны',
           ),
           BottomNavigationBarItem(
-            icon: SizedBox(
-              height: 33.h,
-              child: SvgPicture.asset(
-                'assets/icons/calendar.svg',
-                height: 27.h,
-                color: _selectedIndex == 2
-                    ? accentColor
-                    : const Color.fromARGB(255, 176, 176, 176),
-              ),
-            ),
-            label: 'Обучение',
-          ),
-          BottomNavigationBarItem(
-            icon: SizedBox(
-              height: 33.h,
-              child: SvgPicture.asset(
-                'assets/icons/chat.svg',
-                height: 30.h,
-                color: _selectedIndex == 3
-                    ? accentColor
-                    : const Color.fromARGB(255, 176, 176, 176),
-              ),
+            icon: SvgPicture.asset(
+              SvgImg.chat,
+              height: 25.h,
+              width: 40.w,
+              color:
+                  _selectedIndex == 2 ? accentColor : const Color(0xffCECECE),
             ),
             label: 'Чат',
           ),
           BottomNavigationBarItem(
-            icon: SizedBox(
-              height: 33.h,
-              child: SvgPicture.asset(
-                'assets/icons/user.svg',
-                height: 30.h,
-                color: _selectedIndex == 4
-                    ? accentColor
-                    : const Color.fromARGB(255, 176, 176, 176),
-              ),
+            icon: SvgPicture.asset(
+              SvgImg.profile,
+              height: 25.h,
+              width: 40.w,
+              color:
+                  _selectedIndex == 3 ? accentColor : const Color(0xffCECECE),
             ),
             label: 'Профиль',
           ),
         ],
       ),
+      body: pages.elementAt(_selectedIndex),
     );
   }
 }

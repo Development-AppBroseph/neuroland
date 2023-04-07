@@ -1,7 +1,8 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:grow_food/core/error/exception.dart';
 import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/features/presentation/auth/domain/usecases/log_out.dart';
+import 'package:grow_food/features/presentation/auth/domain/usecases/refresh_token.dart';
 import 'package:grow_food/features/presentation/auth/domain/usecases/sign_in_user.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_state.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -9,9 +10,11 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 class SignInCubit extends HydratedCubit<SignInStates> {
   final SignInUser signInUser;
   final UserLogOut userLogOut;
+  final RefreshToken refreshToken;
   SignInCubit({
     required this.signInUser,
     required this.userLogOut,
+    required this.refreshToken,
   }) : super(SignInStates.signInEmptyState);
 
   Future<void> signIn({
@@ -68,6 +71,16 @@ class SignInCubit extends HydratedCubit<SignInStates> {
       });
     } catch (e) {
       emit(SignInStates.signInErrorState);
+    }
+  }
+
+  Future<void> refreshUserToken() async {
+    try {
+      await refreshToken.call(RefreshTokenParams());
+      emit(SignInStates.signInLoadedState);
+    } catch (e) {
+      emit(SignInStates.signInErrorState);
+      throw CacheException();
     }
   }
 

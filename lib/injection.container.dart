@@ -7,10 +7,17 @@ import 'package:grow_food/features/presentation/auth/data/datasource/remote_data
 import 'package:grow_food/features/presentation/auth/data/repository/auth_repository_impl.dart';
 import 'package:grow_food/features/presentation/auth/domain/repository/auth_repository.dart';
 import 'package:grow_food/features/presentation/auth/domain/usecases/log_out.dart';
+import 'package:grow_food/features/presentation/auth/domain/usecases/refresh_token.dart';
 import 'package:grow_food/features/presentation/auth/domain/usecases/sign_in_user.dart';
 import 'package:grow_food/features/presentation/auth/domain/usecases/sign_up_user.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_up/controller/sign_up_cubit.dart';
+import 'package:grow_food/features/presentation/program/data/datasource/courses_video_datasource.dart';
+import 'package:grow_food/features/presentation/program/data/datasource/courses_video_datasource_impl.dart';
+import 'package:grow_food/features/presentation/program/data/repository/courses_video_repository_impl.dart';
+import 'package:grow_food/features/presentation/program/domain/repository/courses_video_repository.dart';
+import 'package:grow_food/features/presentation/program/domain/usecase/get_courses_video.dart';
+import 'package:grow_food/features/presentation/program/presentation/controller/actual_courses_cubit.dart';
 import 'package:grow_food/features/presentation/root_screen/data/local_datasource/local_datasource.dart';
 import 'package:grow_food/features/presentation/root_screen/data/local_datasource/local_datasource_impl.dart';
 import 'package:grow_food/features/presentation/root_screen/data/repository/root_screen_repository_impl.dart';
@@ -22,11 +29,16 @@ final sl = GetIt.asNewInstance();
 
 Future<void> init() async {
   //Cubit
+  //Auth
   sl.registerFactory(
     () => SignUpCubit(signUpUser: sl()),
   );
   sl.registerFactory(
-    () => SignInCubit(signInUser: sl(), userLogOut: sl()),
+    () => SignInCubit(
+      signInUser: sl(),
+      userLogOut: sl(),
+      refreshToken: sl(),
+    ),
   );
   sl.registerFactory(
     () => RootScreenCubit(
@@ -34,7 +46,13 @@ Future<void> init() async {
       localDatasource: sl(),
     ),
   );
+  //Courses
+  sl.registerFactory(
+    () => ActualCoursesCubit(getCoursesVideo: sl()),
+  );
+
   //Usecase
+  //Auth
   sl.registerLazySingleton(
     () => SignUpUser(authRepository: sl()),
   );
@@ -44,8 +62,19 @@ Future<void> init() async {
   sl.registerLazySingleton(
     () => GetToken(rootScreenRepository: sl()),
   );
-  sl.registerLazySingleton(() => UserLogOut(authRepository: sl()));
+  sl.registerLazySingleton(
+    () => UserLogOut(authRepository: sl()),
+  );
+  sl.registerLazySingleton(
+    () => RefreshToken(authRepository: sl()),
+  );
+  //Courses
+  sl.registerLazySingleton(
+    () => GetCoursesVideo(coursesVideoRepository: sl()),
+  );
+
   //Repository
+  //Auth
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(
         authRemotehDatasource: sl(), authLocalDatasource: sl()),
@@ -53,7 +82,13 @@ Future<void> init() async {
   sl.registerLazySingleton<RootScreenRepository>(
     () => RootScreenRepositoryImpl(localDatasource: sl()),
   );
+  //Courses
+  sl.registerLazySingleton<CoursesVideoRepository>(
+    () => CoursesVideoRepositoryImpl(coursesVideoDatasource: sl()),
+  );
+
   //Datasource
+  //Auth
   sl.registerLazySingleton<AuthRemoteDatasource>(
     () => AuthRemoteDatasourceImpl(),
   );
@@ -63,6 +98,11 @@ Future<void> init() async {
   sl.registerLazySingleton<AuthLocalDatasource>(
     () => AuthLocalDatasourceImpl(flutterSecureStorage: sl()),
   );
+  //Courses
+  sl.registerLazySingleton<CoursesVideoDatasource>(
+    () => CoursesVideoDatasourceImpl(),
+  );
+
   //UserData
   const flutterSecureStorage = FlutterSecureStorage();
   sl.registerLazySingleton(() => flutterSecureStorage);

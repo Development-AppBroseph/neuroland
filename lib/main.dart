@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_up/controller/sign_up_cubit.dart';
+import 'package:grow_food/features/presentation/program/presentation/controller/actual_courses_cubit.dart';
 import 'package:grow_food/features/presentation/root_screen/presentation/root_screen/controllers/root_screen_cubit.dart';
 import 'package:grow_food/rout_generatoe.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
@@ -29,7 +30,10 @@ Future<void> main() async {
         ),
         BlocProvider<RootScreenCubit>(
           create: (context) => sl<RootScreenCubit>(),
-        )
+        ),
+        BlocProvider<ActualCoursesCubit>(
+          create: (context) => sl<ActualCoursesCubit>(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(428, 926),

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:grow_food/core/constants/constants.dart';
+import 'package:grow_food/core/helpers/auth_interceptor/auth_interceptor.dart';
 import 'package:grow_food/features/presentation/auth/data/datasource/remote_datasource/auth_remote_datasorce.dart';
 import 'package:grow_food/features/presentation/auth/data/models/user_sign_in_model.dart';
 import 'package:grow_food/features/presentation/auth/data/models/user_sign_up_model.dart';
@@ -21,6 +22,8 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     initializeInterceptor();
   }
   initializeInterceptor() {
+    _dio.interceptors.clear();
+    _dio.interceptors.add(DataSourceInterceptor());
     _dio.interceptors.add(
       PrettyDioLogger(
         requestHeader: true,
@@ -34,6 +37,10 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     );
   }
 
+  Map<String, String> headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+  };
   @override
   Future<UserSignUpModel> signUpUser({
     required String userName,
@@ -42,10 +49,6 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     required String password,
     required int id,
   }) async {
-    Map<String, String> headers = {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-    };
     final userData = jsonEncode({
       "name": userName,
       "email": email,
@@ -59,7 +62,6 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       options: Options(
         followRedirects: true,
         headers: headers,
-        validateStatus: (status) => status! < 499,
       ),
     );
     if (response.statusCode! >= 200 && response.statusCode! < 400) {
@@ -79,15 +81,34 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     final Response response = await _dio.post(
       Endpoints.authentication.endpoint,
       data: userData,
-      options: Options(
-        followRedirects: true,
-        validateStatus: (status) => status! < 499,
-      ),
+      options: Options(followRedirects: true, headers: headers),
     );
     if (response.statusCode! >= 200 && response.statusCode! < 400) {
       return UserSignInModel.fromJson(response.data);
     } else {
       throw response.data['error'];
+    }
+  }
+
+  @override
+  Future<UserSignInModel> refreshToken() async {
+    final response = await _dio.post(
+      Endpoints.refreshToken.endpoint,
+      options: Options(followRedirects: true, headers: headers),
+    );
+    if (response.statusCode! >= 200 && response.statusCode! < 400) {
+      return UserSignInModel.fromJson(response.data);
+    } else {
+      throw DioErrorType.other;
+    }
+  }
+
+  @override
+  Future fetch(RequestOptions options) {
+    try {
+      return _dio.fetch(options);
+    } catch (_) {
+      rethrow;
     }
   }
 }

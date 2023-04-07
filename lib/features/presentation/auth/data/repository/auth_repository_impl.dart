@@ -1,5 +1,6 @@
 import 'package:grow_food/features/presentation/auth/data/datasource/local_datasource/auth_local_datasource.dart';
 import 'package:grow_food/features/presentation/auth/data/datasource/remote_datasource/auth_remote_datasorce.dart';
+import 'package:grow_food/features/presentation/auth/data/models/user_sign_in_model.dart';
 import 'package:grow_food/features/presentation/auth/domain/entiti/user_sign_in_entiti.dart';
 import 'package:grow_food/features/presentation/auth/domain/entiti/user_sign_up_entiti.dart';
 import 'package:grow_food/core/error/failure.dart';
@@ -60,6 +61,23 @@ class AuthRepositoryImpl implements AuthRepository {
       return Right(userLogOut);
     } catch (e) {
       return Left(CacheFailure(error: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserSignInEntiti>> refreshToken() async {
+    return await _refreshToken(() => authRemotehDatasource.refreshToken());
+  }
+
+  Future<Either<Failure, UserSignInModel>> _refreshToken(
+      Future<UserSignInModel> Function() token) async {
+    try {
+      final userToken = await token();
+      authLocalDatasource.saveUserToken(userToken.authToken);
+      print('Save token: ${userToken.authToken}');
+      return Right(userToken);
+    } catch (e) {
+      return Left(ServerFailure(error: e.toString()));
     }
   }
 }

@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:grow_food/features/presentation/auth/data/models/user_sign_in_model.dart';
 import 'package:grow_food/features/presentation/auth/data/models/user_sign_up_model.dart';
 
@@ -13,4 +14,7 @@ abstract class AuthRemoteDatasource {
     required String emailOrPhoneNumber,
     required String password,
   });
+
+  Future<UserSignInModel> refreshToken();
+  Future<dynamic>fetch(RequestOptions options);
 }
