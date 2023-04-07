@@ -34,7 +34,7 @@ class _VideoPageState extends State<VideoPage> {
       initialVideoId: YoutubePlayer.convertUrlToId(widget.videoUrl) ?? '',
       flags: const YoutubePlayerFlags(
         autoPlay: false,
-        mute: true,
+        mute: false,
       ),
     )..addListener(() {
         if (!youtubePlayerController.value.isFullScreen) {

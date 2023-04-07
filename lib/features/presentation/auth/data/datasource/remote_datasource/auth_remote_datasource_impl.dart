@@ -56,18 +56,29 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       "branch_ids": id,
       "password": password,
     });
-    final Response response = await _dio.post(
-      Endpoints.registration.endpoint,
-      data: userData,
-      options: Options(
-        followRedirects: true,
-        headers: headers,
-      ),
-    );
-    if (response.statusCode! >= 200 && response.statusCode! < 400) {
-      return UserSignUpModel.fromJson(response.data);
-    } else {
-      throw response.data['error'];
+
+    try {
+      final Response response = await _dio.post(
+        Endpoints.registration.endpoint,
+        data: userData,
+        options: Options(
+          followRedirects: true,
+          headers: headers,
+        ),
+      );
+      if (response.statusCode! >= 200 && response.statusCode! < 400) {
+        return UserSignUpModel.fromJson(response.data);
+      } else {
+        throw response.data['error'];
+      }
+    } on DioError catch (e) {
+      if (e.response!.statusCode == 400) {
+        throw 'Вы ввели данные не правильно';
+      } else if (e.response!.statusCode! >= 500) {
+        throw 'Ошибка сервера';
+      } else {
+        throw 'Что-то пошло не так!';
+      }
     }
   }
 
@@ -78,28 +89,48 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       "password": password,
       "email": emailOrPhoneNumber,
     });
-    final Response response = await _dio.post(
-      Endpoints.authentication.endpoint,
-      data: userData,
-      options: Options(followRedirects: true, headers: headers),
-    );
-    if (response.statusCode! >= 200 && response.statusCode! < 400) {
-      return UserSignInModel.fromJson(response.data);
-    } else {
-      throw response.data['error'];
+    try {
+      final Response response = await _dio.post(
+        Endpoints.authentication.endpoint,
+        data: userData,
+        options: Options(followRedirects: true, headers: headers),
+      );
+      if (response.statusCode! >= 200 && response.statusCode! < 400) {
+        return UserSignInModel.fromJson(response.data);
+      } else {
+        throw response.data['error'];
+      }
+    } on DioError catch (e) {
+      if (e.response!.statusCode == 400) {
+        throw 'Такого пользователя нет';
+      } else if (e.response!.statusCode! >= 500) {
+        throw 'Ошибка сервера';
+      } else {
+        throw 'Что-то пошло не так!';
+      }
     }
   }
 
   @override
   Future<UserSignInModel> refreshToken() async {
-    final response = await _dio.post(
-      Endpoints.refreshToken.endpoint,
-      options: Options(followRedirects: true, headers: headers),
-    );
-    if (response.statusCode! >= 200 && response.statusCode! < 400) {
-      return UserSignInModel.fromJson(response.data);
-    } else {
-      throw DioErrorType.other;
+    try {
+      final response = await _dio.post(
+        Endpoints.refreshToken.endpoint,
+        options: Options(followRedirects: true, headers: headers),
+      );
+      if (response.statusCode! >= 200 && response.statusCode! < 400) {
+        return UserSignInModel.fromJson(response.data);
+      } else {
+        throw response.data['error'];
+      }
+    } on DioError catch (e) {
+      if (e.response!.statusCode == 400) {
+        throw 'Такого пользователя нет';
+      } else if (e.response!.statusCode! >= 500) {
+        throw 'Ошибка сервера';
+      } else {
+        throw 'Что-то пошло не так!';
+      }
     }
   }
 
