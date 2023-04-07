@@ -74,7 +74,7 @@ class _StudiesViewState extends State<StudiesView> {
                         pinned: true,
                         elevation: 0,
                         backgroundColor: ColorsStyles.backgroundColor,
-                        toolbarHeight: 12,
+                        toolbarHeight: 7,
                         bottom: PreferredSize(
                           preferredSize: Size.fromHeight(33.h),
                           child: StreamBuilder(
@@ -88,7 +88,10 @@ class _StudiesViewState extends State<StudiesView> {
                               indicatorColor: Colors.transparent,
                               indicatorSize: TabBarIndicatorSize.label,
                               padding: EdgeInsets.only(
-                                  left: 12, right: 12, bottom: 5.h, top: 5.h),
+                                left: 12,
+                                right: 12,
+                                bottom: 5.h,
+                              ),
                               labelPadding:
                                   EdgeInsets.symmetric(horizontal: 10.w),
                               isScrollable: true,
@@ -112,6 +115,7 @@ class _StudiesViewState extends State<StudiesView> {
                     children: List.generate(
                       state.coursesVideoEntiti.directions.length,
                       (indexTabs) => ListView.builder(
+                        padding: EdgeInsets.zero,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: state.coursesVideoEntiti.videos.where(
