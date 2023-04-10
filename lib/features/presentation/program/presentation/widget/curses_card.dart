@@ -68,7 +68,6 @@ class _CoursesCardState extends State<CoursesCard> {
                       value: downloadProgress.progress,
                     ),
                     imageUrl: '$baseUrl${widget.videoEntiti.preview}',
-                    fit: BoxFit.cover,
                   ),
                 ),
                 Container(
@@ -77,7 +76,7 @@ class _CoursesCardState extends State<CoursesCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
-                        title: widget.videoEntiti.course.title,
+                        title: widget.videoEntiti.course!.title,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w800,
                       ),
@@ -85,7 +84,7 @@ class _CoursesCardState extends State<CoursesCard> {
                         height: 10.h,
                       ),
                       CustomText(
-                        title: widget.videoEntiti.course.description,
+                        title: widget.videoEntiti.course!.description,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w800,
                         color: Colors.grey,

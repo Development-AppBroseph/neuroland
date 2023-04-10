@@ -12,7 +12,7 @@ class VideoEntiti {
   });
 
   final int id;
-  final CourseEntiti course;
+  final CourseEntiti? course;
   final int points;
   final String preview;
   final String duration;

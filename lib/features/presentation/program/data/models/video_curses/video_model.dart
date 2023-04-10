@@ -5,7 +5,7 @@ import 'package:grow_food/features/presentation/program/domain/entiti/video_curs
 class VideoModel extends VideoEntiti {
   VideoModel({
     required final int id,
-    required final CourseEntiti course,
+    required final CourseEntiti? course,
     required final int points,
     required final String preview,
     required final String duration,
@@ -22,7 +22,9 @@ class VideoModel extends VideoEntiti {
         );
   factory VideoModel.fromJson(Map<String, dynamic> json) => VideoModel(
         id: json["id"],
-        course: CourseModel.fromJson(json["course"]),
+        course: json['course'] == null
+            ? null
+            : CourseModel.fromJson(json["course"]),
         points: json["points"],
         preview: json["preview"],
         duration: json["duration"],

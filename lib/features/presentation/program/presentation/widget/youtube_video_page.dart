@@ -60,11 +60,8 @@ class _VideoPageState extends State<VideoPage> {
           backgroundColor: Colors.transparent,
         ),
         backgroundColor: ColorsStyles.blackColor,
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            player,
-          ],
+        body: Center(
+          child: player,
         ),
       ),
     );

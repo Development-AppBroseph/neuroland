@@ -120,7 +120,7 @@ class _StudiesViewState extends State<StudiesView> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: state.coursesVideoEntiti.videos.where(
                           (element) {
-                            return element.course.direction ==
+                            return element.course?.direction ==
                                 state.coursesVideoEntiti.directions[indexTabs]
                                     .id;
                           },
@@ -128,7 +128,7 @@ class _StudiesViewState extends State<StudiesView> {
                         itemBuilder: (context, index) => CoursesCard(
                           videoEntiti: state.coursesVideoEntiti.videos
                               .where((element) =>
-                                  element.course.direction ==
+                                  element.course?.direction ==
                                   state.coursesVideoEntiti.directions[indexTabs]
                                       .id)
                               .toList()[index],
@@ -141,7 +141,7 @@ class _StudiesViewState extends State<StudiesView> {
             }),
           );
         }
-        return Container();
+        return const Text('Error');
       },
     );
   }
