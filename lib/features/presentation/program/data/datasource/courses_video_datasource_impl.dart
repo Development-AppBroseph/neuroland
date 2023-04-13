@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:grow_food/core/constants/constants.dart';
 import 'package:grow_food/core/helpers/auth_interceptor/auth_interceptor.dart';
 import 'package:grow_food/features/presentation/program/data/datasource/courses_video_datasource.dart';
@@ -17,16 +18,18 @@ class CoursesVideoDatasourceImpl implements CoursesVideoDatasource {
   }
   initializeInterceptor() {
     _dio.interceptors.add(DataSourceInterceptor());
-    _dio.interceptors.add(
-      PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseBody: true,
-        error: true,
-        compact: true,
-        maxWidth: 90,
-      ),
-    );
+    if (kDebugMode) {
+      _dio.interceptors.add(
+        PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          responseBody: true,
+          error: true,
+          compact: true,
+          maxWidth: 90,
+        ),
+      );
+    }
   }
 
   Map<String, String> headers = {

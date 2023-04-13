@@ -140,8 +140,16 @@ class _StudiesViewState extends State<StudiesView> {
               );
             }),
           );
+        } else if (state is ActualCoursesErrorState) {
+          return const Center(
+            child: Text('Error'),
+          );
         }
-        return const Text('Error');
+        return const Center(
+          child: CircularProgressIndicator(
+            color: ColorsStyles.buttonColor,
+          ),
+        );
       },
     );
   }
