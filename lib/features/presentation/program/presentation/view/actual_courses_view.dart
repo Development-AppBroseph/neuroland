@@ -61,7 +61,7 @@ class _StudiesViewState extends State<StudiesView> {
                               Container(
                                 margin: EdgeInsets.only(top: 60.h, left: 24.w),
                                 child: CustomText(
-                                  title: 'Акутальные курсы',
+                                  title: 'Актуальные курсы',
                                   fontSize: 24.sp,
                                   fontWeight: FontWeight.w800,
                                 ),
