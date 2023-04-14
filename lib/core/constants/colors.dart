@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 const Color accentColor = Color.fromRGBO(50, 52, 139, 1);
 
 const Color redColor = Color.fromRGBO(190, 39, 46, 1);
-const Color backgroundColor = Color(0xffF9F9FB);
+const Color backgroundColor = Color(0xffF4F4F4);
 
 abstract class ColorsStyles {
-  static const Color backgroundColor = Color(0xffF9F9FB);
+  static const Color backgroundColor = Color(0xffF4F4F4);
   static const List<Color> gradientRedColor = [
     Color(0xffFF414A),
     Color(0xffBE272E)
@@ -21,4 +21,5 @@ abstract class ColorsStyles {
   static const Color mainTextColor = Color(0xff363636); 
   static const Color textFiledHintColor = Color(0xff6B6B6B);
   static const Color buttonColor = Color(0xff2E3190);
+  static const Color exitColor = Color(0xffF01111);
 }

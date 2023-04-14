@@ -11,9 +11,7 @@ class SmartDilogFunctions {
       msg: '',
       builder: (context) {
         return Container(
-          height: 80.h,
-          width: 80.w,
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             color: ColorsStyles.whiteColor,
             borderRadius: BorderRadius.circular(20),

@@ -30,6 +30,10 @@ class SignInCubit extends HydratedCubit<SignInStates> {
         if (state == SignInStates.signInLoadingState) {
           SmartDilogFunctions.showCustomLoader();
         }
+        Future.delayed(
+          const Duration(seconds: 3),
+          () => SmartDialog.dismiss(),
+        );
         final result = await signInUser.call(
           SignInUserParams(
             emailOrPhoneNumber: emailOrPhoneNumber,

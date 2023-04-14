@@ -30,6 +30,7 @@ dependencies:
   path_provider: ^2.0.14
   youtube_player_flutter: ^8.1.2
   cached_network_image: ^3.2.3
+  card_loading: ^0.3.0
 
 dev_dependencies:
   flutter_test:

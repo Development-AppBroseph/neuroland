@@ -46,7 +46,7 @@ class _SignInState extends State<SignIn> {
     return BlocBuilder<SignInCubit, SignInStates>(
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: ColorsStyles.backgroundColor,
+          backgroundColor: ColorsStyles.whiteColor,
           body: SafeArea(
             child: ScrollConfiguration(
               behavior: MyBehavior(),

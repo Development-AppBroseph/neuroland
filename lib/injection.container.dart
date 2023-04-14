@@ -12,12 +12,18 @@ import 'package:grow_food/features/presentation/auth/domain/usecases/sign_in_use
 import 'package:grow_food/features/presentation/auth/domain/usecases/sign_up_user.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_up/controller/sign_up_cubit.dart';
-import 'package:grow_food/features/presentation/program/data/datasource/courses_video_datasource.dart';
-import 'package:grow_food/features/presentation/program/data/datasource/courses_video_datasource_impl.dart';
-import 'package:grow_food/features/presentation/program/data/repository/courses_video_repository_impl.dart';
-import 'package:grow_food/features/presentation/program/domain/repository/courses_video_repository.dart';
-import 'package:grow_food/features/presentation/program/domain/usecase/get_courses_video.dart';
-import 'package:grow_food/features/presentation/program/presentation/controller/actual_courses_cubit.dart';
+import 'package:grow_food/features/presentation/profile/data/datasource/remote_profile_datasource/remote_profile_datasource.dart';
+import 'package:grow_food/features/presentation/profile/data/datasource/remote_profile_datasource/remote_profile_datasource_implements.dart';
+import 'package:grow_food/features/presentation/profile/data/repository/profile_repository_impl.dart';
+import 'package:grow_food/features/presentation/profile/domain/repository/profile_repository.dart';
+import 'package:grow_food/features/presentation/profile/domain/usecase/get_profile.dart';
+import 'package:grow_food/features/presentation/profile/presentation/controller/profile_cubit.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/data/datasource/courses_video_datasource.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/data/datasource/courses_video_datasource_impl.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/data/repository/courses_video_repository_impl.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/domain/repository/courses_video_repository.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/get_courses_video.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/controller/actual_courses_cubit.dart';
 import 'package:grow_food/features/presentation/root_screen/data/local_datasource/local_datasource.dart';
 import 'package:grow_food/features/presentation/root_screen/data/local_datasource/local_datasource_impl.dart';
 import 'package:grow_food/features/presentation/root_screen/data/repository/root_screen_repository_impl.dart';
@@ -50,6 +56,10 @@ Future<void> init() async {
   sl.registerFactory(
     () => ActualCoursesCubit(getCoursesVideo: sl()),
   );
+  //Profile
+  sl.registerFactory(
+    () => ProfileCubit(getProfile: sl()),
+  );
 
   //Usecase
   //Auth
@@ -72,6 +82,10 @@ Future<void> init() async {
   sl.registerLazySingleton(
     () => GetCoursesVideo(coursesVideoRepository: sl()),
   );
+  //Profile
+  sl.registerLazySingleton(
+    () => GetProfile(profileRepository: sl()),
+  );
 
   //Repository
   //Auth
@@ -85,6 +99,10 @@ Future<void> init() async {
   //Courses
   sl.registerLazySingleton<CoursesVideoRepository>(
     () => CoursesVideoRepositoryImpl(coursesVideoDatasource: sl()),
+  );
+  //Profile
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(remoteProfileDatasource: sl()),
   );
 
   //Datasource
@@ -101,6 +119,10 @@ Future<void> init() async {
   //Courses
   sl.registerLazySingleton<CoursesVideoDatasource>(
     () => CoursesVideoDatasourceImpl(),
+  );
+  //Profile
+  sl.registerLazySingleton<RemoteProfileDatasource>(
+    () => RemoteProfileDatasourceImpl(),
   );
 
   //UserData
