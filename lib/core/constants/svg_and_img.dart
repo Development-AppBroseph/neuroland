@@ -14,4 +14,6 @@ abstract class SvgImg {
   static const String profile = 'assets/icons/profile.svg';
   static const String studiesFill = 'assets/icons/studies_fill.svg';
   static const String studies = 'assets/icons/studies.svg';
+  static const String refLink = 'assets/icons/ref_link.svg';
+  static const String exit = 'assets/icons/exit.svg';
 }

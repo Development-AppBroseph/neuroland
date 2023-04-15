@@ -94,3 +94,8 @@ var maskFormatter = MaskTextInputFormatter(
     filter: {"#": RegExp(r'[0-9A-Za-zа-яА-я]')},
     type: MaskAutoCompletionType.lazy,
   );
+var maskProfileFormatter = MaskTextInputFormatter(
+    mask: '## (###) ###-##-##',
+    filter: {"#": RegExp(r'[0-9A-Za-zа-яА-я]')},
+    type: MaskAutoCompletionType.lazy,
+  );

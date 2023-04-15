@@ -3,11 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/constants/svg_and_img.dart';
-import 'package:grow_food/features/presentation/categories/categories.dart';
 import 'package:grow_food/features/presentation/chat/chat.dart';
-import 'package:grow_food/features/presentation/orders/orders.dart';
-import 'package:grow_food/features/presentation/profile/profile.dart';
-import 'package:grow_food/features/presentation/program/presentation/view/actual_courses_view.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/presentation/coupons/view/coupons_view.dart';
+import 'package:grow_food/features/presentation/profile/presentation/view/profile.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/view/actual_courses_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -20,10 +19,9 @@ class _HomeViewState extends State<HomeView> {
   int _selectedIndex = 0;
   List pages = [
     const StudiesView(),
-    CategoriesView(),
-    const OrdersView(),
-    const ProfileView(),
+    const CouponsView(),
     const ChatView(),
+    const ProfileView(),
   ];
   @override
   void initState() {

@@ -22,7 +22,6 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
     initializeInterceptor();
   }
   initializeInterceptor() {
-    _dio.interceptors.clear();
     _dio.interceptors.add(DataSourceInterceptor());
     _dio.interceptors.add(
       PrettyDioLogger(
