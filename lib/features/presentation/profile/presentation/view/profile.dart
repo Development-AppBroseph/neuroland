@@ -56,14 +56,22 @@ class _ProfileViewState extends State<ProfileView> {
         if (state is ProfileInitialState) {
           context.read<ProfileCubit>().fetchProfile();
         }
+        if (state is ProfileLoadedState) {
+          nameController.text = state.profile.name;
+          phoneController.text = state.profile.phone;
+          emailController.text = state.profile.email;
+          phoneController.text =
+              '${state.profile.phone.substring(0, 2)} (${state.profile.phone.substring(2, 5)}) ${state.profile.phone.substring(5, 8)}-${state.profile.phone.substring(8, 10)}-${state.profile.phone.substring(10, 12)}';
+        }
         return Scaffold(
           backgroundColor: ColorsStyles.backgroundColor,
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  height: 540,
+                  // height: 540,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: ColorsStyles.whiteColor,
@@ -261,7 +269,10 @@ class _ProfileViewState extends State<ProfileView> {
                                 borderRadius: BorderRadius.circular(20.r),
                               )
                           ],
-                        )
+                        ),
+                        const SizedBox(
+                          height: 33,
+                        ),
                       ],
                     ),
                   ),

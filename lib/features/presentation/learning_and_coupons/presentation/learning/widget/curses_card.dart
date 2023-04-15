@@ -48,7 +48,7 @@ class _CoursesCardState extends State<CoursesCard> {
               color: Colors.grey[300]!,
               spreadRadius: 5,
               blurRadius: 10,
-              offset: const Offset(0, 3),
+              offset: const Offset(0, 10),
             ),
           ],
         ),

@@ -52,7 +52,8 @@ class _StudiesViewState extends State<StudiesView> {
                       (BuildContext context, bool innerBoxIsScrolled) {
                     return [
                       SliverAppBar(
-                        expandedHeight: 140,
+                        // expandedHeight: 140,
+                        toolbarHeight: 80,
                         backgroundColor: ColorsStyles.backgroundColor,
                         elevation: 0,
                         floating: true,
@@ -72,6 +73,7 @@ class _StudiesViewState extends State<StudiesView> {
                               padding: EdgeInsets.only(
                                 left: 12,
                                 right: 12,
+                                top: 15,
                                 bottom: 15.h,
                               ),
                               labelPadding:
@@ -120,7 +122,7 @@ class _StudiesViewState extends State<StudiesView> {
                           separatorBuilder: (context, index) => SizedBox(
                             height: 15.h,
                           ),
-                          padding: const EdgeInsets.only(top: 32, bottom: 32),
+                          padding: const EdgeInsets.only(top: 10, bottom: 32),
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: state.coursesVideoEntiti.videos.where(
