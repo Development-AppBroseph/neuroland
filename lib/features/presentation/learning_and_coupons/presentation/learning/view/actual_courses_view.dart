@@ -122,7 +122,7 @@ class _StudiesViewState extends State<StudiesView> {
                           separatorBuilder: (context, index) => SizedBox(
                             height: 15.h,
                           ),
-                          padding: const EdgeInsets.only(top: 10, bottom: 32),
+                          padding: const EdgeInsets.only(top: 20, bottom: 32),
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: state.coursesVideoEntiti.videos.where(
