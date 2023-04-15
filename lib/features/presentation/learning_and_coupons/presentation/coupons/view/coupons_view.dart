@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
+import 'package:grow_food/core/helpers/widgets/my_behavior.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/coupons/widgets/coupons_card.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/controller/actual_courses_cubit.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/controller/actual_courses_state.dart';
@@ -73,14 +74,17 @@ class _CouponsViewState extends State<CouponsView> {
                   ),
                 ];
               },
-              body: ListView.separated(
-                separatorBuilder: (context, index) => const SizedBox(
-                  height: 18,
-                ),
-                padding: const EdgeInsets.only(top: 15),
-                itemCount: state.coursesVideoEntiti.coupons.length,
-                itemBuilder: (context, index) => CouponsCard(
-                  couponEntiti: state.coursesVideoEntiti.coupons[index],
+              body: ScrollConfiguration(
+                behavior: MyBehavior(),
+                child: ListView.separated(
+                  separatorBuilder: (context, index) => const SizedBox(
+                    height: 18,
+                  ),
+                  padding: const EdgeInsets.only(top: 15),
+                  itemCount: state.coursesVideoEntiti.coupons.length,
+                  itemBuilder: (context, index) => CouponsCard(
+                    couponEntiti: state.coursesVideoEntiti.coupons[index],
+                  ),
                 ),
               ),
             );
