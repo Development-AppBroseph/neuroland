@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
+import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPage extends StatefulWidget {
   final String videoUrl;
-  const VideoPage({super.key, required this.videoUrl});
+  final String description;
+  final String titleVideo;
+  const VideoPage(
+      {super.key,
+      required this.videoUrl,
+      required this.description,
+      required this.titleVideo});
 
   @override
   State<VideoPage> createState() => _VideoPageState();
@@ -17,7 +25,6 @@ class _VideoPageState extends State<VideoPage> {
   @override
   void dispose() {
     super.dispose();
-
     youtubePlayerController.dispose();
   }
 
@@ -38,8 +45,13 @@ class _VideoPageState extends State<VideoPage> {
       ),
     )..addListener(() {
         if (!youtubePlayerController.value.isFullScreen) {
-          SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-              overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
+          SystemChrome.setEnabledSystemUIMode(
+            SystemUiMode.manual,
+            overlays: [
+              SystemUiOverlay.bottom,
+              SystemUiOverlay.top,
+            ],
+          );
         }
       });
   }
@@ -56,12 +68,37 @@ class _VideoPageState extends State<VideoPage> {
         ),
       ),
       builder: (context, player) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-        ),
-        backgroundColor: ColorsStyles.blackColor,
-        body: Center(
-          child: player,
+        backgroundColor: ColorsStyles.backgroundColor,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                player,
+                SizedBox(
+                  height: 10.h,
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 24.w),
+                  child: CustomText(
+                    title: widget.titleVideo,
+                    fontSize: 20,
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 24.w),
+                  child: CustomText(
+                    title: widget.description,
+                    fontSize: 18,
+                    color: ColorsStyles.textFiledHintColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

@@ -7,7 +7,6 @@ import 'package:grow_food/core/helpers/widgets/my_behavior.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/coupons/widgets/coupons_card.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/controller/actual_courses_cubit.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/controller/actual_courses_state.dart';
-import 'package:http/http.dart';
 
 class CouponsView extends StatefulWidget {
   const CouponsView({super.key});

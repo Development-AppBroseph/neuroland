@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/helpers/widgets/push_error.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/widget/youtube_video_page.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class SmartDilogFunctions {
   static Future<void> showCustomLoader() {
@@ -68,6 +70,32 @@ class SmartDilogFunctions {
           child: PushError(
             title: title,
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class BottomSheets {
+  static void showVideoBottomsheet(BuildContext context,
+      {required String videoUrl, required String description, required String titleVideo}) {
+    showMaterialModalBottomSheet(
+      context: context,
+      animationCurve: Curves.easeInOutQuint,
+      elevation: 12,
+      barrierColor: const Color.fromRGBO(0, 0, 0, 0.2),
+      duration: const Duration(milliseconds: 600),
+      backgroundColor: Colors.transparent,
+      enableDrag: true,
+      builder: (context) => Container(
+        height: MediaQuery.of(context).size.height - 100,
+        decoration: const BoxDecoration(
+          color: Color(0xffF3F3F3),
+        ),
+        child: VideoPage(
+          videoUrl: videoUrl,
+          description: description,
+          titleVideo: titleVideo,
         ),
       ),
     );
