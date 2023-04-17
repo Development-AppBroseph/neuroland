@@ -17,6 +17,7 @@ import 'package:grow_food/features/presentation/profile/data/datasource/remote_p
 import 'package:grow_food/features/presentation/profile/data/repository/profile_repository_impl.dart';
 import 'package:grow_food/features/presentation/profile/domain/repository/profile_repository.dart';
 import 'package:grow_food/features/presentation/profile/domain/usecase/get_profile.dart';
+import 'package:grow_food/features/presentation/profile/domain/usecase/get_ref.dart';
 import 'package:grow_food/features/presentation/profile/presentation/controller/profile_cubit.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/data/datasource/courses_video_datasource.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/data/datasource/courses_video_datasource_impl.dart';
@@ -58,7 +59,10 @@ Future<void> init() async {
   );
   //Profile
   sl.registerFactory(
-    () => ProfileCubit(getProfile: sl()),
+    () => ProfileCubit(
+      getProfile: sl(),
+      getLink: sl(),
+    ),
   );
 
   //Usecase
@@ -85,6 +89,9 @@ Future<void> init() async {
   //Profile
   sl.registerLazySingleton(
     () => GetProfile(profileRepository: sl()),
+  );
+  sl.registerLazySingleton(
+    () => GetLink(profileRepository: sl()),
   );
 
   //Repository

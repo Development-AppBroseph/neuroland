@@ -1,4 +1,5 @@
 import 'package:grow_food/features/presentation/profile/data/datasource/remote_profile_datasource/remote_profile_datasource.dart';
+import 'package:grow_food/features/presentation/profile/domain/entiti/invite_link_entiti.dart';
 import 'package:grow_food/features/presentation/profile/domain/entiti/profile_entiti.dart';
 import 'package:grow_food/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
@@ -12,6 +13,16 @@ class ProfileRepositoryImpl implements ProfileRepository {
   Future<Either<Failure, ProfileEntiti>> getProfile() async {
     try {
       final data = await remoteProfileDatasource.getProfile();
+      return Right(data);
+    } catch (e) {
+      return Left(ServerFailure(error: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, InviteLinkEntiti>> getRef() async {
+    try {
+      final data = await remoteProfileDatasource.getRef();
       return Right(data);
     } catch (e) {
       return Left(ServerFailure(error: e.toString()));

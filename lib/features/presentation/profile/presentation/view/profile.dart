@@ -1,12 +1,14 @@
 import 'package:card_loading/card_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/constants/svg_and_img.dart';
 import 'package:grow_food/core/helpers/custom_input_formaters/custom_input_formatter_number.dart';
+import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
 import 'package:grow_food/features/presentation/profile/presentation/controller/profile_cubit.dart';
@@ -313,30 +315,43 @@ class _ProfileViewState extends State<ProfileView> {
                 SizedBox(
                   height: 10.h,
                 ),
-                Container(
-                  height: 60.h,
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 24.w,
-                    vertical: 19.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: ColorsStyles.whiteColor,
-                    borderRadius: BorderRadius.circular(20.r),
-                  ),
-                  child: Row(
-                    children: [
-                      CustomText(
-                        title: 'Реферальная ссылка',
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      const Spacer(),
-                      SvgPicture.asset(
-                        SvgImg.refLink,
-                        color: ColorsStyles.buttonColor,
-                      ),
-                    ],
+                GestureDetector(
+                  onTap: () async {
+                    if (state is ProfileLoadedState) {
+                      HapticFeedback.lightImpact();
+                      await Clipboard.setData(
+                              ClipboardData(text: state.link.inviteLink))
+                          .then((_) {
+                        SmartDilogFunctions.showInfoDilog(
+                            title: 'Ссылка скопирована');
+                      });
+                    }
+                  },
+                  child: Container(
+                    height: 60.h,
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 24.w,
+                      vertical: 19.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: ColorsStyles.whiteColor,
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Row(
+                      children: [
+                        CustomText(
+                          title: 'Реферальная ссылка',
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        const Spacer(),
+                        SvgPicture.asset(
+                          SvgImg.refLink,
+                          color: ColorsStyles.buttonColor,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(

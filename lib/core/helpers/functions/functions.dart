@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/helpers/widgets/push_error.dart';
-import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/widget/youtube_video_page.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class SmartDilogFunctions {
   static Future<void> showCustomLoader() {
