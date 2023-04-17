@@ -53,7 +53,7 @@ class _StudiesViewState extends State<StudiesView> {
                     return [
                       SliverAppBar(
                         // expandedHeight: 140,
-                        toolbarHeight: 80,
+                        toolbarHeight: 90.h,
                         backgroundColor: ColorsStyles.backgroundColor,
                         elevation: 0,
                         floating: true,
@@ -121,7 +121,7 @@ class _StudiesViewState extends State<StudiesView> {
                           separatorBuilder: (context, index) => SizedBox(
                             height: 15.h,
                           ),
-                          padding: const EdgeInsets.only(top: 20, bottom: 32),
+                          padding: EdgeInsets.only(top: 20.h, bottom: 32),
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: state.coursesVideoEntiti.videos.where(

@@ -111,7 +111,7 @@ class _SignUpState extends State<SignUp> {
                           children: [
                             Padding(
                               padding:
-                                  EdgeInsets.only(top: 248.h, bottom: 25.h),
+                                  EdgeInsets.only(top: 188.h, bottom: 25.h),
                               child: CustomText(
                                 title: 'Регистрация',
                                 fontSize: 32.sp,

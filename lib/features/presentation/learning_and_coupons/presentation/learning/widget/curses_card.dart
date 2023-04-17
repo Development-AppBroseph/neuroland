@@ -29,9 +29,7 @@ class _CoursesCardState extends State<CoursesCard> {
           context,
           MaterialPageRoute(
             builder: (context) => VideoPage(
-              videoUrl: widget.videoEntiti.videoUrl,
-              description: widget.videoEntiti.description,
-              titleVideo: widget.videoEntiti.course!.title,
+              videoEntiti: widget.videoEntiti,
             ),
           ),
         );
@@ -49,10 +47,10 @@ class _CoursesCardState extends State<CoursesCard> {
           color: ColorsStyles.whiteColor,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey[300]!,
-              spreadRadius: 5,
-              blurRadius: 10,
-              offset: const Offset(0, 10),
+              color: Color.fromRGBO(0, 0, 0, 0.05),
+              spreadRadius: 0,
+              blurRadius: 20.r,
+              offset: const Offset(0, 0),
             ),
           ],
         ),
