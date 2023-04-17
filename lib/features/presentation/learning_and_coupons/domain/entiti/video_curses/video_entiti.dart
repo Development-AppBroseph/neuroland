@@ -9,6 +9,7 @@ class VideoEntiti {
     required this.duration,
     required this.videoUrl,
     required this.createdAt,
+    required this.description,
   });
 
   final int id;
@@ -18,4 +19,5 @@ class VideoEntiti {
   final String duration;
   final String videoUrl;
   final DateTime createdAt;
+  final String description;
 }

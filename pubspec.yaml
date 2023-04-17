@@ -31,6 +31,7 @@ dependencies:
   youtube_player_flutter: ^8.1.2
   cached_network_image: ^3.2.3
   card_loading: ^0.3.0
+  modal_bottom_sheet: ^2.1.2
 
 dev_dependencies:
   flutter_test:

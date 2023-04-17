@@ -73,7 +73,6 @@ class _StudiesViewState extends State<StudiesView> {
                               padding: EdgeInsets.only(
                                 left: 12,
                                 right: 12,
-                                top: 15,
                                 bottom: 15.h,
                               ),
                               labelPadding:

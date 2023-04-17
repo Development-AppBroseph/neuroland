@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/constants/constants.dart';
+import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/video_curses/video_entiti.dart';
-import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/widget/youtube_video_page.dart';
+
+import 'youtube_video_page.dart';
 
 class CoursesCard extends StatefulWidget {
   final VideoEntiti videoEntiti;
@@ -28,6 +30,8 @@ class _CoursesCardState extends State<CoursesCard> {
           MaterialPageRoute(
             builder: (context) => VideoPage(
               videoUrl: widget.videoEntiti.videoUrl,
+              description: widget.videoEntiti.description,
+              titleVideo: widget.videoEntiti.course!.title,
             ),
           ),
         );
