@@ -4,12 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/helpers/widgets/custom_button.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/video_curses/direction_entiti.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/video_curses/video_entiti.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPage extends StatefulWidget {
   final VideoEntiti videoEntiti;
-  const VideoPage({super.key, required this.videoEntiti});
+  final DirectionEntiti directionEntiti;
+  const VideoPage(
+      {super.key, required this.videoEntiti, required this.directionEntiti});
 
   @override
   State<VideoPage> createState() => _VideoPageState();
@@ -90,7 +93,7 @@ class _VideoPageState extends State<VideoPage> {
         ),
         body: SafeArea(
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -99,12 +102,6 @@ class _VideoPageState extends State<VideoPage> {
                 Center(
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 24.w),
-                    // padding:
-                    //     EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-                    // decoration: BoxDecoration(
-                    //   color: accentColor,
-                    //   borderRadius: BorderRadius.circular(10.r),
-                    // ),
                     alignment: Alignment.centerLeft,
                     child: CustomText(
                       title: widget.videoEntiti.course?.title ?? '',
@@ -114,30 +111,11 @@ class _VideoPageState extends State<VideoPage> {
                     ),
                   ),
                 ),
-
-                // Container(
-                //   margin: EdgeInsets.symmetric(horizontal: 24.w),
-                //   padding:
-                //       EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-                //   decoration: BoxDecoration(
-                //     color: accentColor,
-                //     borderRadius: BorderRadius.circular(10.r),
-                //   ),
-                //   child: CustomText(
-                //     // title: widget.description,
-                //     title: 'Описание',
-                //     fontSize: 18.h,
-                //     fontWeight: FontWeight.w700,
-                //     color: ColorsStyles.whiteColor,
-                //   ),
-                // ),
                 SizedBox(height: 15.h),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
                   child: CustomText(
                     title: widget.videoEntiti.description,
-                    // title:
-                    //     'В данном уроке мы расскажем Вам, о том какие времена есть в английском языке. Приятного просмотра!',
                     fontSize: 18.h,
                     fontWeight: FontWeight.w700,
                     color: ColorsStyles.textFiledHintColor.withOpacity(0.5),
@@ -149,14 +127,12 @@ class _VideoPageState extends State<VideoPage> {
                   child: Row(
                     children: [
                       CustomText(
-                        // title: widget.description,
                         title: 'Длительность урока: ',
                         fontSize: 18.h,
                         fontWeight: FontWeight.w700,
                         color: ColorsStyles.blackColor,
                       ),
                       CustomText(
-                        // title: widget.description,
                         title: widget.videoEntiti.duration,
                         fontSize: 18.h,
                         fontWeight: FontWeight.w700,
@@ -171,14 +147,12 @@ class _VideoPageState extends State<VideoPage> {
                   child: Row(
                     children: [
                       CustomText(
-                        // title: widget.description,
                         title: 'Баллы за просмотр: ',
                         fontSize: 18.h,
                         fontWeight: FontWeight.w700,
                         color: ColorsStyles.blackColor,
                       ),
                       CustomText(
-                        // title: widget.description,
                         title: widget.videoEntiti.points.toString(),
                         fontSize: 18.h,
                         fontWeight: FontWeight.w700,
@@ -190,14 +164,7 @@ class _VideoPageState extends State<VideoPage> {
                 SizedBox(height: 20.h),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 24.w),
-                  // padding:
-                  // EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-                  // decoration: BoxDecoration(
-                  //   color: accentColor,
-                  //   borderRadius: BorderRadius.circular(10.r),
-                  // ),
                   child: CustomText(
-                    // title: widget.description,
                     title: 'О направлении: ',
                     fontSize: 18.h,
                     fontWeight: FontWeight.w700,
@@ -208,7 +175,7 @@ class _VideoPageState extends State<VideoPage> {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
                   child: CustomText(
-                    title: widget.videoEntiti.course?.aboutDirection ?? '',
+                    title: widget.directionEntiti.aboutDirection,
                     fontSize: 18.h,
                     fontWeight: FontWeight.w700,
                     color: ColorsStyles.textFiledHintColor.withOpacity(0.5),

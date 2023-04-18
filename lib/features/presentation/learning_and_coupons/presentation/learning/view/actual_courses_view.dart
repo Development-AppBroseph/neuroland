@@ -138,6 +138,8 @@ class _StudiesViewState extends State<StudiesView> {
                                     state.coursesVideoEntiti
                                         .directions[indexTabs].id)
                                 .toList()[index],
+                            directionEntiti:
+                                state.coursesVideoEntiti.directions[indexTabs],
                           ),
                         ),
                       ),

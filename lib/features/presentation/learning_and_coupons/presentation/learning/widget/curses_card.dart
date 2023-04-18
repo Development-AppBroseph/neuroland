@@ -3,17 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/constants/constants.dart';
-import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/video_curses/direction_entiti.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/video_curses/video_entiti.dart';
 
 import 'youtube_video_page.dart';
 
 class CoursesCard extends StatefulWidget {
   final VideoEntiti videoEntiti;
+  final DirectionEntiti directionEntiti;
   const CoursesCard({
     super.key,
     required this.videoEntiti,
+    required this.directionEntiti,
   });
 
   @override
@@ -30,6 +32,7 @@ class _CoursesCardState extends State<CoursesCard> {
           MaterialPageRoute(
             builder: (context) => VideoPage(
               videoEntiti: widget.videoEntiti,
+              directionEntiti: widget.directionEntiti,
             ),
           ),
         );
@@ -47,7 +50,7 @@ class _CoursesCardState extends State<CoursesCard> {
           color: ColorsStyles.whiteColor,
           boxShadow: [
             BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.05),
+              color: const Color.fromRGBO(0, 0, 0, 0.05),
               spreadRadius: 0,
               blurRadius: 20.r,
               offset: const Offset(0, 0),

@@ -5,6 +5,7 @@ enum Endpoints {
   refreshToken,
   vidoCourses,
   profile,
+  inviteLink
 }
 
 const String baseUrl = 'http://158.160.44.207:8007';
@@ -23,7 +24,9 @@ extension EndpointsExtension on Endpoints {
       case Endpoints.vidoCourses:
         return '/api/course-videos/';
       case Endpoints.profile:
-        return '/api/users/me/';  
+        return '/api/users/me/';
+      case Endpoints.inviteLink:
+        return '/api/invite/';
     }
   }
 }
