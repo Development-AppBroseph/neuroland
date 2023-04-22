@@ -32,6 +32,8 @@ dependencies:
   cached_network_image: ^3.2.3
   card_loading: ^0.3.0
   modal_bottom_sheet: ^2.1.2
+  image_picker: ^0.8.7+3
+  duration: ^3.0.12
 
 dev_dependencies:
   flutter_test:

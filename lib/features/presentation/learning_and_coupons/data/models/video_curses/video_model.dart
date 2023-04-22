@@ -8,6 +8,7 @@ class VideoModel extends VideoEntiti {
     required final CourseEntiti? course,
     required final int points,
     required final String preview,
+    required final bool viewed,
     required final String duration,
     required final String videoUrl,
     required final DateTime createdAt,
@@ -21,6 +22,7 @@ class VideoModel extends VideoEntiti {
           videoUrl: videoUrl,
           createdAt: createdAt,
           description: description,
+          viewed: viewed,
         );
   factory VideoModel.fromJson(Map<String, dynamic> json) => VideoModel(
         id: json["id"],
@@ -33,5 +35,6 @@ class VideoModel extends VideoEntiti {
         videoUrl: json["video_url"],
         createdAt: DateTime.parse(json["created_at"]),
         description: json['description'],
+        viewed: json['viewed'] as bool,
       );
 }

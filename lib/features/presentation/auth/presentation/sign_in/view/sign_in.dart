@@ -8,6 +8,8 @@ import 'package:grow_food/core/helpers/widgets/custom_button.dart';
 import 'package:grow_food/core/helpers/widgets/my_behavior.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_state.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/controller/actual_courses_cubit.dart';
+import 'package:grow_food/features/presentation/profile/presentation/controller/profile_cubit.dart';
 
 import '../widgets/entry_widget.dart';
 
@@ -34,7 +36,7 @@ class _SignInState extends State<SignIn> {
     Function() onSuccess,
   ) async {
     if (emailOrPhoneNumber.isEmpty || password.isEmpty) {
-      SmartDilogFunctions.showErrorDilog(title: 'Есть не заполненные поля');
+      SmartDialogFunctions.showErrorDilog(title: 'Есть не заполненные поля');
     } else {
       onSuccess();
     }
@@ -42,8 +44,13 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    // Size size = MediaQuery.of(context).size;
-    return BlocBuilder<SignInCubit, SignInStates>(
+    return BlocConsumer<SignInCubit, SignInStates>(
+      listener: (context, state) {
+        if (state == SignInStates.signInLoadedState) {
+          context.read<ActualCoursesCubit>().fetchCoursesVideo();
+          context.read<ProfileCubit>().fetchProfile();
+        }
+      },
       builder: (context, state) {
         return Scaffold(
           backgroundColor: ColorsStyles.whiteColor,

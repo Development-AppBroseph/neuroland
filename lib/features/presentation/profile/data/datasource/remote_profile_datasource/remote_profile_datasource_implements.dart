@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:grow_food/core/constants/constants.dart';
@@ -72,6 +74,111 @@ class RemoteProfileDatasourceImpl implements RemoteProfileDatasource {
     } on DioError catch (error) {
       if (error.response!.statusCode == 400) {
         throw 'Вы ввели данные не правильно';
+      } else if (error.response!.statusCode! >= 500) {
+        throw 'Ошибка сервера';
+      } else {
+        throw 'Что-то пошло не так!';
+      }
+    }
+  }
+
+
+  @override
+  Future<ProfileModel> editAvatar({required String avatar}) async {
+    final userData = jsonEncode({
+      "avatar": avatar,
+    });
+    try {
+      final Response response = await _dio.patch(
+        Endpoints.profile.endpoint,
+        data: userData,
+      );
+      if (response.statusCode! >= 200 && response.statusCode! < 400) {
+        return ProfileModel.fromJson(response.data);
+      } else {
+        throw response.data['error'];
+      }
+    } on DioError catch (error) {
+      if (error.response!.statusCode == 400) {
+        throw 'Вы ввели данные не правильно';
+      } else if (error.response!.statusCode! >= 500) {
+        throw 'Ошибка сервера';
+      } else {
+        throw 'Что-то пошло не так!';
+      }
+    }
+  }
+
+  @override
+  Future<ProfileModel> editEmail({required String email}) async {
+    final userData = jsonEncode({
+      "email": email,
+    });
+    try {
+      final Response response = await _dio.patch(
+        Endpoints.profile.endpoint,
+        data: userData,
+      );
+      if (response.statusCode! >= 200 && response.statusCode! < 400) {
+        return ProfileModel.fromJson(response.data);
+      } else {
+        throw response.data['error'];
+      }
+    } on DioError catch (error) {
+      if (error.response!.statusCode == 400) {
+        throw 'Вы ввели Email не корректоно';
+      } else if (error.response!.statusCode! >= 500) {
+        throw 'Ошибка сервера';
+      } else {
+        throw 'Что-то пошло не так!';
+      }
+    }
+  }
+
+  @override
+  Future<ProfileModel> editName({required String name}) async {
+    final userData = jsonEncode({
+      "name": name,
+    });
+    try {
+      final Response response = await _dio.patch(
+        Endpoints.profile.endpoint,
+        data: userData,
+      );
+      if (response.statusCode! >= 200 && response.statusCode! < 400) {
+        return ProfileModel.fromJson(response.data);
+      } else {
+        throw response.data['error'];
+      }
+    } on DioError catch (error) {
+      if (error.response!.statusCode == 400) {
+        throw 'Вы ввели Имя не корректно';
+      } else if (error.response!.statusCode! >= 500) {
+        throw 'Ошибка сервера';
+      } else {
+        throw 'Что-то пошло не так!';
+      }
+    }
+  }
+
+  @override
+  Future<ProfileModel> editNumber({required String number}) async {
+    final userData = jsonEncode({
+      "phone": number,
+    });
+    try {
+      final Response response = await _dio.patch(
+        Endpoints.profile.endpoint,
+        data: userData,
+      );
+      if (response.statusCode! >= 200 && response.statusCode! < 400) {
+        return ProfileModel.fromJson(response.data);
+      } else {
+        throw response.data['error'];
+      }
+    } on DioError catch (error) {
+      if (error.response!.statusCode == 400) {
+        throw 'Вы ввели Номер не правильно';
       } else if (error.response!.statusCode! >= 500) {
         throw 'Ошибка сервера';
       } else {

@@ -28,4 +28,48 @@ class ProfileRepositoryImpl implements ProfileRepository {
       return Left(ServerFailure(error: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, ProfileEntiti>> editAvatar(
+      {required String avatar}) async {
+    try {
+      final data = await remoteProfileDatasource.editAvatar(avatar: avatar);
+      return Right(data);
+    } catch (e) {
+      return Left(ServerFailure(error: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ProfileEntiti>> editEmail(
+      {required String email}) async {
+    try {
+      final data = await remoteProfileDatasource.editEmail(email: email);
+      return Right(data);
+    } catch (e) {
+      return Left(ServerFailure(error: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ProfileEntiti>> editName(
+      {required String name}) async {
+    try {
+      final data = await remoteProfileDatasource.editName(name: name);
+      return Right(data);
+    } catch (e) {
+      return Left(ServerFailure(error: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ProfileEntiti>> editNumber(
+      {required String number}) async {
+    try {
+      final data = await remoteProfileDatasource.editNumber(number: number);
+      return Right(data);
+    } catch (e) {
+      return Left(ServerFailure(error: e.toString()));
+    }
+  }
 }

@@ -12,10 +12,16 @@ import 'package:grow_food/features/presentation/auth/domain/usecases/sign_in_use
 import 'package:grow_food/features/presentation/auth/domain/usecases/sign_up_user.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_up/controller/sign_up_cubit.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/add_points.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/use_coupon.dart';
 import 'package:grow_food/features/presentation/profile/data/datasource/remote_profile_datasource/remote_profile_datasource.dart';
 import 'package:grow_food/features/presentation/profile/data/datasource/remote_profile_datasource/remote_profile_datasource_implements.dart';
 import 'package:grow_food/features/presentation/profile/data/repository/profile_repository_impl.dart';
 import 'package:grow_food/features/presentation/profile/domain/repository/profile_repository.dart';
+import 'package:grow_food/features/presentation/profile/domain/usecase/edit_avatar.dart';
+import 'package:grow_food/features/presentation/profile/domain/usecase/edit_email.dart';
+import 'package:grow_food/features/presentation/profile/domain/usecase/edit_name.dart';
+import 'package:grow_food/features/presentation/profile/domain/usecase/edit_number.dart';
 import 'package:grow_food/features/presentation/profile/domain/usecase/get_profile.dart';
 import 'package:grow_food/features/presentation/profile/domain/usecase/get_ref.dart';
 import 'package:grow_food/features/presentation/profile/presentation/controller/profile_cubit.dart';
@@ -55,13 +61,21 @@ Future<void> init() async {
   );
   //Courses
   sl.registerFactory(
-    () => ActualCoursesCubit(getCoursesVideo: sl()),
+    () => ActualCoursesCubit(
+      getCoursesVideo: sl(),
+      addPoints: sl(),
+      useCoupon: sl(),
+    ),
   );
   //Profile
   sl.registerFactory(
     () => ProfileCubit(
       getProfile: sl(),
       getLink: sl(),
+      editNumber: sl(),
+      editAvatar: sl(),
+      editName: sl(),
+      editEmail: sl(),
     ),
   );
 
@@ -82,9 +96,16 @@ Future<void> init() async {
   sl.registerLazySingleton(
     () => RefreshToken(authRepository: sl()),
   );
+
   //Courses
   sl.registerLazySingleton(
     () => GetCoursesVideo(coursesVideoRepository: sl()),
+  );
+  sl.registerLazySingleton(
+    () => AddPoints(coursesVideoRepository: sl()),
+  );
+  sl.registerLazySingleton(
+    () => UseCoupon(coursesVideoRepository: sl()),
   );
   //Profile
   sl.registerLazySingleton(
@@ -92,6 +113,18 @@ Future<void> init() async {
   );
   sl.registerLazySingleton(
     () => GetLink(profileRepository: sl()),
+  );
+  sl.registerLazySingleton(
+    () => EditAvatar(profileRepository: sl()),
+  );
+  sl.registerLazySingleton(
+    () => EditNumber(profileRepository: sl()),
+  );
+  sl.registerLazySingleton(
+    () => EditName(profileRepository: sl()),
+  );
+  sl.registerLazySingleton(
+    () => EditEmail(profileRepository: sl()),
   );
 
   //Repository

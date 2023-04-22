@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
+import 'package:grow_food/core/constants/constants.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/core/helpers/widgets/my_behavior.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/coupons/widgets/coupons_card.dart';
@@ -23,6 +24,7 @@ class _CouponsViewState extends State<CouponsView> {
       body: BlocBuilder<ActualCoursesCubit, ActualCoursesState>(
         builder: (context, state) {
           if (state is ActualCoursesLoadedState) {
+            print(Endpoints.useCoupon.endpoint.replaceRange(13, 14, '1/'));
             return NestedScrollView(
               physics: const BouncingScrollPhysics(),
               headerSliverBuilder:
@@ -59,7 +61,8 @@ class _CouponsViewState extends State<CouponsView> {
                                       width: 2),
                                 ),
                                 child: CustomText(
-                                  title: 'Баллы: 500',
+                                  title:
+                                      'Баллы: ${state.coursesVideoEntiti.balance}',
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.w800,
                                   color: ColorsStyles.buttonColor,

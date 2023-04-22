@@ -24,16 +24,12 @@ class SignInCubit extends HydratedCubit<SignInStates> {
   }) async {
     try {
       if (emailOrPhoneNumber == '' || password == '') {
-        SmartDilogFunctions.showErrorDilog(title: 'Есть не заполненные поля');
+        SmartDialogFunctions.showErrorDilog(title: 'Есть не заполненные поля');
       } else {
         emit(SignInStates.signInLoadingState);
         if (state == SignInStates.signInLoadingState) {
-          SmartDilogFunctions.showCustomLoader();
+          SmartDialogFunctions.showCustomLoader();
         }
-        Future.delayed(
-          const Duration(seconds: 3),
-          () => SmartDialog.dismiss(),
-        );
         final result = await signInUser.call(
           SignInUserParams(
             emailOrPhoneNumber: emailOrPhoneNumber,
@@ -44,7 +40,7 @@ class SignInCubit extends HydratedCubit<SignInStates> {
           (error) async {
             emit(SignInStates.signInErrorState);
             await SmartDialog.dismiss();
-            SmartDilogFunctions.showErrorDilog(title: error.error);
+            SmartDialogFunctions.showErrorDilog(title: error.error);
           },
           (data) async {
             emit(SignInStates.signInLoadedState);
@@ -58,20 +54,21 @@ class SignInCubit extends HydratedCubit<SignInStates> {
     }
   }
 
-  Future<void> logOut() async {
+  Future<void> logOut(Function() logOutUser) async {
     try {
       emit(SignInStates.signInLoadingState);
       if (state == SignInStates.signInLoadingState) {
-        SmartDilogFunctions.showCustomLoader();
+        SmartDialogFunctions.showCustomLoader();
       }
       final result = await userLogOut.call(LogOutParams());
       result.fold((error) async {
         emit(SignInStates.signInErrorState);
         await SmartDialog.dismiss();
-        SmartDilogFunctions.showErrorDilog(title: error.error);
+        SmartDialogFunctions.showErrorDilog(title: error.error);
       }, (data) async {
         emit(SignInStates.signInEmptyState);
         await SmartDialog.dismiss();
+        await logOutUser();
       });
     } catch (e) {
       emit(SignInStates.signInErrorState);
