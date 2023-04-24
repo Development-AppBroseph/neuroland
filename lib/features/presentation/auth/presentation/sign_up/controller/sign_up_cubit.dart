@@ -17,10 +17,8 @@ class SignUpCubit extends Cubit<SignUpState> {
     required Function() onSuccess,
   }) async {
     try {
-      emit(SignUpLoadingState());
-      if (state is SignUpLoadingState) {
-        SmartDilogFunctions.showCustomLoader();
-      }
+      SmartDialogFunctions.showCustomLoader();
+
       final result = await signUpUser.call(
         SignUpUserParams(
           userName: userName,
@@ -32,12 +30,10 @@ class SignUpCubit extends Cubit<SignUpState> {
       );
       result.fold(
         (error) async {
-          emit(SignUpErrorState(message: "Поломалось епта"));
           await SmartDialog.dismiss();
-          SmartDilogFunctions.showErrorDilog(title: error.error);
+          SmartDialogFunctions.showErrorDilog(title: error.error);
         },
         (data) async {
-          emit(SignUpLoadedState());
           await SmartDialog.dismiss();
           await onSuccess();
         },

@@ -8,9 +8,11 @@ class CoursesVideoEntiti {
     required this.directions,
     required this.videos,
     required this.coupons,
+    required this.balance,
   });
 
   final List<DirectionEntiti> directions;
   final List<VideoEntiti> videos;
   final List<CouponEntiti> coupons;
+  final int balance;
 }

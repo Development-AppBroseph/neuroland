@@ -43,7 +43,11 @@ class _SignUpState extends State<SignUp> {
     TownsModel(id: 11, name: 'Нейролэнд / Аскиз'),
     TownsModel(id: 12, name: 'Нейролэнд / Абаза'),
   ];
-
+  @override
+  void dispose() {
+    super.dispose();
+    controller.close();
+  }
   @override
   void initState() {
     super.initState();
@@ -54,6 +58,8 @@ class _SignUpState extends State<SignUp> {
     compareControllerPassword.addListener(() {});
     scrollController.addListener(() {});
   }
+  
+
 
   Future<void> onSuccessRegistration(
     String name,
@@ -68,9 +74,9 @@ class _SignUpState extends State<SignUp> {
         email.isEmpty ||
         snapshot.data == null ||
         password.isEmpty) {
-      SmartDilogFunctions.showErrorDilog(title: 'Есть не заполненные поля');
+      SmartDialogFunctions.showErrorDilog(title: 'Есть не заполненные поля');
     } else if (!controllerEmail.text.contains('@')) {
-      SmartDilogFunctions.showErrorDilog(title: 'Ввели не правильный Email');
+      SmartDialogFunctions.showErrorDilog(title: 'Ввели не правильный Email');
     } else {
       await onSuccess();
     }
@@ -84,6 +90,7 @@ class _SignUpState extends State<SignUp> {
             stream: controller.stream,
             builder: (context, snapshot) {
               return Scaffold(
+                backgroundColor: ColorsStyles.whiteColor,
                 appBar: AppBar(
                   automaticallyImplyLeading: false,
                   elevation: 0,
@@ -94,7 +101,7 @@ class _SignUpState extends State<SignUp> {
                       color: ColorsStyles.blackColor,
                     ),
                   ),
-                  backgroundColor: ColorsStyles.backgroundColor,
+                  backgroundColor: ColorsStyles.whiteColor,
                 ),
                 body: Container(
                   margin: EdgeInsets.symmetric(horizontal: 35.w),

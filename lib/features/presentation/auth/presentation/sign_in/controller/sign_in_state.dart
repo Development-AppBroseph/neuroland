@@ -7,14 +7,12 @@ enum SignInStates {
   signInErrorState,
 }
 
-class SignInState extends Equatable {
+class SignInState  {
   final SignInStates signInStates;
 
   const SignInState({
     this.signInStates = SignInStates.signInEmptyState,
   });
-  @override
-  List<Object?> get props => [signInStates];
 }
 
 // class SignInEmptyState extends SignInState {

@@ -1,7 +1,9 @@
+import 'package:duration/duration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
+import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/core/helpers/widgets/custom_button.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/video_curses/direction_entiti.dart';
@@ -11,8 +13,12 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class VideoPage extends StatefulWidget {
   final VideoEntiti videoEntiti;
   final DirectionEntiti directionEntiti;
+  final Function() onWatched;
   const VideoPage(
-      {super.key, required this.videoEntiti, required this.directionEntiti});
+      {super.key,
+      required this.videoEntiti,
+      required this.directionEntiti,
+      required this.onWatched});
 
   @override
   State<VideoPage> createState() => _VideoPageState();
@@ -52,6 +58,13 @@ class _VideoPageState extends State<VideoPage> {
               SystemUiOverlay.top,
             ],
           );
+        }
+        final dur =
+            formatTime(youtubePlayerController.value.position.inSeconds);
+        if (!widget.videoEntiti.viewed) {
+          if (widget.videoEntiti.duration == dur) {
+            widget.onWatched();
+          }
         }
       });
   }

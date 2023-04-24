@@ -7,11 +7,17 @@ import 'package:grow_food/features/presentation/learning_and_coupons/domain/enti
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/video_curses/video_entiti.dart';
 
 class CourseVideoModel extends CoursesVideoEntiti {
-  CourseVideoModel(
-      {required final List<DirectionEntiti> directions,
-      required final List<VideoEntiti> videos,
-      required final List<CouponEntiti> coupons})
-      : super(directions: directions, videos: videos, coupons: coupons);
+  CourseVideoModel({
+    required final List<DirectionEntiti> directions,
+    required final List<VideoEntiti> videos,
+    required final List<CouponEntiti> coupons,
+    required final int balance,
+  }) : super(
+          directions: directions,
+          videos: videos,
+          coupons: coupons,
+          balance: balance,
+        );
   factory CourseVideoModel.fromJson(Map<String, dynamic> json) =>
       CourseVideoModel(
         directions: List<DirectionModel>.from(
@@ -23,5 +29,6 @@ class CourseVideoModel extends CoursesVideoEntiti {
         coupons: List<CouponEntiti>.from(
           json['coupons'].map((x) => CouponModel.fromJson(x)),
         ),
+        balance: json['balance'] as int,
       );
 }

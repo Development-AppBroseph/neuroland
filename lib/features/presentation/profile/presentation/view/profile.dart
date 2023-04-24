@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:ffi';
+import 'dart:io';
+
 import 'package:card_loading/card_loading.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +17,8 @@ import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
 import 'package:grow_food/features/presentation/profile/presentation/controller/profile_cubit.dart';
 import 'package:grow_food/features/presentation/profile/presentation/controller/profile_state.dart';
+import 'package:grow_food/features/presentation/profile/presentation/widgets/profile_textfield.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -28,6 +34,27 @@ class _ProfileViewState extends State<ProfileView> {
   String name = '';
   String phone = '';
   String email = '';
+
+  File? _image;
+
+  Future pickImage(ImageSource imageSource) async {
+    try {
+      final image = await ImagePicker().pickImage(source: imageSource);
+      if (image == null) return;
+      File? img = File(image.path);
+      Uint8List imageBytes = await img.readAsBytes();
+      String base64String = base64Encode(imageBytes);
+      setState(() {
+        _image = img;
+        context
+            .read<ProfileCubit>()
+            .editUserAvatar('data:image/png;base64,$base64String');
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   void initState() {
     nameController.addListener(() {});
@@ -44,16 +71,7 @@ class _ProfileViewState extends State<ProfileView> {
   bool toggle = false;
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProfileCubit, ProfileState>(
-      listener: (context, state) {
-        if (state is ProfileLoadedState) {
-          nameController.text = state.profile.name;
-          phoneController.text = state.profile.phone;
-          emailController.text = state.profile.email;
-          phoneController.text =
-              '${state.profile.phone.substring(0, 2)} (${state.profile.phone.substring(2, 5)}) ${state.profile.phone.substring(5, 8)}-${state.profile.phone.substring(8, 10)}-${state.profile.phone.substring(10, 12)}';
-        }
-      },
+    return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
         if (state is ProfileInitialState) {
           context.read<ProfileCubit>().fetchProfile();
@@ -62,8 +80,7 @@ class _ProfileViewState extends State<ProfileView> {
           nameController.text = state.profile.name;
           phoneController.text = state.profile.phone;
           emailController.text = state.profile.email;
-          phoneController.text =
-              '${state.profile.phone.substring(0, 2)} (${state.profile.phone.substring(2, 5)}) ${state.profile.phone.substring(5, 8)}-${state.profile.phone.substring(8, 10)}-${state.profile.phone.substring(10, 12)}';
+          phoneController.text = maskFormatter.maskText(state.profile.phone);
         }
         return Scaffold(
           backgroundColor: ColorsStyles.backgroundColor,
@@ -73,7 +90,6 @@ class _ProfileViewState extends State<ProfileView> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  // height: 540,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: ColorsStyles.whiteColor,
@@ -110,19 +126,50 @@ class _ProfileViewState extends State<ProfileView> {
                             ],
                           ),
                         if (state is ProfileLoadedState)
-                          Container(
-                            height: 150,
-                            width: 150,
-                            margin: EdgeInsets.only(top: 53.h, bottom: 20.h),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: const Color(0xffD9D9D9),
-                              borderRadius: BorderRadius.circular(40.r),
-                            ),
-                            child: const Icon(
-                              Icons.camera_alt_rounded,
-                              color: Color(0xff969696),
-                              size: 50,
+                          GestureDetector(
+                            onTap: () => {
+                              pickImage(ImageSource.gallery),
+                            },
+                            child: Container(
+                              height: 150,
+                              width: 150,
+                              margin: EdgeInsets.only(top: 53.h, bottom: 20.h),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: const Color(0xffD9D9D9),
+                                borderRadius: BorderRadius.circular(40.r),
+                                // image: DecorationImage(
+                                //   image: FileImage(_image!),
+                                //   fit: BoxFit.cover,
+                                // ),
+                              ),
+                              child: state.profile.avatar == null
+                                  ? const Icon(
+                                      Icons.camera_alt_rounded,
+                                      color: Color(0xff969696),
+                                      size: 50,
+                                    )
+                                  : _image != null
+                                      ? ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(40.r),
+                                          child: Image.file(
+                                            _image!,
+                                            fit: BoxFit.cover,
+                                            height: 150,
+                                            width: 150,
+                                          ),
+                                        )
+                                      : ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(40.r),
+                                          child: Image.network(
+                                            state.profile.avatar!,
+                                            fit: BoxFit.cover,
+                                            height: 150,
+                                            width: 150,
+                                          ),
+                                        ),
                             ),
                           )
                         else
@@ -135,41 +182,15 @@ class _ProfileViewState extends State<ProfileView> {
                         Column(
                           children: [
                             if (state is ProfileLoadedState)
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 24.w),
-                                child: TextField(
-                                  cursorColor: ColorsStyles.blackColor,
-                                  controller: nameController,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w800,
-                                    color: ColorsStyles.blackColor,
-                                  ),
-                                  decoration: const InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0xff6B6B6B),
-                                      ),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0xff6B6B6B),
-                                      ),
-                                    ),
-                                    contentPadding:
-                                        EdgeInsets.only(top: 10, bottom: 8),
-                                    labelText: 'Имя',
-                                    labelStyle: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400,
-                                        color: Color(0xff6B6B6B)),
-                                    floatingLabelStyle: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color(0xff6B6B6B),
-                                    ),
-                                  ),
-                                ),
+                              ProfileTextField(
+                                textCapitalization: TextCapitalization.words,
+                                textInputType: TextInputType.name,
+                                isNumber: false,
+                                controller: nameController,
+                                onFinished: () => context
+                                    .read<ProfileCubit>()
+                                    .editUserName(nameController.text),
+                                title: 'Имя',
                               )
                             else
                               CardLoading(
@@ -181,42 +202,16 @@ class _ProfileViewState extends State<ProfileView> {
                               height: 10,
                             ),
                             if (state is ProfileLoadedState)
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 24.w),
-                                child: TextField(
-                                  cursorColor: ColorsStyles.blackColor,
-                                  inputFormatters: [maskFormatter],
-                                  controller: phoneController,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w800,
-                                    color: ColorsStyles.blackColor,
-                                  ),
-                                  decoration: const InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0xff6B6B6B),
-                                      ),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0xff6B6B6B),
-                                      ),
-                                    ),
-                                    contentPadding:
-                                        EdgeInsets.only(top: 10, bottom: 8),
-                                    labelText: 'Номер',
-                                    labelStyle: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400,
-                                        color: Color(0xff6B6B6B)),
-                                    floatingLabelStyle: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color(0xff6B6B6B),
-                                    ),
-                                  ),
-                                ),
+                              ProfileTextField(
+                                textCapitalization: TextCapitalization.none,
+                                textInputType: TextInputType.number,
+                                isNumber: true,
+                                controller: phoneController,
+                                onFinished: () => context
+                                    .read<ProfileCubit>()
+                                    .editUserNumber(
+                                        '+7${maskFormatter.getUnmaskedText()}'),
+                                title: 'Номер',
                               )
                             else
                               CardLoading(
@@ -228,41 +223,15 @@ class _ProfileViewState extends State<ProfileView> {
                               height: 10,
                             ),
                             if (state is ProfileLoadedState)
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 24.w),
-                                child: TextField(
-                                  cursorColor: ColorsStyles.blackColor,
-                                  controller: emailController,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w800,
-                                    color: ColorsStyles.blackColor,
-                                  ),
-                                  decoration: const InputDecoration(
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0xff6B6B6B),
-                                      ),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                        color: Color(0xff6B6B6B),
-                                      ),
-                                    ),
-                                    contentPadding:
-                                        EdgeInsets.only(top: 10, bottom: 8),
-                                    labelText: 'Email',
-                                    labelStyle: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400,
-                                        color: Color(0xff6B6B6B)),
-                                    floatingLabelStyle: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color(0xff6B6B6B),
-                                    ),
-                                  ),
-                                ),
+                              ProfileTextField(
+                                textCapitalization: TextCapitalization.none,
+                                textInputType: TextInputType.emailAddress,
+                                isNumber: false,
+                                controller: emailController,
+                                onFinished: () => context
+                                    .read<ProfileCubit>()
+                                    .editUserEmail(emailController.text),
+                                title: 'Email',
                               )
                             else
                               CardLoading(
@@ -279,39 +248,39 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Container(
-                  height: 60.h,
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 24.w,
-                    vertical: 19.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: ColorsStyles.whiteColor,
-                    borderRadius: BorderRadius.circular(20.r),
-                  ),
-                  child: Row(
-                    children: [
-                      CustomText(
-                        title: 'Персональные уведомления',
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      const Spacer(),
-                      CupertinoSwitch(
-                        onChanged: (bool value) {
-                          setState(() {
-                            toggle = value;
-                          });
-                        },
-                        value: toggle,
-                      ),
-                    ],
-                  ),
-                ),
+                // SizedBox(
+                //   height: 10.h,
+                // ),
+                // Container(
+                //   height: 60.h,
+                //   width: double.infinity,
+                //   padding: EdgeInsets.symmetric(
+                //     horizontal: 24.w,
+                //     vertical: 19.h,
+                //   ),
+                //   decoration: BoxDecoration(
+                //     color: ColorsStyles.whiteColor,
+                //     borderRadius: BorderRadius.circular(20.r),
+                //   ),
+                //   child: Row(
+                //     children: [
+                //       CustomText(
+                //         title: 'Персональные уведомления',
+                //         fontSize: 20.sp,
+                //         fontWeight: FontWeight.w600,
+                //       ),
+                //       const Spacer(),
+                //       CupertinoSwitch(
+                //         onChanged: (bool value) {
+                //           setState(() {
+                //             toggle = value;
+                //           });
+                //         },
+                //         value: toggle,
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -322,8 +291,9 @@ class _ProfileViewState extends State<ProfileView> {
                       await Clipboard.setData(
                               ClipboardData(text: state.link.inviteLink))
                           .then((_) {
-                        SmartDilogFunctions.showInfoDilog(
-                            title: 'Ссылка скопирована');
+                        SmartDialogFunctions.showInfoDilog(
+                          title: 'Ссылка скопирована',
+                        );
                       });
                     }
                   },
@@ -358,7 +328,18 @@ class _ProfileViewState extends State<ProfileView> {
                   height: 40.h,
                 ),
                 GestureDetector(
-                  onTap: () => context.read<SignInCubit>().logOut(),
+                  onTap: () => context.read<SignInCubit>().logOut(
+                        () => {
+                          if (mounted)
+                            {
+                              Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                '/',
+                                (route) => false,
+                              ),
+                            }
+                        },
+                      ),
                   child: Container(
                     height: 60.h,
                     width: double.infinity,

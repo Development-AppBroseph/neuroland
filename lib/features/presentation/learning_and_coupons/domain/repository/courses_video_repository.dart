@@ -4,4 +4,6 @@ import 'package:grow_food/features/presentation/learning_and_coupons/domain/enti
 
 abstract class CoursesVideoRepository {
   Future<Either<Failure, CoursesVideoEntiti>> getCoursesVideo();
+  Future<Either<Failure, void>> addPoints(int videoId);
+  Future<Either<Failure, void>> useCoupon(int couponId);
 }

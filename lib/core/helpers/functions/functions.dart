@@ -3,7 +3,7 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/helpers/widgets/push_error.dart';
 
-class SmartDilogFunctions {
+class SmartDialogFunctions {
   static Future<void> showCustomLoader() {
     return SmartDialog.showLoading(
       animationType: SmartAnimationType.scale,
@@ -71,6 +71,10 @@ class SmartDilogFunctions {
       ),
     );
   }
+}
+
+String formatTime(int seconds) {
+  return '${(Duration(seconds: seconds))}'.split('.')[0].padLeft(8, '0');
 }
 
 // class BottomSheets {

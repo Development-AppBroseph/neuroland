@@ -18,4 +18,24 @@ class CoursesVideoRepositoryImpl extends CoursesVideoRepository {
       return Left(ServerFailure(error: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> addPoints(int videoId) async {
+    try {
+      final result = await coursesVideoDatasource.addPoints(videoId);
+      return Right(result);
+    } catch (e) {
+      return Left(ServerFailure(error: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> useCoupon(int couponId) async {
+    try {
+      final result = await coursesVideoDatasource.useCoupon(couponId);
+      return Right(result);
+    } catch (e) {
+      return Left(ServerFailure(error: e.toString()));
+    }
+  }
 }

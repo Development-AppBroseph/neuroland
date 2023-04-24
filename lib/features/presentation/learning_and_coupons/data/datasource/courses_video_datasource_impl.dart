@@ -57,4 +57,50 @@ class CoursesVideoDatasourceImpl implements CoursesVideoDatasource {
       rethrow;
     }
   }
+
+  @override
+  Future<void> addPoints(int videoId) async {
+    try {
+      final Response response = await _dio.post(
+        Endpoints.addPoints.endpoint.replaceRange(12, 13, "$videoId/"),
+        options: Options(headers: headers),
+      );
+      if (response.statusCode == 200) {
+        return;
+      } else {
+        throw "Вы не посмотрели видео";
+      }
+    } on DioError catch (error) {
+      if (error.response!.statusCode == 400) {
+        throw 'Вы не посмотрели видео';
+      } else if (error.response!.statusCode! >= 500) {
+        throw 'Ошибка сервера';
+      } else {
+        throw 'Что-то пошло не так!';
+      }
+    }
+  }
+
+  @override
+  Future<void> useCoupon(int couponId) async {
+    try {
+      final Response response = await _dio.post(
+        Endpoints.useCoupon.endpoint.replaceRange(13, 14, '$couponId/'),
+        options: Options(headers: headers),
+      );
+      if (response.statusCode == 200) {
+        return;
+      } else {
+        throw "Вы уже приобрели купон";
+      }
+    } on DioError catch (error) {
+      if (error.response!.statusCode == 400) {
+        throw 'Вы уже приобрели купон';
+      } else if (error.response!.statusCode! >= 500) {
+        throw 'Ошибка сервера';
+      } else {
+        throw 'Что-то пошло не так!';
+      }
+    }
+  }
 }
