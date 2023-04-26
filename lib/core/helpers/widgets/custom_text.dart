@@ -32,6 +32,7 @@ class CustomText extends StatelessWidget {
         fontSize: fontSize,
         fontWeight: fontWeight,
         fontStyle: fontStyle,
+        fontFamily: 'Mons',
         color: color,
       ),
       textAlign: centerTitle! ? TextAlign.center : TextAlign.left,

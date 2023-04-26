@@ -64,6 +64,7 @@ class _VideoPageState extends State<VideoPage> {
         if (!widget.videoEntiti.viewed) {
           if (widget.videoEntiti.duration == dur) {
             widget.onWatched();
+            youtubePlayerController.dispose();
           }
         }
       });

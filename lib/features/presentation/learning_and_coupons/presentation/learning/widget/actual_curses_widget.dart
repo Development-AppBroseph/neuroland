@@ -24,9 +24,14 @@ class _ActualCursesCardState extends State<ActualCursesCard> {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.r),
-        color: widget.isSelected
-            ? ColorsStyles.buttonColor
-            : ColorsStyles.whiteColor,
+        gradient: LinearGradient(
+          colors: widget.isSelected
+              ? ColorsStyles.gradientBlueColor
+              : [ColorsStyles.whiteColor, ColorsStyles.whiteColor],
+        ),
+        // color: widget.isSelected
+        //     ? ColorsStyles.buttonColor
+        //     : ColorsStyles.whiteColor,
       ),
       child: CustomText(
         title: widget.title,

@@ -67,6 +67,7 @@ class _EntryWidgetState extends State<EntryWidget> {
                 fontSize: 20.sp,
                 color: ColorsStyles.blackColor,
                 fontWeight: FontWeight.w400,
+                fontFamily: 'Mons'
               ),
               textAlignVertical: TextAlignVertical.center,
               cursorColor: ColorsStyles.blackColor,
@@ -76,6 +77,7 @@ class _EntryWidgetState extends State<EntryWidget> {
                 hintText: 'Email',
                 hintStyle: TextStyle(
                   fontSize: 20.sp,
+                  fontFamily: 'Mons',
                   fontWeight: FontWeight.w500,
                   color: ColorsStyles.textFiledHintColor,
                 ),

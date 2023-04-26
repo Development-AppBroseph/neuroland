@@ -34,6 +34,10 @@ dependencies:
   modal_bottom_sheet: ^2.1.2
   image_picker: ^0.8.7+3
   duration: ^3.0.12
+  onesignal_flutter: ^3.5.1
+  url_launcher: ^6.1.7
+  firebase_dynamic_links: ^5.1.1
+  firebase_core: ^2.10.0
 
 dev_dependencies:
   flutter_test:

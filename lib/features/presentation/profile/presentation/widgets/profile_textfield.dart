@@ -35,6 +35,7 @@ class ProfileTextField extends StatelessWidget {
         style: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w800,
+          fontFamily: 'Mons',
           color: ColorsStyles.blackColor,
         ),
         decoration: InputDecoration(
@@ -56,6 +57,7 @@ class ProfileTextField extends StatelessWidget {
               color: Color(0xff6B6B6B)),
           floatingLabelStyle: const TextStyle(
             fontSize: 15,
+            fontFamily: 'Mons',
             fontWeight: FontWeight.w400,
             color: Color(0xff6B6B6B),
           ),

@@ -24,7 +24,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaleButton(
       onTap: onTap,
-      bound: 0.02, 
+      bound: 0.02,
       duration: const Duration(milliseconds: 100),
       child: Container(
         height: 55.h,
@@ -41,11 +41,18 @@ class CustomButton extends StatelessWidget {
                 ),
           borderRadius: BorderRadius.circular(10.r),
           color: outLined ? ColorsStyles.whiteColor : ColorsStyles.buttonColor,
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: outLined
+                ? [Colors.transparent, Colors.transparent]
+                : ColorsStyles.gradientBlueColor,
+          ),
         ),
         child: CustomText(
           title: title,
-          fontSize: 18.sp,
-          fontWeight: accentText ? FontWeight.w700 : null,
+          fontSize: 20.sp,
+          fontWeight: accentText ? FontWeight.w800 : null,
           color:
               outLined ? ColorsStyles.mainTextColor : ColorsStyles.whiteColor,
         ),

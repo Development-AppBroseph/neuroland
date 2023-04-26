@@ -36,3 +36,5 @@ extension EndpointsExtension on Endpoints {
     }
   }
 }
+
+const String telegramBot = 'https://t.me/Neurolandro_bot';

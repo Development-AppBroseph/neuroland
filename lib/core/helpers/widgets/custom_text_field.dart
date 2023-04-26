@@ -50,6 +50,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           fontSize: 20.sp,
           color: ColorsStyles.blackColor,
           fontWeight: FontWeight.w400,
+          fontFamily: 'Mons'
         ),
         textAlignVertical: TextAlignVertical.center,
         cursorColor: ColorsStyles.blackColor,
@@ -64,6 +65,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         decoration: InputDecoration.collapsed(
           hintText: widget.hintText,
           hintStyle: TextStyle(
+            fontFamily: "Mons",
             fontSize: 20.sp,
             fontWeight: FontWeight.w500,
             color: ColorsStyles.textFiledHintColor,

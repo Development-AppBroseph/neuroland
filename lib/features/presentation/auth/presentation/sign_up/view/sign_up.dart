@@ -48,6 +48,7 @@ class _SignUpState extends State<SignUp> {
     super.dispose();
     controller.close();
   }
+
   @override
   void initState() {
     super.initState();
@@ -58,8 +59,6 @@ class _SignUpState extends State<SignUp> {
     compareControllerPassword.addListener(() {});
     scrollController.addListener(() {});
   }
-  
-
 
   Future<void> onSuccessRegistration(
     String name,
@@ -251,11 +250,16 @@ class _SignUpState extends State<SignUp> {
                                         bottom: 19.h,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: snapshot.data == index
-                                            ? ColorsStyles.buttonColor
-                                            : null,
                                         borderRadius:
                                             BorderRadius.circular(10.r),
+                                        gradient: LinearGradient(
+                                          colors: snapshot.data == index
+                                              ? ColorsStyles.gradientBlueColor
+                                              : [
+                                                  Colors.transparent,
+                                                  Colors.transparent,
+                                                ],
+                                        ),
                                       ),
                                       child: CustomText(
                                         title: towns[index].name,

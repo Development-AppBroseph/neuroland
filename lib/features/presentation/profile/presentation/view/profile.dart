@@ -12,6 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/constants/svg_and_img.dart';
 import 'package:grow_food/core/helpers/custom_input_formaters/custom_input_formatter_number.dart';
+import 'package:grow_food/core/helpers/firebase.dart';
 import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
@@ -288,8 +289,13 @@ class _ProfileViewState extends State<ProfileView> {
                   onTap: () async {
                     if (state is ProfileLoadedState) {
                       HapticFeedback.lightImpact();
+                        print(state.link.inviteLink.substring(59, 69));
+                        final url = Uri.parse(state.link.inviteLink);
+                        url.queryParameters['referral_link'];
+                        // Uri.base.queryParameters(state.link.inviteLink);
+                      final refLink = await FirebaseSevice.copyLink(url.queryParameters['referral_code']!);
                       await Clipboard.setData(
-                              ClipboardData(text: state.link.inviteLink))
+                              ClipboardData(text: refLink,))
                           .then((_) {
                         SmartDialogFunctions.showInfoDilog(
                           title: 'Ссылка скопирована',
