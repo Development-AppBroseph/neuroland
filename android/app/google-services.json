@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "56823057749",
+    "project_id": "neuroland-9e26c",
+    "storage_bucket": "neuroland-9e26c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56823057749:android:102f51657cf367dc2c33dc",
+        "android_client_info": {
+          "package_name": "com.example.grow_food"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56823057749-23s17p5n17ntdtskaabu8cab9afn737q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUbk-nX1JojdwRjktO0awDKitb9bU6_EY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56823057749-23s17p5n17ntdtskaabu8cab9afn737q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
