@@ -14,6 +14,7 @@ import 'package:grow_food/core/helpers/widgets/my_behavior.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_up/controller/sign_up_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_up/controller/sign_up_state.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -318,13 +319,24 @@ class _SignUpState extends State<SignUp> {
                             withPadding: false,
                           ),
                         ),
-                        CustomText(
-                          title:
-                              'Нажимая кнопку, вы автоматически соглашаетесь с Политикой Конфиденциальности',
-                          fontWeight: FontWeight.w400,
-                          color: ColorsStyles.textFiledHintColor,
-                          fontSize: 15.sp,
-                          centerTitle: true,
+                        GestureDetector(
+                          onTap: () async {
+                            if (!await launchUrl(
+                              Uri.parse(
+                                  'http://158.160.44.207:9001/project_info/03_Положение_по_защите_и_обработке_персональных_данных_2.pdf'),
+                              mode: LaunchMode.externalNonBrowserApplication,
+                            )) {
+                              throw 'Could not launch';
+                            }
+                          },
+                          child: CustomText(
+                            title:
+                                'Нажимая кнопку, вы автоматически соглашаетесь с Политикой Конфиденциальности',
+                            fontWeight: FontWeight.w400,
+                            color: ColorsStyles.textFiledHintColor,
+                            fontSize: 15.sp,
+                            centerTitle: true,
+                          ),
                         )
                       ],
                     ),

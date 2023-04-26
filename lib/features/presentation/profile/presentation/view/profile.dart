@@ -20,6 +20,7 @@ import 'package:grow_food/features/presentation/profile/presentation/controller/
 import 'package:grow_food/features/presentation/profile/presentation/controller/profile_state.dart';
 import 'package:grow_food/features/presentation/profile/presentation/widgets/profile_textfield.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -336,22 +337,12 @@ class _ProfileViewState extends State<ProfileView> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    if (state is ProfileLoadedState) {
-                      HapticFeedback.lightImpact();
-                      print(state.link.inviteLink.substring(59, 69));
-                      final url = Uri.parse(state.link.inviteLink);
-                      url.queryParameters['referral_link'];
-                      // Uri.base.queryParameters(state.link.inviteLink);
-                      final refLink = await FirebaseSevice.copyLink(
-                          url.queryParameters['referral_code']!);
-                      await Clipboard.setData(ClipboardData(
-                        text: refLink,
-                      )).then((_) {
-                        SmartDialogFunctions.showInfoDilog(
-                          title: 'Ссылка скопирована',
-                        );
-                      });
-                    }
+                     if (!await launchUrl(
+                        Uri.parse('http://158.160.44.207:9001/project_info/03_Положение_по_защите_и_обработке_персональных_данных_2.pdf'),
+                        mode: LaunchMode.externalNonBrowserApplication,
+                      )) {
+                        throw 'Could not launch';
+                      }
                   },
                   child: Container(
                     height: 60.h,
