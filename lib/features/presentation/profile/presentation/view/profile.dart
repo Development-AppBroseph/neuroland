@@ -337,12 +337,13 @@ class _ProfileViewState extends State<ProfileView> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                     if (!await launchUrl(
-                        Uri.parse('http://158.160.44.207:9001/project_info/03_Положение_по_защите_и_обработке_персональных_данных_2.pdf'),
-                        mode: LaunchMode.externalNonBrowserApplication,
-                      )) {
-                        throw 'Could not launch';
-                      }
+                    if (!await launchUrl(
+                      Uri.parse(
+                          'http://158.160.44.207:9001/project_info/03_Положение_по_защите_и_обработке_персональных_данных_2.pdf'),
+                      mode: LaunchMode.inAppWebView,
+                    )) {
+                      throw 'Could not launch';
+                    }
                   },
                   child: Container(
                     height: 60.h,

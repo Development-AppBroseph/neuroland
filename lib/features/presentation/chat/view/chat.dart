@@ -42,11 +42,20 @@ class _ChatViewState extends State<ChatView> {
             padding: EdgeInsets.zero,
             controller: scrollController,
             children: [
-              Image.asset(
-                Img.like,
-                width: 381,
-                height: 360,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15.r),
+                  child: Image.asset(
+                    Img.owners,
+                    width: 381.w,
+                    fit: BoxFit.cover,
+                    alignment: Alignment.centerLeft,
+                    height: 300.h,
+                  ),
+                ),
               ),
+              SizedBox(height: 15.h),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 24.w),
                 child: const CustomText(
