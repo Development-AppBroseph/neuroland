@@ -103,11 +103,14 @@ class _CoursesCardState extends State<CoursesCard> {
                           SizedBox(
                             height: 10.h,
                           ),
-                          CustomText(
-                            title: widget.videoEntiti.course!.description,
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.grey,
+                          Padding(
+                            padding: EdgeInsets.only(right: 70.w),
+                            child: CustomText(
+                              title: widget.videoEntiti.course!.description,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.grey,
+                            ),
                           ),
                         ],
                       ),

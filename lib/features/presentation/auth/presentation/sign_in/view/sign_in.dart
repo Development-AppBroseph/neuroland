@@ -112,9 +112,10 @@ class _SignInState extends State<SignIn> {
                   SizedBox(height: 15.h),
                   GestureDetector(
                     onTap: () async {
-                       if (!await launchUrl(
-                        Uri.parse('http://158.160.44.207:9001/project_info/03_Положение_по_защите_и_обработке_персональных_данных_2.pdf'),
-                        mode: LaunchMode.externalNonBrowserApplication,
+                      if (!await launchUrl(
+                        Uri.parse(
+                            'http://158.160.44.207:9001/project_info/03_Положение_по_защите_и_обработке_персональных_данных_2.pdf'),
+                        mode: LaunchMode.inAppWebView,
                       )) {
                         throw 'Could not launch';
                       }

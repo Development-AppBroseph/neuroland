@@ -4,6 +4,7 @@ abstract class Img {
   static const String signInBackground = 'assets/images/sign_in_background.png';
   static const String cursesImg = 'assets/images/curses.png';
   static const String like = 'assets/images/like.png';
+  static const String owners = 'assets/images/owners.JPG';
 }
 
 abstract class SvgImg {
