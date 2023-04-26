@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -324,7 +325,9 @@ class _SignUpState extends State<SignUp> {
                             if (!await launchUrl(
                               Uri.parse(
                                   'http://158.160.44.207:9001/project_info/03_Положение_по_защите_и_обработке_персональных_данных_2.pdf'),
-                              mode: LaunchMode.inAppWebView,
+                              mode: Platform.isAndroid
+                                  ? LaunchMode.externalNonBrowserApplication
+                                  : LaunchMode.inAppWebView,
                             )) {
                               throw 'Could not launch';
                             }
