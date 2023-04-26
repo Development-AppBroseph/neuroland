@@ -32,7 +32,7 @@ extension EndpointsExtension on Endpoints {
       case Endpoints.addPoints:
         return '/api/videos/ viewed/';
       case Endpoints.useCoupon:
-        return '/api/coupons/ redeem/';  
+        return '/api/coupons/ redeem/';
     }
   }
 }

@@ -289,14 +289,15 @@ class _ProfileViewState extends State<ProfileView> {
                   onTap: () async {
                     if (state is ProfileLoadedState) {
                       HapticFeedback.lightImpact();
-                        print(state.link.inviteLink.substring(59, 69));
-                        final url = Uri.parse(state.link.inviteLink);
-                        url.queryParameters['referral_link'];
-                        // Uri.base.queryParameters(state.link.inviteLink);
-                      final refLink = await FirebaseSevice.copyLink(url.queryParameters['referral_code']!);
-                      await Clipboard.setData(
-                              ClipboardData(text: refLink,))
-                          .then((_) {
+                      print(state.link.inviteLink.substring(59, 69));
+                      final url = Uri.parse(state.link.inviteLink);
+                      url.queryParameters['referral_link'];
+                      // Uri.base.queryParameters(state.link.inviteLink);
+                      final refLink = await FirebaseSevice.copyLink(
+                          url.queryParameters['referral_code']!);
+                      await Clipboard.setData(ClipboardData(
+                        text: refLink,
+                      )).then((_) {
                         SmartDialogFunctions.showInfoDilog(
                           title: 'Ссылка скопирована',
                         );
@@ -326,6 +327,55 @@ class _ProfileViewState extends State<ProfileView> {
                           SvgImg.refLink,
                           color: ColorsStyles.buttonColor,
                         ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    if (state is ProfileLoadedState) {
+                      HapticFeedback.lightImpact();
+                      print(state.link.inviteLink.substring(59, 69));
+                      final url = Uri.parse(state.link.inviteLink);
+                      url.queryParameters['referral_link'];
+                      // Uri.base.queryParameters(state.link.inviteLink);
+                      final refLink = await FirebaseSevice.copyLink(
+                          url.queryParameters['referral_code']!);
+                      await Clipboard.setData(ClipboardData(
+                        text: refLink,
+                      )).then((_) {
+                        SmartDialogFunctions.showInfoDilog(
+                          title: 'Ссылка скопирована',
+                        );
+                      });
+                    }
+                  },
+                  child: Container(
+                    height: 60.h,
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 24.w,
+                      vertical: 19.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: ColorsStyles.whiteColor,
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Row(
+                      children: [
+                        CustomText(
+                          title: 'Политика конфиденциальности',
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        const Spacer(),
+                        // SvgPicture.asset(
+                        //   SvgImg.cupones,
+                        //   color: ColorsStyles.buttonColor,
+                        // ),
                       ],
                     ),
                   ),
@@ -373,6 +423,9 @@ class _ProfileViewState extends State<ProfileView> {
                       ],
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: 40.h,
                 ),
               ],
             ),

@@ -121,7 +121,9 @@ class _CoursesCardState extends State<CoursesCard> {
                     padding:
                         EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
                     decoration: BoxDecoration(
-                      color: ColorsStyles.buttonColor,
+                      gradient: const LinearGradient(
+                        colors: ColorsStyles.gradientBlueColor,
+                      ),
                       borderRadius: BorderRadius.circular(10.r),
                     ),
                     child: CustomText(

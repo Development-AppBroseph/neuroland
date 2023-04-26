@@ -5,6 +5,7 @@ import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/constants/svg_and_img.dart';
 import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/core/helpers/widgets/custom_button.dart';
+import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/core/helpers/widgets/my_behavior.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_state.dart';
@@ -67,7 +68,7 @@ class _SignInState extends State<SignIn> {
                       top: 170.h,
                       right: 24.w,
                       left: 24.w,
-                      bottom: 206.h,
+                      bottom: 156.h,
                     ),
                     child: Image.asset(
                       Img.logo,
@@ -106,6 +107,16 @@ class _SignInState extends State<SignIn> {
                     outLined: true,
                     accentText: true,
                     onTap: () => Navigator.pushNamed(context, '/SignUp'),
+                  ),
+                  SizedBox(height: 15.h),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Center(
+                      child: CustomText(
+                        title: 'Политика конфиденциальности',
+                        fontSize: 16.h,
+                      ),
+                    ),
                   ),
                 ],
               ),

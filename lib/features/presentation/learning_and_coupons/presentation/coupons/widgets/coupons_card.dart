@@ -23,7 +23,9 @@ class _CouponsCardState extends State<CouponsCard> {
     return BlocBuilder<ActualCoursesCubit, ActualCoursesState>(
       builder: (context, state) {
         return GestureDetector(
-          onTap: () => context.read<ActualCoursesCubit>().useUserCoupon(widget.couponEntiti.id),
+          onTap: () => context
+              .read<ActualCoursesCubit>()
+              .useUserCoupon(widget.couponEntiti.id),
           child: Container(
             width: double.infinity,
             margin: EdgeInsets.symmetric(
@@ -49,8 +51,8 @@ class _CouponsCardState extends State<CouponsCard> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(20.r),
                       child: CachedNetworkImage(
-                        progressIndicatorBuilder: (context, url, downloadProgress) =>
-                            Center(
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) => Center(
                           child: Container(
                             margin: const EdgeInsets.all(20),
                             child: CircularProgressIndicator(
@@ -82,14 +84,17 @@ class _CouponsCardState extends State<CouponsCard> {
                           ),
                           const Spacer(),
                           Container(
-                            padding:
-                                EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20.w, vertical: 8.h),
                             decoration: BoxDecoration(
-                              color: ColorsStyles.buttonColor,
+                              gradient: const LinearGradient(
+                                colors: ColorsStyles.gradientBlueColor,
+                              ),
                               borderRadius: BorderRadius.circular(10.r),
                             ),
                             child: CustomText(
-                              title: '${widget.couponEntiti.pointsRequired} баллов',
+                              title:
+                                  '${widget.couponEntiti.pointsRequired} баллов',
                               fontSize: 15.sp,
                               fontWeight: FontWeight.w800,
                               color: ColorsStyles.whiteColor,
@@ -104,7 +109,8 @@ class _CouponsCardState extends State<CouponsCard> {
                   top: 22,
                   left: 30,
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
                     decoration: BoxDecoration(
                       color: ColorsStyles.whiteColor,
                       borderRadius: BorderRadius.circular(10.r),
