@@ -11,6 +11,8 @@ class CustomTextField extends StatefulWidget {
   final String hintText;
   final bool isPassword;
   final bool isText;
+  final Function()? onTap;
+  final Function(String text)? onChanged;
   const CustomTextField({
     super.key,
     required this.color,
@@ -19,6 +21,8 @@ class CustomTextField extends StatefulWidget {
     required this.hintText,
     this.isText = true,
     this.isPassword = false,
+    this.onTap,
+    this.onChanged,
   });
 
   @override
@@ -32,8 +36,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
     super.initState();
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,21 +47,21 @@ class _CustomTextFieldState extends State<CustomTextField> {
         color: widget.color,
       ),
       child: TextField(
+        onTap: widget.onTap,
+        onChanged: widget.onChanged,
         controller: widget.controller,
         style: TextStyle(
-          fontSize: 20.sp,
-          color: ColorsStyles.blackColor,
-          fontWeight: FontWeight.w400,
-          fontFamily: 'Mons'
-        ),
+            fontSize: 20.sp,
+            color: ColorsStyles.blackColor,
+            fontWeight: FontWeight.w400,
+            fontFamily: 'Mons'),
         textAlignVertical: TextAlignVertical.center,
         cursorColor: ColorsStyles.blackColor,
         textCapitalization: widget.isText
             ? TextCapitalization.sentences
             : TextCapitalization.none,
-        inputFormatters: widget.isText || widget.isPassword  
-                ? []
-                : [maskFormatter],
+        inputFormatters:
+            widget.isText || widget.isPassword ? [] : [maskFormatter],
         keyboardType: widget.type,
         obscureText: widget.isPassword,
         decoration: InputDecoration.collapsed(
