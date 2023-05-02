@@ -65,16 +65,16 @@ class _SignInState extends State<SignIn> {
                 scrollDirection: Axis.vertical,
                 children: [
                   Container(
-                    height: 106.h,
+                    height: 306.h,
                     width: 320.w,
                     margin: EdgeInsets.only(
-                      top: 170.h,
+                      top: 70.h,
                       right: 24.w,
                       left: 24.w,
-                      bottom: 156.h,
+                      bottom: 56.h,
                     ),
                     child: Image.asset(
-                      Img.logo,
+                      Img.neurodom,
                       fit: BoxFit.contain,
                     ),
                   ),
