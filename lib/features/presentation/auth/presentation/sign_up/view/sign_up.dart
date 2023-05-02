@@ -9,7 +9,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/helpers/custom_input_formaters/custom_input_formatter_number.dart';
 import 'package:grow_food/core/helpers/functions/functions.dart';
-import 'package:grow_food/core/helpers/models/towns_model.dart';
 import 'package:grow_food/core/helpers/widgets/custom_button.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text_field.dart';
@@ -18,7 +17,6 @@ import 'package:grow_food/features/presentation/auth/data/models/cities_model.da
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_up/controller/sign_up_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_up/controller/sign_up_state.dart';
-import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SignUp extends StatefulWidget {
@@ -28,7 +26,7 @@ class SignUp extends StatefulWidget {
   State<SignUp> createState() => _SignUpState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignUpState extends State<SignUp> with WidgetsBindingObserver {
   final TextEditingController controllerName = TextEditingController();
   final TextEditingController controllerNumber = TextEditingController();
   final TextEditingController controllerEmail = TextEditingController();
@@ -37,13 +35,18 @@ class _SignUpState extends State<SignUp> {
       TextEditingController();
   final TextEditingController controllerTown = TextEditingController();
   final ScrollController scrollController = ScrollController();
+  final ScrollController scrollControllerTowns = ScrollController();
   final controller = StreamController<int>();
+  GlobalKey key = GlobalKey();
 
   bool isSelectCity = false;
   double rotate = 1 / 4;
   double maxScroll = 0.0;
+  double heightTowns = 300.0;
   List<CityModel> towns = [];
   List<CityModel> searchTowm = [];
+  double progress = 0.0;
+  double sumElement = 0;
 
   @override
   void dispose() {
@@ -54,14 +57,20 @@ class _SignUpState extends State<SignUp> {
   @override
   void initState() {
     super.initState();
+    scrollController.addListener(() {});
+    scrollControllerTowns.addListener(() {
+      setState(() {});
+    });
     getCities();
     controllerName.addListener(() {});
     controllerNumber.addListener(() {});
     controllerEmail.addListener(() {});
     controllerPassword.addListener(() {});
     compareControllerPassword.addListener(() {});
-    scrollController.addListener(() {});
-    controllerTown.addListener(() {});
+
+    controllerTown.addListener(() {
+      setState(() {});
+    });
   }
 
   Future<void> onSuccessRegistration(
@@ -93,6 +102,8 @@ class _SignUpState extends State<SignUp> {
       for (var city in response) {
         towns.add(CityModel.fromJson(city));
       }
+      sumElement = towns.length * 60;
+      setState(() {});
     } catch (e) {
       rethrow;
     }
@@ -100,6 +111,7 @@ class _SignUpState extends State<SignUp> {
 
   Future<void> searchTowms(String text) async {
     searchTowm.clear();
+
     if (text.isEmpty) {
       setState(() {});
       return;
@@ -110,6 +122,7 @@ class _SignUpState extends State<SignUp> {
         searchTowm.add(city);
       }
     });
+    sumElement = searchTowm.length * 60;
     setState(() {});
   }
 
@@ -134,321 +147,324 @@ class _SignUpState extends State<SignUp> {
                   ),
                   backgroundColor: ColorsStyles.whiteColor,
                 ),
-                body: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 35.w),
-                  child: ScrollConfiguration(
-                    behavior: MyBehavior(),
-                    child: ListView(
-                      physics: const BouncingScrollPhysics(),
-                      cacheExtent: double.infinity,
-                      controller: scrollController,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsets.only(top: 188.h, bottom: 25.h),
-                              child: CustomText(
-                                title: 'Регистрация',
-                                fontSize: 32.sp,
-                                fontWeight: FontWeight.bold,
-                                color: ColorsStyles.mainTextColor,
-                              ),
+                body: ScrollConfiguration(
+                  behavior: MyBehavior(),
+                  child: ListView(
+                    padding: EdgeInsets.symmetric(horizontal: 35.w),
+                    physics: const BouncingScrollPhysics(),
+                    controller: scrollController,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(top: 188.h, bottom: 25.h),
+                            child: CustomText(
+                              title: 'Регистрация',
+                              fontSize: 32.sp,
+                              fontWeight: FontWeight.bold,
+                              color: ColorsStyles.mainTextColor,
                             ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5.h),
-                              child: CustomTextField(
-                                color: ColorsStyles.backgroundTextField,
-                                controller: controllerName,
-                                hintText: 'Имя',
-                                type: TextInputType.name,
-                                isText: true,
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5.h),
+                            child: CustomTextField(
+                              color: ColorsStyles.backgroundTextField,
+                              controller: controllerName,
+                              hintText: 'Имя',
+                              type: TextInputType.name,
+                              isText: true,
                             ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5.h),
-                              child: CustomTextField(
-                                color: ColorsStyles.backgroundTextField,
-                                controller: controllerNumber,
-                                hintText: 'Мобильный телефон',
-                                type: TextInputType.number,
-                                isText: false,
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5.h),
+                            child: CustomTextField(
+                              color: ColorsStyles.backgroundTextField,
+                              controller: controllerNumber,
+                              hintText: 'Мобильный телефон',
+                              type: TextInputType.number,
+                              isText: false,
                             ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5.h),
-                              child: CustomTextField(
-                                color: ColorsStyles.backgroundTextField,
-                                controller: controllerEmail,
-                                hintText: 'Email',
-                                type: TextInputType.text,
-                                isText: true,
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5.h),
+                            child: CustomTextField(
+                              color: ColorsStyles.backgroundTextField,
+                              controller: controllerEmail,
+                              hintText: 'Email',
+                              type: TextInputType.text,
+                              isText: true,
                             ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5.h),
-                              child: CustomTextField(
-                                color: ColorsStyles.backgroundTextField,
-                                controller: controllerPassword,
-                                hintText: 'Пароль',
-                                isPassword: true,
-                                type: TextInputType.text,
-                                isText: false,
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5.h),
+                            child: CustomTextField(
+                              color: ColorsStyles.backgroundTextField,
+                              controller: controllerPassword,
+                              hintText: 'Пароль',
+                              isPassword: true,
+                              type: TextInputType.text,
+                              isText: false,
                             ),
-                            // GestureDetector(
-                            //   onTap: () {
-                            //     setState(() {
-                            //       if (!isSelectCity) {
-                            //         isSelectCity = true;
-                            //         rotate = 1 / 1.35;
-                            //         Future.delayed(
-                            //                 const Duration(milliseconds: 400))
-                            //             .then(
-                            //           (value) => scrollController.animateTo(
-                            //             scrollController
-                            //                 .position.maxScrollExtent,
-                            //             duration:
-                            //                 const Duration(milliseconds: 200),
-                            //             curve: Curves.ease,
-                            //           ),
-                            //         );
-                            //       } else {
-                            //         isSelectCity = false;
-                            //         rotate = 1 / 4;
-                            //       }
-                            //     });
-                            //   },
-                            //   child: Container(
-                            //     width: double.infinity,
-                            //     padding: EdgeInsets.symmetric(
-                            //         horizontal: 30.w, vertical: 18.5.h),
-                            //     margin: EdgeInsets.only(top: 5.h),
-                            //     decoration: BoxDecoration(
-                            //       borderRadius: BorderRadius.circular(10.r),
-                            //       color: ColorsStyles.backgroundTextField,
-                            //     ),
-                            //     child: Row(
-                            //       children: [
-                            //         CustomText(
-                            //           title: 'Город проживания',
-                            //           fontSize: 20.sp,
-                            //           fontWeight: FontWeight.w500,
-                            //           color: ColorsStyles.textFiledHintColor,
-                            //         ),
-                            //         const Spacer(),
-                            //         AnimatedRotation(
-                            //           turns: rotate,
-                            //           duration: const Duration(
-                            //             milliseconds: 400,
-                            //           ),
-                            //           curve: Curves.ease,
-                            //           child: const Icon(
-                            //             Icons.arrow_back_ios_new_rounded,
-                            //             color: ColorsStyles.textFiledHintColor,
-                            //             size: 20,
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5.h),
-                              child: CustomTextField(
-                                color: ColorsStyles.backgroundTextField,
-                                controller: controllerTown,
-                                hintText: 'Город',
-                                type: TextInputType.text,
-                                onTap: () {
-                                  setState(() {
-                                    if (!isSelectCity) {
-                                      isSelectCity = true;
-                                      rotate = 1 / 1.35;
-                                      Future.delayed(const Duration(
-                                              milliseconds: 400))
-                                          .then(
-                                        (value) => scrollController.animateTo(
-                                          scrollController
-                                              .position.maxScrollExtent,
-                                          duration: const Duration(
-                                              milliseconds: 200),
-                                          curve: Curves.ease,
+                          ),
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     setState(() {
+                          //       if (!isSelectCity) {
+                          //         isSelectCity = true;
+                          //         rotate = 1 / 1.35;
+                          //         Future.delayed(
+                          //                 const Duration(milliseconds: 400))
+                          //             .then(
+                          //           (value) => scrollController.animateTo(
+                          //             scrollController
+                          //                 .position.maxScrollExtent,
+                          //             duration:
+                          //                 const Duration(milliseconds: 200),
+                          //             curve: Curves.ease,
+                          //           ),
+                          //         );
+                          //       } else {
+                          //         isSelectCity = false;
+                          //         rotate = 1 / 4;
+                          //       }
+                          //     });
+                          //   },
+                          //   child: Container(
+                          //     width: double.infinity,
+                          //     padding: EdgeInsets.symmetric(
+                          //         horizontal: 30.w, vertical: 18.5.h),
+                          //     margin: EdgeInsets.only(top: 5.h),
+                          //     decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(10.r),
+                          //       color: ColorsStyles.backgroundTextField,
+                          //     ),
+                          //     child: Row(
+                          //       children: [
+                          //         CustomText(
+                          //           title: 'Город проживания',
+                          //           fontSize: 20.sp,
+                          //           fontWeight: FontWeight.w500,
+                          //           color: ColorsStyles.textFiledHintColor,
+                          //         ),
+                          //         const Spacer(),
+                          //         AnimatedRotation(
+                          //           turns: rotate,
+                          //           duration: const Duration(
+                          //             milliseconds: 400,
+                          //           ),
+                          //           curve: Curves.ease,
+                          //           child: const Icon(
+                          //             Icons.arrow_back_ios_new_rounded,
+                          //             color: ColorsStyles.textFiledHintColor,
+                          //             size: 20,
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5.h),
+                            child: CustomTextField(
+                              color: ColorsStyles.backgroundTextField,
+                              controller: controllerTown,
+                              hintText: 'Город',
+                              type: TextInputType.text,
+                              onTap: () {
+                                setState(() {
+                                  if (!isSelectCity) {
+                                    isSelectCity = true;
+                                    // Future.delayed(
+                                    //         const Duration(milliseconds: 400))
+                                    //     .then(
+                                    //   (value) => scrollController.animateTo(
+                                    //     scrollController
+                                    //         .position.maxScrollExtent,
+                                    //     duration:
+                                    //         const Duration(milliseconds: 200),
+                                    //     curve: Curves.ease,
+                                    //   ),
+                                    // );
+                                  }
+                                });
+                              },
+                              onChanged: (text) => searchTowms(text),
+                              isText: true,
+                            ),
+                          ),
+                          AnimatedContainer(
+                            height: sumElement > 300 ? 300 : sumElement,
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.ease,
+                            margin: EdgeInsets.only(top: 10.h),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r),
+                              color: ColorsStyles.backgroundTextField,
+                            ),
+                            child: searchTowm.isNotEmpty ||
+                                    controllerTown.text.isNotEmpty
+                                ? ListView.builder(
+                                    itemCount: searchTowm.length,
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          controller.sink.add(index);
+                                        },
+                                        child: Container(
+                                          height: 60,
+                                          alignment: Alignment.centerLeft,
+                                          padding: EdgeInsets.only(
+                                            left: 30.w,
+                                            right: 30.w,
+                                            top: 19.h,
+                                            bottom: 19.h,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.r),
+                                            gradient: LinearGradient(
+                                              colors: snapshot.data == index
+                                                  ? ColorsStyles
+                                                      .gradientBlueColor
+                                                  : [
+                                                      Colors.transparent,
+                                                      Colors.transparent,
+                                                    ],
+                                            ),
+                                          ),
+                                          child: CustomText(
+                                            title: searchTowm[index].name,
+                                            color: snapshot.data == index
+                                                ? ColorsStyles.whiteColor
+                                                : ColorsStyles
+                                                    .textFiledHintColor,
+                                            fontSize: 20.sp,
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                         ),
                                       );
-                                    }
-                                  });
-                                },
-                                onChanged: (text) => searchTowms(text),
-                                isText: true,
-                              ),
-                            ),
-                            AnimatedContainer(
-                                duration: const Duration(milliseconds: 400),
-                                curve: Curves.ease,
-                                margin: EdgeInsets.only(top: 10.h),
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                  color: ColorsStyles.backgroundTextField,
-                                ),
-                                child: searchTowm.isNotEmpty ||
-                                        controllerTown.text.isNotEmpty
-                                    ? ListView.builder(
-                                      shrinkWrap: true,
-                                        itemCount: searchTowm.length,
-                                        itemBuilder: (context, index) {
-                                          return GestureDetector(
-                                            onTap: () {
-                                              controller.sink.add(index);
-                                            },
-                                            child: Container(
-                                              height: 60,
-                                              alignment: Alignment.centerLeft,
-                                              padding: EdgeInsets.only(
-                                                left: 30.w,
-                                                right: 30.w,
-                                                top: 19.h,
-                                                bottom: 19.h,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.r),
-                                                gradient: LinearGradient(
-                                                  colors: snapshot.data == index
-                                                      ? ColorsStyles
-                                                          .gradientBlueColor
-                                                      : [
-                                                          Colors.transparent,
-                                                          Colors.transparent,
-                                                        ],
-                                                ),
-                                              ),
-                                              child: CustomText(
-                                                title: searchTowm[index].name,
-                                                color: snapshot.data == index
-                                                    ? ColorsStyles.whiteColor
-                                                    : ColorsStyles
-                                                        .textFiledHintColor,
-                                                fontSize: 20.sp,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          );
+                                    },
+                                  )
+                                // ? ListView.builder(
+                                //   controller: scrollControllerTowns,
+                                //     shrinkWrap: true,
+                                //     itemCount: searchTowm.length,
+                                //     itemBuilder: (context, index) {
+
+                                //     },
+                                //   )
+                                : ListView.builder(
+                                    itemCount: towns.length,
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          controller.sink.add(index);
                                         },
-                                      )
-                                    : ListView.builder(
-                                        itemCount: towns.length,
-                                        shrinkWrap: true,
-                                        itemBuilder: (context, index) {
-                                          return GestureDetector(
-                                            onTap: () {
-                                              controller.sink.add(index);
-                                            },
-                                            child: Container(
-                                              height: 60,
-                                              alignment: Alignment.centerLeft,
-                                              padding: EdgeInsets.only(
-                                                left: 30.w,
-                                                right: 30.w,
-                                                top: 19.h,
-                                                bottom: 19.h,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.r),
-                                                gradient: LinearGradient(
-                                                  colors: snapshot.data == index
-                                                      ? ColorsStyles
-                                                          .gradientBlueColor
-                                                      : [
-                                                          Colors.transparent,
-                                                          Colors.transparent,
-                                                        ],
-                                                ),
-                                              ),
-                                              child: CustomText(
-                                                title: towns[index].name,
-                                                color: snapshot.data == index
-                                                    ? ColorsStyles.whiteColor
-                                                    : ColorsStyles
-                                                        .textFiledHintColor,
-                                                fontSize: 20.sp,
-                                                fontWeight: FontWeight.w500,
-                                              ),
+                                        child: Container(
+                                          height: 60,
+                                          alignment: Alignment.centerLeft,
+                                          padding: EdgeInsets.only(
+                                            left: 30.w,
+                                            right: 30.w,
+                                            top: 19.h,
+                                            bottom: 19.h,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.r),
+                                            gradient: LinearGradient(
+                                              colors: snapshot.data == index
+                                                  ? ColorsStyles
+                                                      .gradientBlueColor
+                                                  : [
+                                                      Colors.transparent,
+                                                      Colors.transparent,
+                                                    ],
                                             ),
-                                          );
-                                        },
-                                      )),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 15.h),
-                          child: CustomButton(
-                            title: 'Зарегистрироваться',
-                            accentText: true,
-                            onTap: () => onSuccessRegistration(
-                              controllerName.text,
-                              controllerNumber.text,
-                              controllerEmail.text,
-                              controllerPassword.text,
-                              snapshot,
-                              () => context.read<SignUpCubit>().signUp(
-                                    userName: controllerName.text,
-                                    phoneNumber:
-                                        '+7${maskFormatter.getUnmaskedText()}',
-                                    email: controllerEmail.text,
-                                    password: controllerPassword.text,
-                                    id: 7,
-                                    onSuccess: () =>
-                                        context.read<SignInCubit>().signIn(
-                                              emailOrPhoneNumber:
-                                                  controllerEmail.text,
-                                              password: controllerPassword.text,
-                                              onSuccess: () {
-                                                if (mounted) {
-                                                  return Navigator
-                                                      .pushNamedAndRemoveUntil(
-                                                    context,
-                                                    '/HomeView',
-                                                    (route) => false,
-                                                  );
-                                                }
-                                              },
-                                            ),
+                                          ),
+                                          child: CustomText(
+                                            title: towns[index].name,
+                                            color: snapshot.data == index
+                                                ? ColorsStyles.whiteColor
+                                                : ColorsStyles
+                                                    .textFiledHintColor,
+                                            fontSize: 20.sp,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
-                            ),
-                            withPadding: false,
                           ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30.h,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 15.h),
+                        child: CustomButton(
+                          title: 'Зарегистрироваться',
+                          accentText: true,
+                          onTap: () => onSuccessRegistration(
+                            controllerName.text,
+                            controllerNumber.text,
+                            controllerEmail.text,
+                            controllerPassword.text,
+                            snapshot,
+                            () => context.read<SignUpCubit>().signUp(
+                                  userName: controllerName.text,
+                                  phoneNumber:
+                                      '+7${maskFormatter.getUnmaskedText()}',
+                                  email: controllerEmail.text,
+                                  password: controllerPassword.text,
+                                  id: 7,
+                                  onSuccess: () =>
+                                      context.read<SignInCubit>().signIn(
+                                            emailOrPhoneNumber:
+                                                controllerEmail.text,
+                                            password: controllerPassword.text,
+                                            onSuccess: () {
+                                              if (mounted) {
+                                                return Navigator
+                                                    .pushNamedAndRemoveUntil(
+                                                  context,
+                                                  '/HomeView',
+                                                  (route) => false,
+                                                );
+                                              }
+                                            },
+                                          ),
+                                ),
+                          ),
+                          withPadding: false,
                         ),
-                        GestureDetector(
-                          onTap: () async {
-                            if (!await launchUrl(
-                              Uri.parse(
-                                  'http://158.160.44.207:9001/project_info/03_Положение_по_защите_и_обработке_персональных_данных_2.pdf'),
-                              mode: Platform.isAndroid
-                                  ? LaunchMode.externalNonBrowserApplication
-                                  : LaunchMode.inAppWebView,
-                            )) {
-                              throw 'Could not launch';
-                            }
-                          },
-                          child: CustomText(
-                            title:
-                                'Нажимая кнопку, вы автоматически соглашаетесь с Политикой Конфиденциальности',
-                            fontWeight: FontWeight.w400,
-                            color: ColorsStyles.textFiledHintColor,
-                            fontSize: 15.sp,
-                            centerTitle: true,
-                          ),
-                        )
-                      ],
-                    ),
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          if (!await launchUrl(
+                            Uri.parse(
+                                'http://158.160.44.207:9001/project_info/03_Положение_по_защите_и_обработке_персональных_данных_2.pdf'),
+                            mode: Platform.isAndroid
+                                ? LaunchMode.externalNonBrowserApplication
+                                : LaunchMode.inAppWebView,
+                          )) {
+                            throw 'Could not launch';
+                          }
+                        },
+                        child: CustomText(
+                          title:
+                              'Нажимая кнопку, вы автоматически соглашаетесь с Политикой Конфиденциальности',
+                          fontWeight: FontWeight.w400,
+                          color: ColorsStyles.textFiledHintColor,
+                          fontSize: 15.sp,
+                          centerTitle: true,
+                        ),
+                      )
+                    ],
                   ),
                 ),
               );
