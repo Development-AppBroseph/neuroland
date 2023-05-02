@@ -41,6 +41,7 @@ class _MyAppState extends State<MyApp> {
     configOnSignal();
     super.initState();
   }
+
   void configOnSignal() async {
     await OneSignal.shared.setLogLevel(OSLogLevel.debug, OSLogLevel.none);
     await OneSignal.shared.setAppId('b6c3aa52-66bd-4346-ac64-feadfa8cfcc5');
@@ -48,6 +49,7 @@ class _MyAppState extends State<MyApp> {
       OSNotificationDisplayType.notification;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
