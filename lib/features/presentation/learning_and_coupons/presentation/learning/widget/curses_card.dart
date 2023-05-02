@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
-import 'package:grow_food/core/constants/constants.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/video_curses/direction_entiti.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/video_curses/video_entiti.dart';
@@ -104,12 +103,12 @@ class _CoursesCardState extends State<CoursesCard> {
                             height: 10.h,
                           ),
                           Padding(
-                            padding: EdgeInsets.only(right: 70.w),
+                            padding: EdgeInsets.only(right: 50.w),
                             child: CustomText(
                               title: widget.videoEntiti.course!.description,
-                              fontSize: 20.sp,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w800,
-                              color: Colors.grey,
+                              color: ColorsStyles.blackColor,
                             ),
                           ),
                         ],
