@@ -52,7 +52,6 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       "name": userName,
       "email": email,
       "phone": phoneNumber,
-      "branch_ids": id,
       "password": password,
     });
 
