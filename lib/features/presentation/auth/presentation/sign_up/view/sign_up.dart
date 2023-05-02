@@ -207,146 +207,111 @@ class _SignUpState extends State<SignUp> with WidgetsBindingObserver {
                               type: TextInputType.text,
                               isText: false,
                             ),
-                            // GestureDetector(
-                            //   onTap: () {
-                            //     setState(() {
-                            //       if (!isSelectCity) {
-                            //         isSelectCity = true;
-                            //         rotate = 1 / 1.35;
-                            //         Future.delayed(
-                            //                 const Duration(milliseconds: 400))
-                            //             .then(
-                            //           (value) => scrollController.animateTo(
-                            //             scrollController
-                            //                 .position.maxScrollExtent,
-                            //             duration:
-                            //                 const Duration(milliseconds: 200),
-                            //             curve: Curves.ease,
-                            //           ),
-                            //         );
-                            //       } else {
-                            //         isSelectCity = false;
-                            //         rotate = 1 / 4;
-                            //       }
-                            //     });
-                            //   },
-                            //   child: Container(
-                            //     width: double.infinity,
-                            //     padding: EdgeInsets.symmetric(
-                            //         horizontal: 30.w, vertical: 18.5.h),
-                            //     margin: EdgeInsets.only(top: 5.h),
-                            //     decoration: BoxDecoration(
-                            //       borderRadius: BorderRadius.circular(10.r),
-                            //       color: ColorsStyles.backgroundTextField,
-                            //     ),
-                            //     child: Row(
-                            //       children: [
-                            //         CustomText(
-                            //           title: 'Город проживания',
-                            //           fontSize: 20.sp,
-                            //           fontWeight: FontWeight.w500,
-                            //           color: ColorsStyles.textFiledHintColor,
-                            //         ),
-                            //         const Spacer(),
-                            //         AnimatedRotation(
-                            //           turns: rotate,
-                            //           duration: const Duration(
-                            //             milliseconds: 400,
-                            //           ),
-                            //           curve: Curves.ease,
-                            //           child: const Icon(
-                            //             Icons.arrow_back_ios_new_rounded,
-                            //             color: ColorsStyles.textFiledHintColor,
-                            //             size: 20,
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5.h),
-                              child: CustomTextField(
-                                color: ColorsStyles.backgroundTextField,
-                                controller: controllerTown,
-                                hintText: 'Город',
-                                type: TextInputType.text,
-                                onTap: () {
-                                  setState(() {
-                                    if (!isSelectCity) {
-                                      isSelectCity = true;
-                                      rotate = 1 / 1.35;
-                                      Future.delayed(
-                                              const Duration(milliseconds: 400))
-                                          .then(
-                                        (value) => scrollController.animateTo(
-                                          scrollController
-                                              .position.maxScrollExtent,
-                                          duration:
-                                              const Duration(milliseconds: 200),
-                                          curve: Curves.ease,
-                                        ),
-                                      );
-                                    }
-                                  });
-                                },
-                                onChanged: (text) => searchTowms(text),
-                                isText: true,
-                              ),
+                          ),
+                          // GestureDetector(
+                          //   onTap: () {
+                          //     setState(() {
+                          //       if (!isSelectCity) {
+                          //         isSelectCity = true;
+                          //         rotate = 1 / 1.35;
+                          //         Future.delayed(
+                          //                 const Duration(milliseconds: 400))
+                          //             .then(
+                          //           (value) => scrollController.animateTo(
+                          //             scrollController
+                          //                 .position.maxScrollExtent,
+                          //             duration:
+                          //                 const Duration(milliseconds: 200),
+                          //             curve: Curves.ease,
+                          //           ),
+                          //         );
+                          //       } else {
+                          //         isSelectCity = false;
+                          //         rotate = 1 / 4;
+                          //       }
+                          //     });
+                          //   },
+                          //   child: Container(
+                          //     width: double.infinity,
+                          //     padding: EdgeInsets.symmetric(
+                          //         horizontal: 30.w, vertical: 18.5.h),
+                          //     margin: EdgeInsets.only(top: 5.h),
+                          //     decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(10.r),
+                          //       color: ColorsStyles.backgroundTextField,
+                          //     ),
+                          //     child: Row(
+                          //       children: [
+                          //         CustomText(
+                          //           title: 'Город проживания',
+                          //           fontSize: 20.sp,
+                          //           fontWeight: FontWeight.w500,
+                          //           color: ColorsStyles.textFiledHintColor,
+                          //         ),
+                          //         const Spacer(),
+                          //         AnimatedRotation(
+                          //           turns: rotate,
+                          //           duration: const Duration(
+                          //             milliseconds: 400,
+                          //           ),
+                          //           curve: Curves.ease,
+                          //           child: const Icon(
+                          //             Icons.arrow_back_ios_new_rounded,
+                          //             color: ColorsStyles.textFiledHintColor,
+                          //             size: 20,
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5.h),
+                            child: CustomTextField(
+                              color: ColorsStyles.backgroundTextField,
+                              controller: controllerTown,
+                              hintText: 'Город',
+                              type: TextInputType.text,
+                              onTap: () {
+                                setState(() {
+                                  if (!isSelectCity) {
+                                    isSelectCity = true;
+                                    // Future.delayed(
+                                    //         const Duration(milliseconds: 400))
+                                    //     .then(
+                                    //   (value) => scrollController.animateTo(
+                                    //     scrollController
+                                    //         .position.maxScrollExtent,
+                                    //     duration:
+                                    //         const Duration(milliseconds: 200),
+                                    //     curve: Curves.ease,
+                                    //   ),
+                                    // );
+                                  }
+                                });
+                              },
+                              onChanged: (text) => searchTowms(text),
+                              isText: true,
                             ),
-                            AnimatedContainer(
-                                duration: const Duration(milliseconds: 400),
-                                curve: Curves.ease,
-                                margin: EdgeInsets.only(top: 10.h),
-                                width: double.infinity,
-                                height: 400.h,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                  color: ColorsStyles.backgroundTextField,
-                                ),
-                                child: searchTowm.isNotEmpty ||
-                                        controllerTown.text.isNotEmpty
-                                    ? ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: searchTowm.length,
-                                        itemBuilder: (context, index) {
-                                          return GestureDetector(
-                                            onTap: () {
-                                              controller.sink.add(index);
-                                            },
-                                            child: Container(
-                                              height: 60,
-                                              alignment: Alignment.centerLeft,
-                                              padding: EdgeInsets.only(
-                                                left: 30.w,
-                                                right: 30.w,
-                                                top: 19.h,
-                                                bottom: 19.h,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10.r),
-                                                gradient: LinearGradient(
-                                                  colors: snapshot.data == index
-                                                      ? ColorsStyles
-                                                          .gradientBlueColor
-                                                      : [
-                                                          Colors.transparent,
-                                                          Colors.transparent,
-                                                        ],
-                                                ),
-                                              ),
-                                              child: CustomText(
-                                                title: searchTowm[index].name,
-                                                color: snapshot.data == index
-                                                    ? ColorsStyles.whiteColor
-                                                    : ColorsStyles
-                                                        .textFiledHintColor,
-                                                fontSize: 20.sp,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          );
+                          ),
+                          AnimatedContainer(
+                            height: sumElement > 300 ? 300 : sumElement,
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.ease,
+                            margin: EdgeInsets.only(top: 10.h),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r),
+                              color: ColorsStyles.backgroundTextField,
+                            ),
+                            child: searchTowm.isNotEmpty ||
+                                    controllerTown.text.isNotEmpty
+                                ? ListView.builder(
+                                    itemCount: searchTowm.length,
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          controller.sink.add(index);
                                         },
                                         child: Container(
                                           height: 60,

@@ -1,4 +1,4 @@
-package com.example.grow_food
+package dev.broseph.neurodom
 
 import io.flutter.embedding.android.FlutterActivity
 

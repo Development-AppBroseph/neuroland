@@ -29,6 +29,51 @@
             {
               "client_id": "56823057749-23s17p5n17ntdtskaabu8cab9afn737q.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "56823057749-44uabe1df98veto150bc379075s84ai8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dev.broseph.neuroland",
+                "app_store_id": "1668195949"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56823057749:android:e1208a14061df9672c33dc",
+        "android_client_info": {
+          "package_name": "dev.broseph.neurodom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56823057749-23s17p5n17ntdtskaabu8cab9afn737q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUbk-nX1JojdwRjktO0awDKitb9bU6_EY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56823057749-23s17p5n17ntdtskaabu8cab9afn737q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "56823057749-44uabe1df98veto150bc379075s84ai8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dev.broseph.neuroland",
+                "app_store_id": "1668195949"
+              }
             }
           ]
         }
