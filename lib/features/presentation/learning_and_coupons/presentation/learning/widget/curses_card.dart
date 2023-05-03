@@ -6,7 +6,6 @@ import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/video_curses/direction_entiti.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/video_curses/video_entiti.dart';
-
 import '../controller/actual_courses_cubit.dart';
 import '../controller/actual_courses_state.dart';
 import 'youtube_video_page.dart';

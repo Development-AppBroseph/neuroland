@@ -94,7 +94,7 @@ class CoursesVideoDatasourceImpl implements CoursesVideoDatasource {
         throw "Вы уже приобрели купон";
       }
     } on DioError catch (error) {
-      if (error.response!.statusCode == 400) {
+      if (error.response!.statusCode == 400 || error.response!.statusCode == 403) {
         throw 'Вы уже приобрели купон';
       } else if (error.response!.statusCode! >= 500) {
         throw 'Ошибка сервера';
