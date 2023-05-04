@@ -44,9 +44,9 @@ class _CouponsViewState extends State<CouponsView> {
                               right: 24, left: 24, bottom: 15),
                           child: Row(
                             children: [
-                              const CustomText(
-                                title: 'Купоны',
-                                fontSize: 24,
+                              CustomText(
+                                title: 'Купоны от партнёров',
+                                fontSize: 20.h,
                                 fontWeight: FontWeight.w800,
                               ),
                               const Spacer(),
