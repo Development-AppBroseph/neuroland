@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/data/models/partner_coupons/partner_coupons_model.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/data/models/video_curses/courses_video_model.dart';
 
 abstract class CoursesVideoDatasource {
@@ -6,4 +7,5 @@ abstract class CoursesVideoDatasource {
   Future<dynamic> fetch(RequestOptions options);
   Future<void> addPoints(int videoId);
   Future<void> useCoupon(int couponId);
+  Future<PartnerCouponsModel> getPartnersCoupons();
 }

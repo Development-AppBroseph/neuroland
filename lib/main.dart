@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_up/controller/sign_up_cubit.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/presentation/coupons/controller/partner_coupons_cubit.dart';
 import 'package:grow_food/features/presentation/profile/presentation/controller/profile_cubit.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/controller/actual_courses_cubit.dart';
 import 'package:grow_food/features/presentation/root_screen/presentation/root_screen/controllers/root_screen_cubit.dart';
@@ -68,6 +69,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider<ProfileCubit>(
           create: (context) => sl<ProfileCubit>(),
+        ),
+        BlocProvider<PartnerCouponsCubit>(
+          create: (context) => sl<PartnerCouponsCubit>(),
         )
       ],
       child: ScreenUtilInit(

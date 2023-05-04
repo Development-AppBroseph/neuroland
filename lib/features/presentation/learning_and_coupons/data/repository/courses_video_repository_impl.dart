@@ -1,4 +1,5 @@
 import 'package:grow_food/features/presentation/learning_and_coupons/data/datasource/courses_video_datasource.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/partner_coupons/partner_coupons_entiti.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/video_curses/courses_video_entiti.dart';
 import 'package:grow_food/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
@@ -33,6 +34,16 @@ class CoursesVideoRepositoryImpl extends CoursesVideoRepository {
   Future<Either<Failure, void>> useCoupon(int couponId) async {
     try {
       final result = await coursesVideoDatasource.useCoupon(couponId);
+      return Right(result);
+    } catch (e) {
+      return Left(ServerFailure(error: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, PartnerCouponsEntiti>> getPartnerCoupons() async {
+    try {
+      final result = await coursesVideoDatasource.getPartnersCoupons();
       return Right(result);
     } catch (e) {
       return Left(ServerFailure(error: e.toString()));

@@ -13,7 +13,9 @@ import 'package:grow_food/features/presentation/auth/domain/usecases/sign_up_use
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_up/controller/sign_up_cubit.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/add_points.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/get_partners_coupons.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/use_coupon.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/presentation/coupons/controller/partner_coupons_cubit.dart';
 import 'package:grow_food/features/presentation/profile/data/datasource/remote_profile_datasource/remote_profile_datasource.dart';
 import 'package:grow_food/features/presentation/profile/data/datasource/remote_profile_datasource/remote_profile_datasource_implements.dart';
 import 'package:grow_food/features/presentation/profile/data/repository/profile_repository_impl.dart';
@@ -65,6 +67,13 @@ Future<void> init() async {
       getCoursesVideo: sl(),
       addPoints: sl(),
       useCoupon: sl(),
+      getPartnersCoupons: sl(),
+    ),
+  );
+  //Coupons
+  sl.registerFactory(
+    () => PartnerCouponsCubit(
+      getPartnersCoupons: sl(),
     ),
   );
   //Profile
@@ -106,6 +115,9 @@ Future<void> init() async {
   );
   sl.registerLazySingleton(
     () => UseCoupon(coursesVideoRepository: sl()),
+  );
+  sl.registerLazySingleton(
+    () => GetPartnersCoupons(coursesVideoRepository: sl()),
   );
   //Profile
   sl.registerLazySingleton(

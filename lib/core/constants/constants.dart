@@ -8,6 +8,7 @@ enum Endpoints {
   inviteLink,
   addPoints,
   useCoupon,
+  partnerCoupons,
 }
 
 const String baseUrl = 'http://158.160.44.207:8007';
@@ -33,6 +34,8 @@ extension EndpointsExtension on Endpoints {
         return '/api/videos/ viewed/';
       case Endpoints.useCoupon:
         return '/api/coupons/ redeem/';
+      case Endpoints.partnerCoupons:
+        return '/api/partner-coupons/';
     }
   }
 }
