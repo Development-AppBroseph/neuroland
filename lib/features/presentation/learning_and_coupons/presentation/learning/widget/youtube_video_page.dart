@@ -86,6 +86,7 @@ class _VideoPageState extends State<VideoPage> {
           backgroundColor: backgroundColor,
           elevation: 0,
           foregroundColor: Colors.black,
+          centerTitle: true,
           title: Container(
             width: 100.w,
             height: 30.h,

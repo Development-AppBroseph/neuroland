@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:grow_food/core/constants/constants.dart';
 import 'package:grow_food/core/helpers/auth_interceptor/auth_interceptor.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/data/datasource/courses_video_datasource.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/data/models/partner_coupons/partner_coupons_model.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/data/models/video_curses/courses_video_model.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -94,13 +95,33 @@ class CoursesVideoDatasourceImpl implements CoursesVideoDatasource {
         throw "Вы уже приобрели купон";
       }
     } on DioError catch (error) {
-      if (error.response!.statusCode == 400 || error.response!.statusCode == 403) {
+      if (error.response!.statusCode == 400 ||
+          error.response!.statusCode == 403) {
         throw 'Вы уже приобрели купон';
       } else if (error.response!.statusCode! >= 500) {
         throw 'Ошибка сервера';
       } else {
         throw 'Что-то пошло не так!';
       }
+    }
+  }
+
+  @override
+  Future<PartnerCouponsModel> getPartnersCoupons() async {
+    try {
+      final Response response = await _dio.get(
+        Endpoints.partnerCoupons.endpoint,
+        options: Options(
+          headers: headers,
+        ),
+      );
+      if (response.statusCode == 200) {
+        return PartnerCouponsModel.fromJson(response.data);
+      } else {
+        throw 'Error!';
+      }
+    } on DioError catch (error) {
+      throw error.toString();
     }
   }
 }

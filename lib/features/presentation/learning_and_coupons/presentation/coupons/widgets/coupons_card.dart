@@ -4,13 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
-import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/coupons/coupon_entiti.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/partner_coupons/partner_coupon_entiti.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/presentation/coupons/controller/partner_coupons_cubit.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/controller/actual_courses_state.dart';
 
 import '../../learning/controller/actual_courses_cubit.dart';
+import 'coupons_page.dart';
 
 class CouponsCard extends StatefulWidget {
-  final CouponEntiti couponEntiti;
+  final PartnerCouponEntiti couponEntiti;
   const CouponsCard({super.key, required this.couponEntiti});
 
   @override
@@ -23,9 +25,14 @@ class _CouponsCardState extends State<CouponsCard> {
     return BlocBuilder<ActualCoursesCubit, ActualCoursesState>(
       builder: (context, state) {
         return GestureDetector(
-          onTap: () => context
-              .read<ActualCoursesCubit>()
-              .useUserCoupon(widget.couponEntiti.id),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CouponsPage(
+                partnerCouponEntiti: widget.couponEntiti,
+              ),
+            ),
+          ),
           child: Container(
             width: double.infinity,
             margin: EdgeInsets.symmetric(
@@ -77,27 +84,32 @@ class _CouponsCardState extends State<CouponsCard> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          CustomText(
-                            title: widget.couponEntiti.title,
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w800,
-                          ),
                           const Spacer(),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20.w, vertical: 8.h),
-                            decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                colors: ColorsStyles.gradientBlueColor,
+                          GestureDetector(
+                            onTap: () async => {
+                              await context
+                                  .read<ActualCoursesCubit>()
+                                  .useUserCoupon(widget.couponEntiti.id),
+                              context
+                                  .read<PartnerCouponsCubit>()
+                                  .fetchPartnerCoupons(),
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20.w, vertical: 8.h),
+                              decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  colors: ColorsStyles.gradientBlueColor,
+                                ),
+                                borderRadius: BorderRadius.circular(10.r),
                               ),
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            child: CustomText(
-                              title:
-                                  '${widget.couponEntiti.pointsRequired} баллов',
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w800,
-                              color: ColorsStyles.whiteColor,
+                              child: CustomText(
+                                title:
+                                    '${widget.couponEntiti.pointsRequired} баллов',
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w800,
+                                color: ColorsStyles.whiteColor,
+                              ),
                             ),
                           ),
                         ],
@@ -105,23 +117,23 @@ class _CouponsCardState extends State<CouponsCard> {
                     ),
                   ],
                 ),
-                Positioned(
-                  top: 22,
-                  left: 30,
-                  child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
-                    decoration: BoxDecoration(
-                      color: ColorsStyles.whiteColor,
-                      borderRadius: BorderRadius.circular(10.r),
-                    ),
-                    child: CustomText(
-                      title: widget.couponEntiti.partnerName!,
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ),
+                // Positioned(
+                //   top: 22,
+                //   left: 30,
+                //   child: Container(
+                //     padding:
+                //         EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+                //     decoration: BoxDecoration(
+                //       color: ColorsStyles.whiteColor,
+                //       borderRadius: BorderRadius.circular(10.r),
+                //     ),
+                //     child: CustomText(
+                //       title: widget.couponEntiti.partnerName!,
+                //       fontSize: 15.sp,
+                //       fontWeight: FontWeight.w800,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

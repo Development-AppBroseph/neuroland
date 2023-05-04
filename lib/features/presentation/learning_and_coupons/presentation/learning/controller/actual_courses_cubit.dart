@@ -3,6 +3,7 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/add_points.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/get_courses_video.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/get_partners_coupons.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/use_coupon.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/controller/actual_courses_state.dart';
 
@@ -10,10 +11,12 @@ class ActualCoursesCubit extends Cubit<ActualCoursesState> {
   final GetCoursesVideo getCoursesVideo;
   final AddPoints addPoints;
   final UseCoupon useCoupon;
+  final GetPartnersCoupons getPartnersCoupons;
   ActualCoursesCubit({
     required this.getCoursesVideo,
     required this.addPoints,
     required this.useCoupon,
+    required this.getPartnersCoupons,
   }) : super(ActualCoursesInitialState());
 
   Future<void> fetchCoursesVideo() async {
