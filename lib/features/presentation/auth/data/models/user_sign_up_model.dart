@@ -7,14 +7,14 @@ class UserSignUpModel extends UserSignUpEntiti {
     required final int id,
     required final String userName,
     required final String authToken,
-    required final String branchId,
+    required final String? city,
   }) : super(
           email: email,
           phoneNumber: phoneNumber,
           id: id,
           userName: userName,
           authToken: authToken,
-          branchId: branchId,
+          city: city
         );
   factory UserSignUpModel.fromJson(Map<String, dynamic> json) =>
       UserSignUpModel(
@@ -23,7 +23,7 @@ class UserSignUpModel extends UserSignUpEntiti {
         id: json['id'],
         userName: json['name'],
         authToken: json['auth_token'],
-        branchId: json['branch_ids'],
+        city: json['city'] ?? null,
       );
   Map<String, dynamic> toJson() => {
         'email': email,
@@ -31,6 +31,5 @@ class UserSignUpModel extends UserSignUpEntiti {
         'id': id,
         'name': userName,
         'auth_token': authToken,
-        'branch_ids': branchId,
       };
 }

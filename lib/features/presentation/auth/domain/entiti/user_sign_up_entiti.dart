@@ -4,7 +4,7 @@ class UserSignUpEntiti {
   final int id;
   final String userName;
   final String authToken;
-  final String branchId;
+  final String? city;
 
   UserSignUpEntiti({
     required this.email,
@@ -12,6 +12,6 @@ class UserSignUpEntiti {
     required this.id,
     required this.userName,
     required this.authToken,
-    required this.branchId,
+    required this.city,
   });
 }

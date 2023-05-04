@@ -117,11 +117,11 @@ class _SignUpState extends State<SignUp> with WidgetsBindingObserver {
       return;
     }
 
-    towns.forEach((city) {
+    for (var city in towns) {
       if (city.district.contains(text) || city.name.contains(text)) {
         searchTowm.add(city);
       }
-    });
+    }
     sumElement = searchTowm.length * 60;
     setState(() {});
   }
