@@ -39,5 +39,5 @@ extension EndpointsExtension on Endpoints {
     }
   }
 }
-
+//TODO переделать свич
 const String telegramBot = 'https://t.me/Neurolandro_bot';
