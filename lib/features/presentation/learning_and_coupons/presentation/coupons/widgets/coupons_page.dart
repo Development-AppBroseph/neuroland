@@ -34,7 +34,7 @@ class _CouponsPageState extends State<CouponsPage> {
     super.initState();
     youtubePlayerController = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(
-              widget.partnerCouponEntiti.videoCouponePartner.promoUrl) ??
+              widget.partnerCouponEntiti.videoCouponePartner == null ? '' : widget.partnerCouponEntiti.videoCouponePartner!.promoUrl) ??
           '',
       flags: const YoutubePlayerFlags(
         autoPlay: false,
@@ -63,73 +63,143 @@ class _CouponsPageState extends State<CouponsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return YoutubePlayerBuilder(
-      player: YoutubePlayer(
-        controller: youtubePlayerController,
-        showVideoProgressIndicator: false,
-        progressIndicatorColor: Colors.red,
-        progressColors: const ProgressBarColors(
-          playedColor: Colors.red,
-        ),
-      ),
-      builder: (context, player) => Scaffold(
-        backgroundColor: backgroundColor,
-        appBar: AppBar(
-          backgroundColor: backgroundColor,
-          elevation: 0,
-          foregroundColor: Colors.black,
-          centerTitle: true,
-          title: Container(
-            width: 100.w,
-            height: 30.h,
-            decoration: BoxDecoration(
-              color: accentColor,
-              borderRadius: BorderRadius.circular(10.r),
+    return widget.partnerCouponEntiti.videoCouponePartner == null
+        ? Scaffold(
+            backgroundColor: backgroundColor,
+            appBar: AppBar(
+              backgroundColor: backgroundColor,
+              elevation: 0,
+              foregroundColor: Colors.black,
+              centerTitle: true,
+              title: Container(
+                width: 100.w,
+                height: 30.h,
+                decoration: BoxDecoration(
+                  color: accentColor,
+                  borderRadius: BorderRadius.circular(10.r),
+                ),
+                alignment: Alignment.center,
+                child: CustomText(
+                  title: 'Купон',
+                  fontSize: 18.h,
+                  fontWeight: FontWeight.w700,
+                  color: ColorsStyles.whiteColor,
+                ),
+              ),
             ),
-            alignment: Alignment.center,
-            child: CustomText(
-              title: 'Купон',
-              fontSize: 18.h,
-              fontWeight: FontWeight.w700,
-              color: ColorsStyles.whiteColor,
-            ),
-          ),
-        ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                player,
-                SizedBox(height: 20.h),
-                Center(
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 24.w),
-                    alignment: Alignment.centerLeft,
-                    child: CustomText(
-                      title: widget.partnerCouponEntiti.description,
-                      fontSize: 22.h,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
+            body: SafeArea(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 24.w),
+                        alignment: Alignment.centerLeft,
+                        child: CustomText(
+                          title: 'У данного промо нет ролика',
+                          fontSize: 22.h,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                     ),
+                    SizedBox(height: 20.h),
+                    Center(
+                      child: Container(
+                        margin: EdgeInsets.symmetric(horizontal: 24.w),
+                        alignment: Alignment.centerLeft,
+                        child: CustomText(
+                          title: widget.partnerCouponEntiti.description,
+                          fontSize: 22.h,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    // SizedBox(height: 15.h),
+                    // Container(
+                    //   padding: EdgeInsets.symmetric(horizontal: 24.w),
+                    //   child: CustomText(
+                    //     title: widget.partnerCouponEntiti.videoCoupone,
+                    //     fontSize: 18.h,
+                    //     fontWeight: FontWeight.w700,
+                    //     color: ColorsStyles.textFiledHintColor.withOpacity(0.5),
+                    //   ),
+                    // ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        : YoutubePlayerBuilder(
+            player: YoutubePlayer(
+              controller: youtubePlayerController,
+              showVideoProgressIndicator: false,
+              progressIndicatorColor: Colors.red,
+              progressColors: const ProgressBarColors(
+                playedColor: Colors.red,
+              ),
+            ),
+            builder: (context, player) => Scaffold(
+              backgroundColor: backgroundColor,
+              appBar: AppBar(
+                backgroundColor: backgroundColor,
+                elevation: 0,
+                foregroundColor: Colors.black,
+                centerTitle: true,
+                title: Container(
+                  width: 100.w,
+                  height: 30.h,
+                  decoration: BoxDecoration(
+                    color: accentColor,
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
+                  alignment: Alignment.center,
+                  child: CustomText(
+                    title: 'Купон',
+                    fontSize: 18.h,
+                    fontWeight: FontWeight.w700,
+                    color: ColorsStyles.whiteColor,
                   ),
                 ),
-                // SizedBox(height: 15.h),
-                // Container(
-                //   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                //   child: CustomText(
-                //     title: widget.partnerCouponEntiti.videoCoupone,
-                //     fontSize: 18.h,
-                //     fontWeight: FontWeight.w700,
-                //     color: ColorsStyles.textFiledHintColor.withOpacity(0.5),
-                //   ),
-                // ),
-              ],
+              ),
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      player,
+                      SizedBox(height: 20.h),
+                      Center(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: 24.w),
+                          alignment: Alignment.centerLeft,
+                          child: CustomText(
+                            title: widget.partnerCouponEntiti.description,
+                            fontSize: 22.h,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      // SizedBox(height: 15.h),
+                      // Container(
+                      //   padding: EdgeInsets.symmetric(horizontal: 24.w),
+                      //   child: CustomText(
+                      //     title: widget.partnerCouponEntiti.videoCoupone,
+                      //     fontSize: 18.h,
+                      //     fontWeight: FontWeight.w700,
+                      //     color: ColorsStyles.textFiledHintColor.withOpacity(0.5),
+                      //   ),
+                      // ),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
-    );
+          );
   }
 }

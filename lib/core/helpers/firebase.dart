@@ -7,7 +7,7 @@ class FirebaseSevice {
         uriPrefix: 'https://neuroland.page.link',
         googleAnalyticsParameters: const GoogleAnalyticsParameters(),
         androidParameters:
-            const AndroidParameters(packageName: 'com.example.grow_food'));
+            const AndroidParameters(packageName: 'dev.broseph.neurodom'));
     final dynamicLink =
         await FirebaseDynamicLinks.instance.buildLink(parameters);
     String link = dynamicLink.toString();

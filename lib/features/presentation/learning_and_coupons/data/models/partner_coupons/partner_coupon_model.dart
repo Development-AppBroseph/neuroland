@@ -10,7 +10,7 @@ class PartnerCouponModel extends PartnerCouponEntiti {
     required final int quantity,
     required final bool canRedeem,
     required final dynamic videoCoupone,
-    required final VideoCouponPartnerModel videoCouponePartner,
+    required final VideoCouponPartnerModel? videoCouponePartner,
   }) : super(
             id: id,
             image: image,
@@ -29,7 +29,6 @@ class PartnerCouponModel extends PartnerCouponEntiti {
         quantity: json["quantity"] as int,
         canRedeem: json["can_redeem"] as bool,
         videoCoupone: json["video_coupone"] ?? null,
-        videoCouponePartner:
-            VideoCouponPartnerModel.fromJson(json["video_coupone_partner"]),
+        videoCouponePartner: json['video_coupone_partner'] == null ? null : VideoCouponPartnerModel.fromJson(json["video_coupone_partner"]),
       );
 }

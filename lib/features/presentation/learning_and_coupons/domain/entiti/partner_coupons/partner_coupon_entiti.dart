@@ -8,7 +8,7 @@ class PartnerCouponEntiti {
   final int quantity;
   final bool canRedeem;
   final dynamic videoCoupone;
-  final VideoCouponPartnerEntiti videoCouponePartner;
+  final VideoCouponPartnerEntiti? videoCouponePartner;
 
   PartnerCouponEntiti({
     required this.id,
