@@ -31,3 +31,4 @@ class PartnerCouposErrorState extends PartnerCouposState {
   @override
   List<Object?> get props => [error];
 }
+

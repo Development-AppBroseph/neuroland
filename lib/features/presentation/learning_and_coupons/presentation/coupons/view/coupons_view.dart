@@ -93,8 +93,8 @@ class _CouponsViewState extends State<CouponsView> {
               ),
             );
           } else if (state is PartnerCouposErrorState) {
-            return const Center(
-              child: Text('Error'),
+            return Center(
+              child: Text(state.error),
             );
           }
           return const Center(
