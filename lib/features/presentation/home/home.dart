@@ -8,8 +8,8 @@ import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/constants/svg_and_img.dart';
 import 'package:grow_food/features/presentation/chat/view/chat.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/coupons/view/coupons_view.dart';
-import 'package:grow_food/features/presentation/profile/presentation/view/profile.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/view/actual_courses_view.dart';
+import 'package:grow_food/features/presentation/profile/presentation/view/profile.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -27,7 +27,7 @@ class _HomeViewState extends State<HomeView> {
     const ProfileView(),
   ];
   @override
-  void initState() {  
+  void initState() {
     super.initState();
     if (Platform.isAndroid) {
       FirebaseDynamicLinks.instance.getInitialLink().then((value) {
