@@ -1,15 +1,12 @@
+import 'package:grow_food/features/presentation/profile/domain/entiti/coupon_entiti.dart';
+import 'package:grow_food/features/presentation/profile/domain/entiti/user_entiti.dart';
+
 class ProfileEntiti {
-  final int id;
-  final String name;
-  final String phone;
-  final String email;
-  final String? avatar;
+  final UserEntiti user;
+  final List<CouponEntiti> coupons;
 
   ProfileEntiti({
-    required this.id,
-    required this.name,
-    required this.phone,
-    required this.email,
-    required this.avatar,
+    required this.user,
+    required this.coupons,
   });
 }

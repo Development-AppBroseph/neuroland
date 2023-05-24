@@ -1,24 +1,12 @@
+import 'package:grow_food/features/presentation/profile/data/models/coupon_model.dart';
+import 'package:grow_food/features/presentation/profile/data/models/user_model.dart';
 import 'package:grow_food/features/presentation/profile/domain/entiti/profile_entiti.dart';
 
 class ProfileModel extends ProfileEntiti {
-  ProfileModel({
-    required final int id,
-    required final String name,
-    required final String phone,
-    required final String email,
-    required final String? avatar,
-  }) : super(
-          id: id,
-          name: name,
-          phone: phone,
-          email: email,
-          avatar: avatar,
-        );
+  ProfileModel({required super.user, required super.coupons});
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
-        id: json['id'] as int,
-        name: json['name'] as String,
-        phone: json['phone'] as String,
-        email: json['email'] as String,
-        avatar: json['avatar'] ?? null,
+        user: UserModel.fromJson(json["user"]),
+        coupons: List<CouponModel>.from(
+            json["coupons"].map((x) => CouponModel.fromJson(x))),
       );
 }

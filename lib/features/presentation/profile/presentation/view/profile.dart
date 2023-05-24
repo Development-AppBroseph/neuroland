@@ -14,8 +14,10 @@ import 'package:grow_food/core/helpers/firebase.dart';
 import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
+import 'package:grow_food/features/presentation/profile/domain/entiti/coupon_entiti.dart';
 import 'package:grow_food/features/presentation/profile/presentation/controller/profile_cubit.dart';
 import 'package:grow_food/features/presentation/profile/presentation/controller/profile_state.dart';
+import 'package:grow_food/features/presentation/profile/presentation/widgets/bought_coupons_page.dart';
 import 'package:grow_food/features/presentation/profile/presentation/widgets/profile_textfield.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -35,6 +37,7 @@ class _ProfileViewState extends State<ProfileView> {
   String phone = '';
   String email = '';
   File? _image;
+  List<CouponEntiti> coupons = [];
 
   Future pickImage(ImageSource imageSource) async {
     try {
@@ -76,10 +79,12 @@ class _ProfileViewState extends State<ProfileView> {
           context.read<ProfileCubit>().fetchProfile();
         }
         if (state is ProfileLoadedState) {
-          nameController.text = state.profile.name;
-          phoneController.text = state.profile.phone;
-          emailController.text = state.profile.email;
-          phoneController.text = maskFormatter.maskText(state.profile.phone);
+          nameController.text = state.profile.user.name;
+          phoneController.text = state.profile.user.phone;
+          emailController.text = state.profile.user.email;
+          phoneController.text =
+              maskFormatter.maskText(state.profile.user.phone);
+              coupons = state.profile.coupons;
         }
         return Scaffold(
           backgroundColor: ColorsStyles.backgroundColor,
@@ -106,7 +111,7 @@ class _ProfileViewState extends State<ProfileView> {
                             child: Row(
                               children: [
                                 CustomText(
-                                  title: 'Привет, ${state.profile.name}!',
+                                  title: 'Привет, ${state.profile.user.name}!',
                                   fontSize: 24,
                                   fontWeight: FontWeight.w800,
                                 ),
@@ -142,7 +147,7 @@ class _ProfileViewState extends State<ProfileView> {
                                 //   fit: BoxFit.cover,
                                 // ),
                               ),
-                              child: state.profile.avatar == null
+                              child: state.profile.user.avatar == null
                                   ? const Icon(
                                       Icons.camera_alt_rounded,
                                       color: Color(0xff969696),
@@ -163,7 +168,7 @@ class _ProfileViewState extends State<ProfileView> {
                                           borderRadius:
                                               BorderRadius.circular(40.r),
                                           child: Image.network(
-                                            state.profile.avatar!,
+                                            state.profile.user.avatar!,
                                             fit: BoxFit.cover,
                                             height: 150,
                                             width: 150,
@@ -367,6 +372,44 @@ class _ProfileViewState extends State<ProfileView> {
                         //   SvgImg.cupones,
                         //   color: ColorsStyles.buttonColor,
                         // ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 40.h,
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>  BoughtCouponsPage(coupons: coupons),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    height: 60.h,
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 24.w,
+                      vertical: 19.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: ColorsStyles.whiteColor,
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Row(
+                      children: [
+                        CustomText(
+                          title: 'Купленные купоны',
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        const Spacer(),
+                        const Icon(
+                          Icons.arrow_forward_ios_rounded,
+                        ),
                       ],
                     ),
                   ),

@@ -51,10 +51,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
         onChanged: widget.onChanged,
         controller: widget.controller,
         style: TextStyle(
-            fontSize: 20.sp,
-            color: ColorsStyles.blackColor,
-            fontWeight: FontWeight.w400,
-            fontFamily: 'Mons'),
+          fontSize: 20.sp,
+          color: ColorsStyles.blackColor,
+          fontWeight: FontWeight.w400,
+          fontFamily: 'Mons',
+        ),
         textAlignVertical: TextAlignVertical.center,
         cursorColor: ColorsStyles.blackColor,
         textCapitalization: widget.isText
