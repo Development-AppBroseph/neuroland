@@ -8,27 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		03EAB939266BEFADF833BA52 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AAC58CE6AC6DFCB0C9FB701 /* Pods_Runner.framework */; };
-		106F03202A03EA9D00D56176 /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 106F031F2A03EA9D00D56176 /* NotificationService.m */; };
-		106F03242A03EA9D00D56176 /* Noti.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 106F031C2A03EA9D00D56176 /* Noti.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		11D1D40529F91B18006F15AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11D1D40429F91B18006F15AA /* GoogleService-Info.plist */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
-		2328C827C7D516A267CBCCF2 /* Pods_Noti.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2553973AD08C16063D0E82A /* Pods_Noti.framework */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		106F03222A03EA9D00D56176 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 97C146E61CF9000F007C117D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 106F031B2A03EA9D00D56176;
-			remoteInfo = Noti;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		108918332A03CFDD00934092 /* Embed Foundation Extensions */ = {
@@ -37,7 +24,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				106F03242A03EA9D00D56176 /* Noti.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,12 +41,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		106F031C2A03EA9D00D56176 /* Noti.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Noti.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		106F031E2A03EA9D00D56176 /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
-		106F031F2A03EA9D00D56176 /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
-		106F03212A03EA9D00D56176 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1089182D2A03CFDD00934092 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		1089182F2A03CFDD00934092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11D1D40429F91B18006F15AA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		11D1D40629F92EA7006F15AA /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
@@ -87,14 +67,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		106F03192A03EA9D00D56176 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2328C827C7D516A267CBCCF2 /* Pods_Noti.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		97C146EB1CF9000F007C117D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -117,25 +89,6 @@
 				FCF32346B105AD951FB9D54A /* Pods-Noti.profile.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		106F031D2A03EA9D00D56176 /* Noti */ = {
-			isa = PBXGroup;
-			children = (
-				106F031E2A03EA9D00D56176 /* NotificationService.h */,
-				106F031F2A03EA9D00D56176 /* NotificationService.m */,
-				106F03212A03EA9D00D56176 /* Info.plist */,
-			);
-			path = Noti;
-			sourceTree = "<group>";
-		};
-		1089182C2A03CFDD00934092 /* neuroland */ = {
-			isa = PBXGroup;
-			children = (
-				1089182D2A03CFDD00934092 /* NotificationService.swift */,
-				1089182F2A03CFDD00934092 /* Info.plist */,
-			);
-			path = neuroland;
 			sourceTree = "<group>";
 		};
 		31848E8C257770FB87175F01 /* Frameworks */ = {
@@ -163,8 +116,6 @@
 			children = (
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
-				1089182C2A03CFDD00934092 /* neuroland */,
-				106F031D2A03EA9D00D56176 /* Noti */,
 				97C146EF1CF9000F007C117D /* Products */,
 				0A8CF3AE834D11A00569F908 /* Pods */,
 				31848E8C257770FB87175F01 /* Frameworks */,
@@ -175,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				97C146EE1CF9000F007C117D /* Runner.app */,
-				106F031C2A03EA9D00D56176 /* Noti.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,24 +150,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		106F031B2A03EA9D00D56176 /* Noti */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 106F03282A03EA9D00D56176 /* Build configuration list for PBXNativeTarget "Noti" */;
-			buildPhases = (
-				5C4A89577766FA4B90D58031 /* [CP] Check Pods Manifest.lock */,
-				106F03182A03EA9D00D56176 /* Sources */,
-				106F03192A03EA9D00D56176 /* Frameworks */,
-				106F031A2A03EA9D00D56176 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Noti;
-			productName = Noti;
-			productReference = 106F031C2A03EA9D00D56176 /* Noti.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		97C146ED1CF9000F007C117D /* Runner */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */;
@@ -235,7 +167,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				106F03232A03EA9D00D56176 /* PBXTargetDependency */,
 			);
 			name = Runner;
 			productName = Runner;
@@ -253,9 +184,6 @@
 				LastUpgradeCheck = 1300;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
-					106F031B2A03EA9D00D56176 = {
-						CreatedOnToolsVersion = 14.3;
-					};
 					97C146ED1CF9000F007C117D = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 1100;
@@ -276,19 +204,11 @@
 			projectRoot = "";
 			targets = (
 				97C146ED1CF9000F007C117D /* Runner */,
-				106F031B2A03EA9D00D56176 /* Noti */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		106F031A2A03EA9D00D56176 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		97C146EC1CF9000F007C117D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -318,28 +238,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed_and_thin";
-		};
-		5C4A89577766FA4B90D58031 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Noti-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 		76F835075BFF4FDDD51048F5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -398,14 +296,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		106F03182A03EA9D00D56176 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				106F03202A03EA9D00D56176 /* NotificationService.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		97C146EA1CF9000F007C117D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -416,14 +306,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		106F03232A03EA9D00D56176 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 106F031B2A03EA9D00D56176 /* Noti */;
-			targetProxy = 106F03222A03EA9D00D56176 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		97C146FA1CF9000F007C117D /* Main.storyboard */ = {
@@ -811,16 +693,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		106F03282A03EA9D00D56176 /* Build configuration list for PBXNativeTarget "Noti" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				106F03252A03EA9D00D56176 /* Debug */,
-				106F03262A03EA9D00D56176 /* Release */,
-				106F03272A03EA9D00D56176 /* Profile */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		97C146E91CF9000F007C117D /* Build configuration list for PBXProject "Runner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
