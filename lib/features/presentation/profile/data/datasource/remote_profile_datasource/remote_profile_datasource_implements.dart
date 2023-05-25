@@ -82,7 +82,6 @@ class RemoteProfileDatasourceImpl implements RemoteProfileDatasource {
     }
   }
 
-
   @override
   Future<ProfileModel> editAvatar({required String avatar}) async {
     final userData = jsonEncode({

@@ -52,7 +52,6 @@ class _StudiesViewState extends State<StudiesView> {
                       (BuildContext context, bool innerBoxIsScrolled) {
                     return [
                       SliverAppBar(
-                        // expandedHeight: 140,
                         toolbarHeight: 90.h,
                         backgroundColor: ColorsStyles.backgroundColor,
                         elevation: 0,
