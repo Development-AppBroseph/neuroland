@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,6 +16,7 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:path_provider/path_provider.dart';
+// import 'package:google_api_availability/google_api_availability.dart';
 import 'injection.container.dart' as di;
 import 'injection.container.dart';
 
@@ -23,6 +27,28 @@ Future<void> main() async {
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
+
+  // GooglePlayServicesAvailability availability = await GoogleApiAvailability
+  //     .instance
+  //     .checkGooglePlayServicesAvailability();
+
+  // if (availability.value == 0 || Platform.isIOS) {
+  await Firebase.initializeApp();
+  await FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    announcement: true,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+  print('TOKEN IS: ${await FirebaseMessaging.instance.getToken()}');
+
+  // FirebaseMessaging.onBackgroundMessage((message) async {
+  //   print('messageIs: ' + message.data.toString());
+  // });
+  // }
 
   runApp(
     const MyApp(),
