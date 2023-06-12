@@ -72,4 +72,14 @@ class ProfileRepositoryImpl implements ProfileRepository {
       return Left(ServerFailure(error: e.toString()));
     }
   }
+  
+  @override
+  Future<Either<Failure, void>> deleteAccount() async {
+    try {
+      final data = await remoteProfileDatasource.deleteAccount();
+      return Right(data);
+    } catch (e) {
+      return Left(ServerFailure(error: e.toString()));
+    }
+  }
 }

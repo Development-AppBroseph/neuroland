@@ -30,6 +30,11 @@ class ProfileLoadingState extends ProfileState {
   List<Object?> get props => [];
 }
 
+class ProfileDeletedState extends ProfileState {
+  @override
+  List<Object?> get props => [];
+}
+
 class ProfileErrorState extends ProfileState {
   final String errorMessage;
 

@@ -8,4 +8,5 @@ abstract class RemoteProfileDatasource {
   Future<ProfileModel> editName({required String name});
   Future<ProfileModel> editNumber({required String number});
   Future<ProfileModel> editEmail({required String email});
+  Future<void>deleteAccount();
 }

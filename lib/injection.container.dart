@@ -12,14 +12,21 @@ import 'package:grow_food/features/presentation/auth/domain/usecases/sign_in_use
 import 'package:grow_food/features/presentation/auth/domain/usecases/sign_up_user.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_up/controller/sign_up_cubit.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/data/datasource/courses_video_datasource.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/data/datasource/courses_video_datasource_impl.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/data/repository/courses_video_repository_impl.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/domain/repository/courses_video_repository.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/add_points.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/get_courses_video.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/get_partners_coupons.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/use_coupon.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/coupons/controller/partner_coupons_cubit.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/controller/actual_courses_cubit.dart';
 import 'package:grow_food/features/presentation/profile/data/datasource/remote_profile_datasource/remote_profile_datasource.dart';
 import 'package:grow_food/features/presentation/profile/data/datasource/remote_profile_datasource/remote_profile_datasource_implements.dart';
 import 'package:grow_food/features/presentation/profile/data/repository/profile_repository_impl.dart';
 import 'package:grow_food/features/presentation/profile/domain/repository/profile_repository.dart';
+import 'package:grow_food/features/presentation/profile/domain/usecase/delete_account.dart';
 import 'package:grow_food/features/presentation/profile/domain/usecase/edit_avatar.dart';
 import 'package:grow_food/features/presentation/profile/domain/usecase/edit_email.dart';
 import 'package:grow_food/features/presentation/profile/domain/usecase/edit_name.dart';
@@ -27,12 +34,6 @@ import 'package:grow_food/features/presentation/profile/domain/usecase/edit_numb
 import 'package:grow_food/features/presentation/profile/domain/usecase/get_profile.dart';
 import 'package:grow_food/features/presentation/profile/domain/usecase/get_ref.dart';
 import 'package:grow_food/features/presentation/profile/presentation/controller/profile_cubit.dart';
-import 'package:grow_food/features/presentation/learning_and_coupons/data/datasource/courses_video_datasource.dart';
-import 'package:grow_food/features/presentation/learning_and_coupons/data/datasource/courses_video_datasource_impl.dart';
-import 'package:grow_food/features/presentation/learning_and_coupons/data/repository/courses_video_repository_impl.dart';
-import 'package:grow_food/features/presentation/learning_and_coupons/domain/repository/courses_video_repository.dart';
-import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/get_courses_video.dart';
-import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/controller/actual_courses_cubit.dart';
 import 'package:grow_food/features/presentation/root_screen/data/local_datasource/local_datasource.dart';
 import 'package:grow_food/features/presentation/root_screen/data/local_datasource/local_datasource_impl.dart';
 import 'package:grow_food/features/presentation/root_screen/data/repository/root_screen_repository_impl.dart';
@@ -85,6 +86,7 @@ Future<void> init() async {
       editAvatar: sl(),
       editName: sl(),
       editEmail: sl(),
+      deleteUserAccount: sl()
     ),
   );
 
@@ -105,6 +107,7 @@ Future<void> init() async {
   sl.registerLazySingleton(
     () => RefreshToken(authRepository: sl()),
   );
+  sl.registerLazySingleton(() => DeleteUserAccount(profileRepository: sl()));
 
   //Courses
   sl.registerLazySingleton(

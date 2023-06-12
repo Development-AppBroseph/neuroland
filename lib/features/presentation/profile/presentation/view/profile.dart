@@ -73,7 +73,16 @@ class _ProfileViewState extends State<ProfileView> {
   bool toggle = false;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileCubit, ProfileState>(
+    return BlocConsumer<ProfileCubit, ProfileState>(
+      listener: (context, state) {
+        if (state is ProfileDeletedState) {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            '/SignIn',
+            (route) => false,
+          );
+        }
+      },
       builder: (context, state) {
         if (state is ProfileInitialState) {
           context.read<ProfileCubit>().fetchProfile();
@@ -84,7 +93,7 @@ class _ProfileViewState extends State<ProfileView> {
           emailController.text = state.profile.user.email;
           phoneController.text =
               maskFormatter.maskText(state.profile.user.phone);
-              coupons = state.profile.coupons;
+          coupons = state.profile.coupons;
         }
         return Scaffold(
           backgroundColor: ColorsStyles.backgroundColor,
@@ -341,7 +350,7 @@ class _ProfileViewState extends State<ProfileView> {
                   onTap: () async {
                     if (!await launchUrl(
                       Uri.parse(
-                          'http://158.160.44.207:9001/project_info/03_Положение_по_защите_и_обработке_персональных_данных_2.pdf'),
+                          'https://doc-hosting.flycricket.io/neirodom-privacy-policy/f2fb4fe4-446b-45bb-98fd-ff395147c176/privacy'),
                       mode: Platform.isAndroid
                           ? LaunchMode.externalNonBrowserApplication
                           : LaunchMode.inAppWebView,
@@ -384,7 +393,8 @@ class _ProfileViewState extends State<ProfileView> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>  BoughtCouponsPage(coupons: coupons),
+                        builder: (context) =>
+                            BoughtCouponsPage(coupons: coupons),
                       ),
                     );
                   },
@@ -452,6 +462,40 @@ class _ProfileViewState extends State<ProfileView> {
                         const Spacer(),
                         SvgPicture.asset(
                           SvgImg.exit,
+                          color: ColorsStyles.exitColor,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                GestureDetector(
+                  onTap: () => context.read<ProfileCubit>().deleteAccount(),
+                  child: Container(
+                    height: 60.h,
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 24.w,
+                      vertical: 19.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: ColorsStyles.whiteColor,
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Row(
+                      children: [
+                        CustomText(
+                          title: 'Удалить аккаунт',
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w600,
+                          color: ColorsStyles.exitColor,
+                        ),
+                        const Spacer(),
+                        const Icon(
+                          Icons.delete_outline_rounded,
+                          size: 30,
                           color: ColorsStyles.exitColor,
                         ),
                       ],

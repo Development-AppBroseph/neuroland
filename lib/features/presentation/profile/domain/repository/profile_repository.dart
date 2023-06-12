@@ -10,5 +10,6 @@ abstract class ProfileRepository {
   Future<Either<Failure, ProfileEntiti>> editNumber({required String number});
   Future<Either<Failure, ProfileEntiti>> editEmail({required String email});
   Future<Either<Failure, ProfileEntiti>> editAvatar({required String avatar});
+  Future<Either<Failure, void>> deleteAccount();
   
 }

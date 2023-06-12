@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/features/presentation/profile/domain/entiti/invite_link_entiti.dart';
 import 'package:grow_food/features/presentation/profile/domain/entiti/profile_entiti.dart';
+import 'package:grow_food/features/presentation/profile/domain/usecase/delete_account.dart';
 import 'package:grow_food/features/presentation/profile/domain/usecase/edit_avatar.dart';
 import 'package:grow_food/features/presentation/profile/domain/usecase/edit_email.dart';
 import 'package:grow_food/features/presentation/profile/domain/usecase/edit_name.dart';
@@ -17,6 +18,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   final EditAvatar editAvatar;
   final EditName editName;
   final EditEmail editEmail;
+  final DeleteUserAccount deleteUserAccount;
   ProfileCubit({
     required this.getProfile,
     required this.getLink,
@@ -24,6 +26,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     required this.editAvatar,
     required this.editName,
     required this.editEmail,
+    required this.deleteUserAccount,
   }) : super(ProfileInitialState());
 
   Future<void> fetchProfile() async {
@@ -92,6 +95,16 @@ class ProfileCubit extends Cubit<ProfileState> {
         (error) => SmartDialogFunctions.showErrorDilog(title: error.error),
         (data) => emit(ProfileInitialState()),
       );
+    } catch (e) {
+      emit(ProfileErrorState(errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    try {
+      final data = await deleteUserAccount.call(DeleteUserAccountParams());
+      data.fold((l) => emit(ProfileErrorState(errorMessage: l.error)),
+          (r) => emit(ProfileDeletedState()));
     } catch (e) {
       emit(ProfileErrorState(errorMessage: e.toString()));
     }
