@@ -48,8 +48,7 @@ class _StudiesViewState extends State<StudiesView> {
                 backgroundColor: backgroundColor,
                 body: NestedScrollView(
                   physics: const BouncingScrollPhysics(),
-                  headerSliverBuilder:
-                      (BuildContext context, bool innerBoxIsScrolled) {
+                  headerSliverBuilder: (context, innerBoxIsScrolled) {
                     return [
                       SliverAppBar(
                         toolbarHeight: 90.h,

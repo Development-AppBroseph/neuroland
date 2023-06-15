@@ -71,7 +71,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       }
     } on DioError catch (e) {
       if (e.response!.statusCode == 400) {
-        throw 'Вы ввели данные не правильно';
+        throw e.response?.data['error'];
       } else if (e.response!.statusCode! >= 500) {
         throw 'Ошибка сервера';
       } else {

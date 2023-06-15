@@ -84,7 +84,6 @@ class _SignUpState extends State<SignUp> with WidgetsBindingObserver {
     if (name.isEmpty ||
         number.isEmpty ||
         email.isEmpty ||
-        snapshot.data == null ||
         password.isEmpty) {
       SmartDialogFunctions.showErrorDilog(title: 'Есть не заполненные поля');
     } else if (!controllerEmail.text.contains('@')) {
