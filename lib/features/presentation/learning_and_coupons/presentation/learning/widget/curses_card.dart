@@ -136,7 +136,7 @@ class _CoursesCardState extends State<CoursesCard> {
                   ),
                 ),
                 Positioned(
-                  right: 39,
+                  right: 30,
                   bottom: 31,
                   child: Container(
                     padding:
