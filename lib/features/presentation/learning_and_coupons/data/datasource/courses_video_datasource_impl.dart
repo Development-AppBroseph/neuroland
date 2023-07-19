@@ -1,3 +1,5 @@
+
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:grow_food/core/constants/constants.dart';
@@ -89,15 +91,17 @@ class CoursesVideoDatasourceImpl implements CoursesVideoDatasource {
         Endpoints.useCoupon.endpoint.replaceRange(13, 14, '$couponId/'),
         options: Options(headers: headers),
       );
+    
       if (response.statusCode == 200) {
         return;
       } else {
         throw "Вы уже приобрели купон";
       }
     } on DioError catch (error) {
+   
       if (error.response!.statusCode == 400 ||
           error.response!.statusCode == 403) {
-        throw 'Вы уже приобрели купон';
+        throw 'У Вас недостаточно поитнов, чтобы приобрести купон';
       } else if (error.response!.statusCode! >= 500) {
         throw 'Ошибка сервера';
       } else {

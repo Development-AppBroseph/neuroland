@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -46,6 +47,8 @@ class RemoteProfileDatasourceImpl implements RemoteProfileDatasource {
   Future<ProfileModel> getProfile() async {
     try {
       final Response response = await _dio.get(Endpoints.profile.endpoint);
+
+      log(response.data.toString());
       if (response.statusCode! >= 200 && response.statusCode! < 400) {
         return ProfileModel.fromJson(response.data);
       } else {
