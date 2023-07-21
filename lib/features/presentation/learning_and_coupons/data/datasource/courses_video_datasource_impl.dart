@@ -98,9 +98,12 @@ class CoursesVideoDatasourceImpl implements CoursesVideoDatasource {
         throw "Вы уже приобрели купон";
       }
     } on DioError catch (error) {
-      log(error.response!.statusCode.toString());
+      log(error.response!.data.toString());
       if (error.response!.statusCode == 400) {
         throw 'Вы уже приобрели купон';
+      }
+       if (error.response!.statusCode == 404) {
+        throw 'Больше нет доступных купонов';
       }
       if (error.response!.statusCode == 403) {
         throw 'У Вас недостаточно поитнов, чтобы приобрести купон';
