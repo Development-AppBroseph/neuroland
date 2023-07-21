@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
+import 'package:grow_food/core/constants/constants.dart';
 import 'package:scale_button/scale_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OrdersView extends StatelessWidget {
   // final Function() onTap;
-  const OrdersView({super.key,});
+  const OrdersView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +53,15 @@ class OrdersView extends StatelessWidget {
           Expanded(child: Container()),
           // AccentButton(onTap: onTap, title: 'Записаться на занятие'),
           ScaleButton(
+            onTap: () async => {
+              if (!await launchUrl(
+                Uri.parse(telegramBot),
+                mode: LaunchMode.externalApplication,
+              ))
+                {
+                  throw 'Could not launch $telegramBot',
+                }
+            },
             bound: 0.02,
             duration: const Duration(milliseconds: 100),
             child: Container(

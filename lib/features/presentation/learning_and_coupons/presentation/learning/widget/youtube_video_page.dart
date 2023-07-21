@@ -2,22 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grow_food/core/constants/colors.dart';
+import 'package:grow_food/core/constants/constants.dart';
 import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/core/helpers/widgets/custom_button.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/video_curses/direction_entiti.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/entiti/video_curses/video_entiti.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPage extends StatefulWidget {
   final VideoEntiti videoEntiti;
   final DirectionEntiti directionEntiti;
   final Function() onWatched;
-  const VideoPage(
-      {super.key,
-      required this.videoEntiti,
-      required this.directionEntiti,
-      required this.onWatched});
+  const VideoPage({super.key, required this.videoEntiti, required this.directionEntiti, required this.onWatched});
 
   @override
   State<VideoPage> createState() => _VideoPageState();
@@ -42,8 +41,7 @@ class _VideoPageState extends State<VideoPage> {
   void initState() {
     super.initState();
     youtubePlayerController = YoutubePlayerController(
-      initialVideoId:
-          YoutubePlayer.convertUrlToId(widget.videoEntiti.videoUrl) ?? '',
+      initialVideoId: YoutubePlayer.convertUrlToId(widget.videoEntiti.videoUrl) ?? '',
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
@@ -58,8 +56,7 @@ class _VideoPageState extends State<VideoPage> {
             ],
           );
         }
-        final dur =
-            formatTime(youtubePlayerController.value.position.inSeconds);
+        final dur = formatTime(youtubePlayerController.value.position.inSeconds);
         if (!widget.videoEntiti.viewed) {
           if (widget.videoEntiti.duration == dur) {
             widget.onWatched();
@@ -196,7 +193,16 @@ class _VideoPageState extends State<VideoPage> {
                 SizedBox(height: 25.h),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  child: const CustomButton(
+                  child: CustomButton(
+                    onTap: () async => {
+                      if (!await launchUrl(
+                        Uri.parse(telegramBot),
+                        mode: LaunchMode.externalApplication,
+                      ))
+                        {
+                          throw 'Could not launch $telegramBot',
+                        }
+                    },
                     title: 'Записаться на пробное занятие',
                     accentText: true,
                     withPadding: false,

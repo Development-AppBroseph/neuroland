@@ -1,4 +1,4 @@
-
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -91,16 +91,18 @@ class CoursesVideoDatasourceImpl implements CoursesVideoDatasource {
         Endpoints.useCoupon.endpoint.replaceRange(13, 14, '$couponId/'),
         options: Options(headers: headers),
       );
-    
+      log(response.statusMessage.toString());
       if (response.statusCode == 200) {
         return;
       } else {
         throw "Вы уже приобрели купон";
       }
     } on DioError catch (error) {
-   
-      if (error.response!.statusCode == 400 ||
-          error.response!.statusCode == 403) {
+      log(error.response!.statusCode.toString());
+      if (error.response!.statusCode == 400) {
+        throw 'Вы уже приобрели купон';
+      }
+      if (error.response!.statusCode == 403) {
         throw 'У Вас недостаточно поитнов, чтобы приобрести купон';
       } else if (error.response!.statusCode! >= 500) {
         throw 'Ошибка сервера';
