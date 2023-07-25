@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/domain/usecase/get_partners_coupons.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/coupons/controller/partner_coupons_state.dart';
@@ -12,6 +14,7 @@ class PartnerCouponsCubit extends Cubit<PartnerCouposState> {
     try {
       emit(PartnerCouposLoadigState());
       final data = await getPartnersCoupons.call(GetPartnersCouponsParams());
+      log(data.toString());
       data.fold(
         (error) => emit(PartnerCouposErrorState(error: error.toString())),
         (result) => emit(

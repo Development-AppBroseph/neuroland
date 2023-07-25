@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:card_loading/card_loading.dart';
@@ -14,6 +15,7 @@ import 'package:grow_food/core/helpers/firebase.dart';
 import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/features/presentation/auth/presentation/sign_in/controller/sign_in_cubit.dart';
+import 'package:grow_food/features/presentation/learning_and_coupons/presentation/coupons/controller/partner_coupons_cubit.dart';
 import 'package:grow_food/features/presentation/profile/domain/entiti/coupon_entiti.dart';
 import 'package:grow_food/features/presentation/profile/presentation/controller/profile_cubit.dart';
 import 'package:grow_food/features/presentation/profile/presentation/controller/profile_state.dart';
@@ -62,6 +64,7 @@ class _ProfileViewState extends State<ProfileView> {
     nameController.addListener(() {});
     phoneController.addListener(() {});
     emailController.addListener(() {});
+       context.read<ProfileCubit>().fetchProfile();
     super.initState();
   }
 
@@ -74,11 +77,17 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileCubit, ProfileState>(
+      buildWhen: (previous, current) {
+        return true;
+      },
       builder: (context, state) {
+         log('${state}');
         if (state is ProfileInitialState) {
           context.read<ProfileCubit>().fetchProfile();
         }
         if (state is ProfileLoadedState) {
+          
+          log('${state.profile.coupons}');
           nameController.text = state.profile.user.name;
           phoneController.text = state.profile.user.phone;
           emailController.text = state.profile.user.email;
@@ -389,7 +398,7 @@ class _ProfileViewState extends State<ProfileView> {
                     );
                   },
                   child: Container(
-                    height: 60.h,
+                    height: 65.h,
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(
                       horizontal: 24.w,
@@ -431,7 +440,7 @@ class _ProfileViewState extends State<ProfileView> {
                         },
                       ),
                   child: Container(
-                    height: 60.h,
+                    height: 65.h,
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(
                       horizontal: 24.w,
