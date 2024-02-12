@@ -57,7 +57,7 @@ class _HomeViewState extends State<HomeView> {
         },
         backgroundColor: Colors.white,
         unselectedItemColor: Colors.grey,
-        // selectedItemColor: accentColor,
+        selectedItemColor: ColorsStyles.exitColor,
         currentIndex: _selectedIndex,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
@@ -65,7 +65,7 @@ class _HomeViewState extends State<HomeView> {
           fontSize: 15.sp,
           fontWeight: FontWeight.w700,
           fontFamily: 'Mons',
-          foreground: Paint()..shader = linearGradient,
+          // foreground: Paint()..shader = linearGradient,
         ),
         unselectedLabelStyle: TextStyle(
           color: Colors.grey,

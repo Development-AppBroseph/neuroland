@@ -31,18 +31,18 @@ class ProfileCubit extends Cubit<ProfileState> {
       ProfileEntiti? profileEntiti;
       InviteLinkEntiti? inviteLinkEntiti;
       final getedProfile = await getProfile.call(GetProfileParams());
-      final getedLink = await getLink.call(GetRefParams());
+      // final getedLink = await getLink.call(GetRefParams());
       emit(ProfileLoadingState());
       getedProfile.fold(
         (error) => emit(ProfileErrorState(errorMessage: error.toString())),
         (data) => profileEntiti = data,
       );
-      getedLink.fold(
-        (error) => emit(ProfileErrorState(errorMessage: error.toString())),
-        (data) => inviteLinkEntiti = data,
-      );
-      emit(
-          ProfileLoadedState(profile: profileEntiti!, link: inviteLinkEntiti!));
+      // getedLink.fold(
+      //   (error) => emit(ProfileErrorState(errorMessage: error.toString())),
+      //   (data) => inviteLinkEntiti = data,
+      // );
+      emit(ProfileLoadedState(
+          profile: profileEntiti!, link: InviteLinkEntiti(inviteLink: '')));
     } catch (e) {
       emit(ProfileErrorState(errorMessage: e.toString()));
     }

@@ -463,7 +463,8 @@ class _SignUpState extends State<SignUp> with WidgetsBindingObserver {
                           fontSize: 15.sp,
                           centerTitle: true,
                         ),
-                      )
+                      ),
+                      SizedBox(height: 40.h)
                     ],
                   ),
                 ),

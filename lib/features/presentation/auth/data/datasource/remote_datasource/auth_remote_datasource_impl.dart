@@ -53,6 +53,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       "email": email,
       "phone": phoneNumber,
       "password": password,
+      "city_id": id,
     });
 
     try {
@@ -85,7 +86,7 @@ class AuthRemoteDatasourceImpl implements AuthRemoteDatasource {
       {required String emailOrPhoneNumber, required String password}) async {
     final userData = jsonEncode({
       "password": password,
-      "email": emailOrPhoneNumber,
+      "username": emailOrPhoneNumber,
     });
     try {
       final Response response = await _dio.post(
