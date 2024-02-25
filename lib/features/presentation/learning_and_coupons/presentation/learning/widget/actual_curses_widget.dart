@@ -36,7 +36,7 @@ class _ActualCursesCardState extends State<ActualCursesCard> {
       child: CustomText(
         title: widget.title,
         fontSize: 15.sp,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w900,
         color: widget.isSelected
             ? ColorsStyles.whiteColor
             : ColorsStyles.textFiledHintColor,

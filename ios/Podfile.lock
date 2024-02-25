@@ -1,64 +1,64 @@
 PODS:
-  - Firebase/Analytics (10.17.0):
+  - Firebase/Analytics (10.7.0):
     - Firebase/Core
-  - Firebase/Core (10.17.0):
+  - Firebase/Core (10.7.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (~> 10.17.0)
-  - Firebase/CoreOnly (10.17.0):
-    - FirebaseCore (= 10.17.0)
-  - Firebase/DynamicLinks (10.17.0):
+    - FirebaseAnalytics (~> 10.7.0)
+  - Firebase/CoreOnly (10.7.0):
+    - FirebaseCore (= 10.7.0)
+  - Firebase/DynamicLinks (10.7.0):
     - Firebase/CoreOnly
-    - FirebaseDynamicLinks (~> 10.17.0)
-  - Firebase/Messaging (10.17.0):
+    - FirebaseDynamicLinks (~> 10.7.0)
+  - Firebase/Messaging (10.7.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (~> 10.17.0)
-  - firebase_analytics (10.6.4):
-    - Firebase/Analytics (= 10.17.0)
+    - FirebaseMessaging (~> 10.7.0)
+  - firebase_analytics (10.2.1):
+    - Firebase/Analytics (= 10.7.0)
     - firebase_core
     - Flutter
-  - firebase_core (2.22.0):
-    - Firebase/CoreOnly (= 10.17.0)
+  - firebase_core (2.10.0):
+    - Firebase/CoreOnly (= 10.7.0)
     - Flutter
-  - firebase_dynamic_links (5.4.4):
-    - Firebase/DynamicLinks (= 10.17.0)
+  - firebase_dynamic_links (5.1.1):
+    - Firebase/DynamicLinks (= 10.7.0)
     - firebase_core
     - Flutter
-  - firebase_messaging (14.7.4):
-    - Firebase/Messaging (= 10.17.0)
+  - firebase_messaging (14.4.1):
+    - Firebase/Messaging (= 10.7.0)
     - firebase_core
     - Flutter
-  - FirebaseAnalytics (10.17.0):
-    - FirebaseAnalytics/AdIdSupport (= 10.17.0)
+  - FirebaseAnalytics (10.7.0):
+    - FirebaseAnalytics/AdIdSupport (= 10.7.0)
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseAnalytics/AdIdSupport (10.17.0):
+  - FirebaseAnalytics/AdIdSupport (10.7.0):
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
-    - GoogleAppMeasurement (= 10.17.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - GoogleAppMeasurement (= 10.7.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - FirebaseCore (10.17.0):
+  - FirebaseCore (10.7.0):
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/Logger (~> 7.8)
-  - FirebaseCoreInternal (10.20.0):
+  - FirebaseCoreInternal (10.21.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
-  - FirebaseDynamicLinks (10.17.0):
+  - FirebaseDynamicLinks (10.7.0):
     - FirebaseCore (~> 10.0)
-  - FirebaseInstallations (10.20.0):
+  - FirebaseInstallations (10.21.0):
     - FirebaseCore (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - PromisesObjC (~> 2.1)
-  - FirebaseMessaging (10.17.0):
+  - FirebaseMessaging (10.7.0):
     - FirebaseCore (~> 10.0)
     - FirebaseInstallations (~> 10.0)
     - GoogleDataTransport (~> 9.2)
@@ -82,25 +82,25 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
-  - GoogleAppMeasurement (10.17.0):
-    - GoogleAppMeasurement/AdIdSupport (= 10.17.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+  - GoogleAppMeasurement (10.7.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.7.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/AdIdSupport (10.17.0):
-    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.17.0)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+  - GoogleAppMeasurement/AdIdSupport (10.7.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.7.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
-  - GoogleAppMeasurement/WithoutAdIdSupport (10.17.0):
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
-    - GoogleUtilities/MethodSwizzler (~> 7.11)
-    - GoogleUtilities/Network (~> 7.11)
-    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.7.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/MethodSwizzler (~> 7.8)
+    - GoogleUtilities/Network (~> 7.8)
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
   - GoogleDataTransport (9.3.0):
     - GoogleUtilities/Environment (~> 7.7)
@@ -150,7 +150,7 @@ PODS:
     - Flutter
     - FlutterMacOS
   - PromisesObjC (2.3.1)
-  - sqflite (0.0.3):
+  - sqflite (0.0.2):
     - Flutter
     - FMDB (>= 2.7.5)
   - url_launcher_ios (0.0.1):
@@ -167,7 +167,7 @@ DEPENDENCIES:
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - onesignal_flutter (from `.symlinks/plugins/onesignal_flutter/ios`)
-  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
@@ -211,30 +211,30 @@ EXTERNAL SOURCES:
   onesignal_flutter:
     :path: ".symlinks/plugins/onesignal_flutter/ios"
   path_provider_foundation:
-    :path: ".symlinks/plugins/path_provider_foundation/darwin"
+    :path: ".symlinks/plugins/path_provider_foundation/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
-  Firebase: f4ac0b02927af9253ae094d23deecf0890da7374
-  firebase_analytics: 9d609f3c43a71319c9112bb01044729305192417
-  firebase_core: efc9455611b8769fa90fbdae5da182600bd6901c
-  firebase_dynamic_links: 9b884c33258a6a93182b84804dcfe8a20803a328
-  firebase_messaging: 9c697d1ecfe77edf15d995b5048906ffc994c96c
-  FirebaseAnalytics: b9284f9fff10157a843e0422e908711f7bf3b9f2
-  FirebaseCore: 534544dd98cabcf4bf8598d88ec683b02319a528
-  FirebaseCoreInternal: efeeb171ac02d623bdaefe121539939821e10811
-  FirebaseDynamicLinks: 66878206d55d4aba6e63744f57151a80d76e472e
-  FirebaseInstallations: 558b1da7d65afeb996fd5c814332f013234ece4e
-  FirebaseMessaging: 1367b28c0c83a63072af4a711328fcc2e6899902
+  Firebase: 0219acf760880eeec8ce479895bd7767466d9f81
+  firebase_analytics: e8e294333de66e5429d4aac365966281b4dbfb7d
+  firebase_core: 18d44f087248303a4a8f05d0099a000c46e3c77a
+  firebase_dynamic_links: 464b974eeb7a5b4b7c970062c49a3e39ff924f47
+  firebase_messaging: 90b11d16c537444a39e50b818ebe1a51ec0e38c2
+  FirebaseAnalytics: f8133442ee6f8512e28ff19e62ce15398bfaeace
+  FirebaseCore: e317665b9d744727a97e623edbbed009320afdd7
+  FirebaseCoreInternal: 43c1788eaeee9d1b97caaa751af567ce11010d00
+  FirebaseDynamicLinks: 16a8fae3697fba66fed7a1d646fe59f30d42aa31
+  FirebaseInstallations: 390ea1d10a4d02b20c965cbfd527ee9b3b412acb
+  FirebaseMessaging: ac9062bcc35ed56e15a0241d8fd317022499baf8
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  flutter_inappwebview: 3d32228f1304635e7c028b0d4252937730bbc6cf
+  flutter_inappwebview: acd4fc0f012cefd09015000c241137d82f01ba62
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  GoogleAppMeasurement: 4dcddfc7f102825c1c4e6422cb35567b101881a7
+  GoogleAppMeasurement: fe17c92a32207dd5cdd4e8d742767f2da74857f6
   GoogleDataTransport: 57c22343ab29bc686febbf7cbb13bad167c2d8fe
   GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
   image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
@@ -242,11 +242,11 @@ SPEC CHECKSUMS:
   onesignal_flutter: b8ac01bc3ebe47e798d7d775455c3a9b5b84f1c5
   OneSignalXCFramework: 087934ab0d4d7445fcf1c015c7c782359e26c020
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
-  path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
+  path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
-  sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
-  url_launcher_ios: 68d46cc9766d0c41dbdc884310529557e3cd7a86
+  sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
+  url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
 
 PODFILE CHECKSUM: ce13d36744da294d67f8e460dbb7aed7c09bd7f4
 
-COCOAPODS: 1.14.2
+COCOAPODS: 1.15.0

@@ -1,6 +1,6 @@
 abstract class Img {
   static const String logo = 'assets/images/logo.png';
-  static const String neurodom = 'assets/images/neurodom.jpg';
+  // static const String neurodom = 'assets/images/neurodom.jpg';
   static const String bottomImage = 'assets/images/bottomImage.png';
   static const String signInBackground = 'assets/images/sign_in_background.png';
   static const String cursesImg = 'assets/images/curses.png';
@@ -19,4 +19,9 @@ abstract class SvgImg {
   static const String studies = 'assets/icons/studies.svg';
   static const String refLink = 'assets/icons/ref_link.svg';
   static const String exit = 'assets/icons/exit.svg';
+  static const String logo = 'assets/images/logo.svg';
+  static const String loginBackground = 'assets/images/background.svg';
+  static const String coursesBackground = 'assets/images/courses_background.svg';
+  static const String couponsBackground = 'assets/images/coupons_background.svg';
+  static const String registrationBackground = 'assets/images/registration_background.svg';
 }

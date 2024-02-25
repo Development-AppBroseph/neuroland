@@ -14,7 +14,7 @@ enum Endpoints {
   const Endpoints({required this.endpoint});
 }
 
-const String baseUrl = 'http://130.193.50.69';
+const String baseUrl = 'http://84.201.157.51';
 
 extension EndpointsExtension on Endpoints {
   String get endpoint {

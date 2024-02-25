@@ -61,7 +61,7 @@ class _ChatViewState extends State<ChatView> {
                 child: const CustomText(
                   title: 'ИНСТРУКЦИЯ КАК ПОПАСТЬ В ТГ ЧАТ ПОДДЕРЖКУ',
                   fontSize: 24,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w800,
                   centerTitle: true,
                 ),
               ),
@@ -79,7 +79,7 @@ class _ChatViewState extends State<ChatView> {
                 margin: EdgeInsets.symmetric(horizontal: 24.w),
                 child: const CustomText(
                   title:
-                      '1. Нажмите кнопку "Перейти в чат"\n2. После Вас перенаправят в Telegram бот\n3. Нажмите кнопку "Начать\n4. Далее нажмите внизу белую кнопку "Отправить номер телефона"\n5. Задайте интересующий вопрос в бот и дождитесь ответа поддержки',
+                      '1. Нажмите кнопку "Перейти в чат"\n2. После Вас перенаправят в Telegram бот\n3. Нажмите кнопку "Начать"\n4. Далее нажмите внизу белую кнопку "Отправить номер телефона"\n5. Задайте интересующий вопрос в бот и дождитесь ответа поддержки',
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                   centerTitle: true,

@@ -63,7 +63,7 @@ class _HomeViewState extends State<HomeView> {
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: TextStyle(
           fontSize: 15.sp,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w800,
           fontFamily: 'Mons',
           // foreground: Paint()..shader = linearGradient,
         ),
@@ -71,97 +71,109 @@ class _HomeViewState extends State<HomeView> {
           color: Colors.grey,
           fontSize: 15.sp,
           fontFamily: 'Mons',
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w800,
         ),
         items: [
           BottomNavigationBarItem(
-            icon: ShaderMask(
-              shaderCallback: (bounds) {
-                const Rect rect = Rect.fromLTRB(0, 0, 25, 40);
-                return LinearGradient(
-                  colors: _selectedIndex == 0
-                      ? ColorsStyles.gradientRedColor
-                      : [
-                          const Color(0xffCECECE),
-                          const Color(0xffCECECE),
-                        ],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ).createShader(rect);
-              },
-              child: SvgPicture.asset(
-                SvgImg.studies,
-                height: 25.h,
-                width: 40.w,
+            icon: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: ShaderMask(
+                shaderCallback: (bounds) {
+                  const Rect rect = Rect.fromLTRB(0, 0, 25, 40);
+                  return LinearGradient(
+                    colors: _selectedIndex == 0
+                        ? ColorsStyles.gradientRedColor
+                        : [
+                            const Color(0xffCECECE),
+                            const Color(0xffCECECE),
+                          ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ).createShader(rect);
+                },
+                child: SvgPicture.asset(
+                  SvgImg.studies,
+                  height: 25.h,
+                  width: 40.w,
+                ),
               ),
             ),
             label: 'Учёба',
           ),
           BottomNavigationBarItem(
-            icon: ShaderMask(
-              shaderCallback: (bounds) {
-                const Rect rect = Rect.fromLTRB(0, 0, 25, 40);
-                return LinearGradient(
-                  colors: _selectedIndex == 1
-                      ? ColorsStyles.gradientRedColor
-                      : [
-                          const Color(0xffCECECE),
-                          const Color(0xffCECECE),
-                        ],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ).createShader(rect);
-              },
-              child: SvgPicture.asset(
-                SvgImg.cupones,
-                height: 25.h,
-                width: 40.w,
+            icon: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: ShaderMask(
+                shaderCallback: (bounds) {
+                  const Rect rect = Rect.fromLTRB(0, 0, 25, 40);
+                  return LinearGradient(
+                    colors: _selectedIndex == 1
+                        ? ColorsStyles.gradientRedColor
+                        : [
+                            const Color(0xffCECECE),
+                            const Color(0xffCECECE),
+                          ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ).createShader(rect);
+                },
+                child: SvgPicture.asset(
+                  SvgImg.cupones,
+                  height: 25.h,
+                  width: 40.w,
+                ),
               ),
             ),
             label: 'Купоны',
           ),
           BottomNavigationBarItem(
-            icon: ShaderMask(
-              shaderCallback: (bounds) {
-                const Rect rect = Rect.fromLTRB(0, 0, 25, 40);
-                return LinearGradient(
-                  colors: _selectedIndex == 2
-                      ? ColorsStyles.gradientRedColor
-                      : [
-                          const Color(0xffCECECE),
-                          const Color(0xffCECECE),
-                        ],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ).createShader(rect);
-              },
-              child: SvgPicture.asset(
-                SvgImg.chat,
-                height: 25.h,
-                width: 40.w,
+            icon: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: ShaderMask(
+                shaderCallback: (bounds) {
+                  const Rect rect = Rect.fromLTRB(0, 0, 25, 40);
+                  return LinearGradient(
+                    colors: _selectedIndex == 2
+                        ? ColorsStyles.gradientRedColor
+                        : [
+                            const Color(0xffCECECE),
+                            const Color(0xffCECECE),
+                          ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ).createShader(rect);
+                },
+                child: SvgPicture.asset(
+                  SvgImg.chat,
+                  height: 25.h,
+                  width: 40.w,
+                ),
               ),
             ),
             label: 'Чат',
           ),
           BottomNavigationBarItem(
-            icon: ShaderMask(
-              shaderCallback: (bounds) {
-                const Rect rect = Rect.fromLTRB(0, 0, 25, 40);
-                return LinearGradient(
-                  colors: _selectedIndex == 3
-                      ? ColorsStyles.gradientRedColor
-                      : [
-                          const Color(0xffCECECE),
-                          const Color(0xffCECECE),
-                        ],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ).createShader(rect);
-              },
-              child: SvgPicture.asset(
-                SvgImg.profile,
-                height: 25.h,
-                width: 40.w,
+            icon: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: ShaderMask(
+                shaderCallback: (bounds) {
+                  const Rect rect = Rect.fromLTRB(0, 0, 25, 40);
+                  return LinearGradient(
+                    colors: _selectedIndex == 3
+                        ? ColorsStyles.gradientRedColor
+                        : [
+                            const Color(0xffCECECE),
+                            const Color(0xffCECECE),
+                          ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ).createShader(rect);
+                },
+                child: SvgPicture.asset(
+                  SvgImg.profile,
+                  height: 25.h,
+                  width: 40.w,
+                ),
               ),
             ),
             label: 'Профиль',
