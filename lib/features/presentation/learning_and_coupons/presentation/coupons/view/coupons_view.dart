@@ -46,7 +46,7 @@ class _CouponsViewState extends State<CouponsView> {
                         floating: true,
                         pinned: true,
                         expandedHeight: 90,
-                        backgroundColor: Color.fromARGB(0, 0, 0, 0),
+                        backgroundColor: const Color.fromARGB(0, 0, 0, 0),
                         bottom: PreferredSize(
                           preferredSize: const Size.fromHeight(60),
                           child: SafeArea(

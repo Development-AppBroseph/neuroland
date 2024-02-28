@@ -289,7 +289,7 @@ class _SignUpState extends State<SignUp> with WidgetsBindingObserver {
                                 child: CustomTextField(
                                   color: ColorsStyles.backgroundTextField,
                                   controller: controllerTown,
-                                  hintText: 'Город',
+                                  hintText: 'Город проживания',
                                   type: TextInputType.text,
                                   onTap: () {
                                     setState(() {
@@ -475,14 +475,39 @@ class _SignUpState extends State<SignUp> with WidgetsBindingObserver {
                                 throw 'Could not launch';
                               }
                             },
-                            child: CustomText(
-                              title:
-                                  'Нажимая кнопку, вы автоматически соглашаетесь с Политикой Конфиденциальности',
-                              fontWeight: FontWeight.w400,
-                              color: ColorsStyles.textFiledHintColor,
-                              fontSize: 15.sp,
-                              centerTitle: true,
+                            child: RichText(
+                              textAlign: TextAlign.center,
+                              text: const TextSpan(
+                                // Note: Styles for TextSpans must be explicitly defined.
+                                // Child text spans will inherit styles from parent
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: ColorsStyles.textFiledHintColor,
+                                  fontSize: 15,
+                                  // fontSize: 15.sp,
+                                  // centerTitle: true,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                      text:
+                                          'Нажимая кнопку, вы автоматически соглашаетесь с '),
+                                  TextSpan(
+                                      text: 'Политикой Конфиденциальности',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.underline,
+                                      )),
+                                ],
+                              ),
                             ),
+                            // CustomText(
+                            //   title:
+                            //       'Нажимая кнопку, вы автоматически соглашаетесь с Политикой Конфиденциальности',
+                            //   fontWeight: FontWeight.w400,
+                            //   color: ColorsStyles.textFiledHintColor,
+                            //   fontSize: 15.sp,
+                            //   centerTitle: true,
+                            // ),
                           ),
                           SizedBox(height: 40.h)
                         ],

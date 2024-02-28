@@ -117,6 +117,41 @@ class _CouponsCardState extends State<CouponsCard> {
                     ),
                   ],
                 ),
+
+                Container(
+                  margin: EdgeInsets.only(
+                    left: 30.w,
+                    top: 14.h,
+                    right: 30.w,
+                    bottom: 20,
+                  ),
+                  child:
+                      GestureDetector(
+                        onTap: () async => {
+                          await context
+                              .read<ActualCoursesCubit>()
+                              .useUserCoupon(widget.couponEntiti.id),
+                          context
+                              .read<PartnerCouponsCubit>()
+                              .fetchPartnerCoupons(),
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20.w, vertical: 8.h),
+                          decoration: BoxDecoration(
+                            color: ColorsStyles.whiteColor,
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          child: CustomText(
+                            title:
+                                'Партнер',
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w800,
+                            color: ColorsStyles.mainTextColor,
+                          ),
+                        ),
+                  ),
+                ),
                 // Positioned(
                 //   top: 22,
                 //   left: 30,

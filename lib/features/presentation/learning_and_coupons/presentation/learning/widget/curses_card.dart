@@ -81,6 +81,10 @@ class _CoursesCardState extends State<CoursesCard> {
                             ),
                           ),
                         ),
+
+                        height: 180,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
                         imageUrl: widget.videoEntiti.preview,
                       ),
                     ),
