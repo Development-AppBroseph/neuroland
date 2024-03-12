@@ -7,7 +7,8 @@ enum Endpoints {
   profile(endpoint: '/api/users/me/'),
   inviteLink(endpoint: '/api/invite/'),
   addPoints(endpoint: '/api/videos/ viewed/'),
-  useCoupon(endpoint: '/api/coupons/ redeem/'),
+  // useCoupon(endpoint: '/api/coupons/ redeem/'),
+  useCoupon(endpoint: '/api/redeem-coupon/ '),
   partnerCoupons(endpoint: '/api/partner-coupons/');
 
   final String endpoint;

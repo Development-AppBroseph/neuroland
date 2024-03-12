@@ -32,7 +32,7 @@ class ActualCoursesCubit extends Cubit<ActualCoursesState> {
     }
   }
 
-  Future<void> addPointsToUser(int videoId) async {
+  Future<void> addPointsToUser(int videoId, Function() refreshPointsWidget) async {
     try {
       SmartDialogFunctions.showCustomLoader();
       final result = await addPoints.call(AddPointParams(videoId: videoId));
@@ -47,6 +47,7 @@ class ActualCoursesCubit extends Cubit<ActualCoursesState> {
         },
       );
       final courses = await getCoursesVideo.call(CoursesVideoParams());
+      refreshPointsWidget();
       courses.fold(
         (error) => emit(ActualCoursesErrorState(message: error.toString())),
         (data) => emit(ActualCoursesLoadedState(coursesVideoEntiti: data)),

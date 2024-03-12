@@ -61,24 +61,8 @@ class _CouponsViewState extends State<CouponsView> {
                                     fontWeight: FontWeight.w800,
                                   ),
                                   const Spacer(),
-                                  Container(
-                                    height: 33.h,
-                                    width: 122.w,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.circular(10.sp),
-                                      border: Border.all(
-                                          color: ColorsStyles.buttonColor,
-                                          width: 2),
-                                    ),
-                                    child: CustomText(
-                                      title:
-                                          'Баллы: ${state.partnerCouponsEntiti.balance}',
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.w900,
-                                      color: ColorsStyles.buttonColor,
-                                    ),
+                                  BalanceWidget(
+                                    balance: state.partnerCouponsEntiti.balance,
                                   ),
                                 ],
                               ),
@@ -94,7 +78,7 @@ class _CouponsViewState extends State<CouponsView> {
                       separatorBuilder: (context, index) => const SizedBox(
                         height: 18,
                       ),
-                      padding: const EdgeInsets.only(top: 15),
+                      padding: const EdgeInsets.only(top: 15, bottom: 15),
                       itemCount:
                           state.partnerCouponsEntiti.partnerCouponEntiti.length,
                       itemBuilder: (context, index) => CouponsCard(
@@ -117,6 +101,37 @@ class _CouponsViewState extends State<CouponsView> {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class BalanceWidget extends StatelessWidget {
+  final int balance;
+  const BalanceWidget({
+    required this.balance,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 33.h,
+      width: 122.w,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        borderRadius:
+            BorderRadius.circular(10.sp),
+        border: Border.all(
+            color: ColorsStyles.buttonColor,
+            width: 2),
+      ),
+      child: CustomText(
+        title:
+            'Баллы: $balance',
+        fontSize: 15.sp,
+        fontWeight: FontWeight.w900,
+        color: ColorsStyles.buttonColor,
       ),
     );
   }

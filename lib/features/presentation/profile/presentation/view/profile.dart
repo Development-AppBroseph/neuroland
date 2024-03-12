@@ -54,6 +54,7 @@ class _ProfileViewState extends State<ProfileView> {
             .read<ProfileCubit>()
             .editUserAvatar(base64String);
             // .editUserAvatar('data:image/png;base64,$base64String');
+            sleep(const Duration(milliseconds: 100));
       });
     } catch (e) {
       print(e);

@@ -87,8 +87,8 @@ class CoursesVideoDatasourceImpl implements CoursesVideoDatasource {
   @override
   Future<void> useCoupon(int couponId) async {
     try {
-      final Response response = await _dio.post(
-        Endpoints.useCoupon.endpoint.replaceRange(13, 14, '$couponId/'),
+      final Response response = await _dio.get(
+        Endpoints.useCoupon.endpoint.replaceRange(19, 20, '$couponId/'),
         options: Options(headers: headers),
       );
       log(response.statusMessage.toString());
@@ -100,15 +100,26 @@ class CoursesVideoDatasourceImpl implements CoursesVideoDatasource {
     } on DioError catch (error) {
       log(error.response!.data.toString());
       if (error.response!.statusCode == 400) {
-        throw 'Вы уже приобрели купон';
-      }
-       if (error.response!.statusCode == 404) {
-        throw 'Больше нет доступных купонов';
-      }
-      if (error.response!.statusCode == 403) {
-        throw 'У Вас недостаточно поитнов, чтобы приобрести купон';
-      } else if (error.response!.statusCode! >= 500) {
-        throw 'Ошибка сервера';
+        if (error.response!.data['error'] ==
+            "Not enough points to get the coupon") {
+          throw 'У Вас недостаточно баллов, чтобы приобрести купон';
+        } else if (error.response!.data['error'] ==
+            "You have already used this coupon") {
+          throw 'Вы уже приобрели этот купон';
+        } else if (error.response!.data['error'] ==
+            "No more coupons available") {
+          throw 'Купоны закончились';
+        }
+        
+        // throw 'Вы уже приобрели купон';
+        // }
+        //  if (error.response!.statusCode == 404) {
+        //   throw 'Больше нет доступных купонов';
+        // }
+        // if (error.response!.statusCode == 403) {
+        //   throw 'У Вас недостаточно баллов, чтобы приобрести купон';
+        // } else if (error.response!.statusCode! >= 500) {
+        //   throw 'Ошибка сервера';
       } else {
         throw 'Что-то пошло не так!';
       }

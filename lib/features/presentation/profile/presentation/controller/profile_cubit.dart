@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:grow_food/core/helpers/functions/functions.dart';
 import 'package:grow_food/features/presentation/profile/domain/entiti/invite_link_entiti.dart';
 import 'package:grow_food/features/presentation/profile/domain/entiti/profile_entiti.dart';
@@ -62,12 +63,26 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   Future<void> editUserAvatar(String avatar) async {
     try {
+
+      SmartDialogFunctions.showCustomLoader();
+
       final getedAvatar =
           await editAvatar.call(EditAvatarParams(avatar: avatar));
       getedAvatar.fold(
-        (error) => SmartDialogFunctions.showErrorDilog(title: error.error),
-        (data) => emit(ProfileInitialState()),
-      );
+        (error) => {
+          SmartDialog.dismiss(),
+          SmartDialogFunctions.showErrorDilog(title: error.error),
+        },
+        (data) => {
+          SmartDialog.dismiss(),
+          SmartDialogFunctions.showErrorDilog(title: 'Успешно'),
+          emit(ProfileInitialState()),
+        });
+      
+      // fold(
+      //   (error) => SmartDialogFunctions.showErrorDilog(title: error.error),
+      //   (data) => emit(ProfileInitialState()),
+      // );
     } catch (e) {
       emit(ProfileErrorState(errorMessage: e.toString()));
     }
