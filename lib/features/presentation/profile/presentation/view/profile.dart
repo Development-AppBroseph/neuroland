@@ -52,7 +52,9 @@ class _ProfileViewState extends State<ProfileView> {
         _image = img;
         context
             .read<ProfileCubit>()
-            .editUserAvatar('data:image/png;base64,$base64String');
+            .editUserAvatar(base64String);
+            // .editUserAvatar('data:image/png;base64,$base64String');
+            sleep(const Duration(milliseconds: 100));
       });
     } catch (e) {
       print(e);
@@ -64,7 +66,7 @@ class _ProfileViewState extends State<ProfileView> {
     nameController.addListener(() {});
     phoneController.addListener(() {});
     emailController.addListener(() {});
-       context.read<ProfileCubit>().fetchProfile();
+    context.read<ProfileCubit>().fetchProfile();
     super.initState();
   }
 
@@ -81,19 +83,18 @@ class _ProfileViewState extends State<ProfileView> {
         return true;
       },
       builder: (context, state) {
-         log('${state}');
+        log('${state}');
         if (state is ProfileInitialState) {
           context.read<ProfileCubit>().fetchProfile();
         }
         if (state is ProfileLoadedState) {
-          
           log('${state.profile.coupons}');
           nameController.text = state.profile.user.name;
           phoneController.text = state.profile.user.phone;
           emailController.text = state.profile.user.email;
           phoneController.text =
               maskFormatter.maskText(state.profile.user.phone);
-              coupons = state.profile.coupons;
+          coupons = state.profile.coupons;
         }
         return Scaffold(
           backgroundColor: ColorsStyles.backgroundColor,
@@ -224,7 +225,7 @@ class _ProfileViewState extends State<ProfileView> {
                                     .read<ProfileCubit>()
                                     .editUserNumber(
                                         '+7${maskFormatter.getUnmaskedText()}'),
-                                title: 'Номер',
+                                title: 'Телефон',
                               )
                             else
                               CardLoading(
@@ -244,7 +245,7 @@ class _ProfileViewState extends State<ProfileView> {
                                 onFinished: () => context
                                     .read<ProfileCubit>()
                                     .editUserEmail(emailController.text),
-                                title: 'Email',
+                                title: 'Почта',
                               )
                             else
                               CardLoading(
@@ -393,7 +394,8 @@ class _ProfileViewState extends State<ProfileView> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>  BoughtCouponsPage(coupons: coupons),
+                        builder: (context) =>
+                            BoughtCouponsPage(coupons: coupons),
                       ),
                     );
                   },

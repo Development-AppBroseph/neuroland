@@ -95,11 +95,21 @@ class RemoteProfileDatasourceImpl implements RemoteProfileDatasource {
         Endpoints.profile.endpoint,
         data: userData,
       );
-      if (response.statusCode! >= 200 && response.statusCode! < 400) {
-        return ProfileModel.fromJson(response.data);
+
+      if (response.statusCode == 200) {
+        // Требует рефакторинг
+
+        final Response responseUser = await _dio.get(Endpoints.profile.endpoint);
+        // throw "Изменения сохранены";
+        return ProfileModel.fromJson(responseUser.data);
       } else {
-        throw response.data['error'];
+        throw "Что-то пошло не так!";
       }
+      // if (response.statusCode! >= 200 && response.statusCode! < 400) {
+      //   return ProfileModel.fromJson(response.data);
+      // } else {
+      //   throw response.data['error'];
+      // }
     } on DioError catch (error) {
       if (error.response!.statusCode == 400) {
         throw 'Вы ввели данные не правильно';
@@ -122,7 +132,11 @@ class RemoteProfileDatasourceImpl implements RemoteProfileDatasource {
         data: userData,
       );
       if (response.statusCode! >= 200 && response.statusCode! < 400) {
-        return ProfileModel.fromJson(response.data);
+        // Требует рефакторинг
+        final Response responseUser = await _dio.get(Endpoints.profile.endpoint);
+        return ProfileModel.fromJson(responseUser.data);
+        // Требует рефакторинг
+        // return ProfileModel.fromJson(response.data);
       } else {
         throw response.data['error'];
       }
@@ -138,17 +152,20 @@ class RemoteProfileDatasourceImpl implements RemoteProfileDatasource {
   }
 
   @override
+  // Future<ProfileModel> editName({required String name}) async {
   Future<ProfileModel> editName({required String name}) async {
-    final userData = jsonEncode({
-      "name": name,
-    });
+    final userData = jsonEncode({"name": name, "coupons": {}});
     try {
       final Response response = await _dio.patch(
         Endpoints.profile.endpoint,
         data: userData,
       );
       if (response.statusCode! >= 200 && response.statusCode! < 400) {
-        return ProfileModel.fromJson(response.data);
+        // Требует рефакторинг
+        final Response responseUser = await _dio.get(Endpoints.profile.endpoint);
+        return ProfileModel.fromJson(responseUser.data);
+        // Требует рефакторинг
+        // return ProfileModel.fromJson(response.data);
       } else {
         throw response.data['error'];
       }
@@ -174,7 +191,11 @@ class RemoteProfileDatasourceImpl implements RemoteProfileDatasource {
         data: userData,
       );
       if (response.statusCode! >= 200 && response.statusCode! < 400) {
-        return ProfileModel.fromJson(response.data);
+        // Требует рефакторинг
+        final Response responseUser = await _dio.get(Endpoints.profile.endpoint);
+        return ProfileModel.fromJson(responseUser.data);
+        // Требует рефакторинг
+        // return ProfileModel.fromJson(response.data);
       } else {
         throw response.data['error'];
       }

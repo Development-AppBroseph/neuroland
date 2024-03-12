@@ -59,7 +59,9 @@ class _VideoPageState extends State<VideoPage> {
         if (!widget.videoEntiti.viewed) {
           if (widget.videoEntiti.duration == dur) {
             widget.onWatched();
-            youtubePlayerController.dispose();
+            widget.videoEntiti.viewed = true;
+            // Не знаю зачем тут нужно удаление плеера, предварительно закомментировал
+            // youtubePlayerController.dispose();
           }
         }
       });

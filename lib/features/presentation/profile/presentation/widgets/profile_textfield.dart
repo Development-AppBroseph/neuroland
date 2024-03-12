@@ -34,7 +34,7 @@ class ProfileTextField extends StatelessWidget {
         controller: controller,
         style: const TextStyle(
           fontSize: 20,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w900,
           fontFamily: 'Mons',
           color: ColorsStyles.blackColor,
         ),
@@ -53,12 +53,12 @@ class ProfileTextField extends StatelessWidget {
           labelText: title,
           labelStyle: const TextStyle(
               fontSize: 15,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w600,
               color: Color(0xff6B6B6B)),
           floatingLabelStyle: const TextStyle(
             fontSize: 15,
             fontFamily: 'Mons',
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.w600,
             color: Color(0xff6B6B6B),
           ),
         ),

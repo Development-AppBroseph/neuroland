@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/constants/svg_and_img.dart';
 import 'package:grow_food/core/helpers/functions/functions.dart';
@@ -61,75 +62,96 @@ class _SignInState extends State<SignIn> {
           body: SafeArea(
             child: ScrollConfiguration(
               behavior: MyBehavior(),
-              child: ListView(
-                scrollDirection: Axis.vertical,
+              child: Stack(
                 children: [
-                  Container(
-                    height: 306.h,
-                    width: 320.w,
-                    margin: EdgeInsets.only(
-                      top: 70.h,
-                      right: 24.w,
-                      left: 24.w,
-                      bottom: 56.h,
-                    ),
-                    child: Image.asset(
-                      Img.neurodom,
-                      fit: BoxFit.contain,
+                  Positioned.fill(
+                    child: SvgPicture.asset(
+                      SvgImg.loginBackground,
+                      fit: BoxFit.fill,
                     ),
                   ),
-                  EntryWidget(
-                    controllerNumberOrEmail: controllerNumberOrEmail,
-                    controllerPassword: controllerPassword,
-                  ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  CustomButton(
-                    title: 'Войти',
-                    accentText: true,
-                    onTap: () => context.read<SignInCubit>().signIn(
-                          emailOrPhoneNumber: controllerNumberOrEmail.text,
-                          password: controllerPassword.text,
-                          onSuccess: () {
-                            if (mounted) {
-                              return Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                '/HomeView',
-                                (route) => false,
-                              );
-                            }
-                          },
+                  ListView(
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      Container(
+                        height: 306.h,
+                        width: 320.w,
+                        margin: EdgeInsets.only(
+                          top: 70.h,
+                          right: 24.w,
+                          left: 24.w,
+                          bottom: 56.h,
                         ),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  CustomButton(
-                    title: 'Регистрация',
-                    outLined: true,
-                    accentText: true,
-                    onTap: () => Navigator.pushNamed(context, '/SignUp'),
-                  ),
-                  SizedBox(height: 15.h),
-                  GestureDetector(
-                    onTap: () async {
-                      if (!await launchUrl(
-                        Uri.parse(
-                            'http://158.160.44.207:9001/project_info/03_Положение_по_защите_и_обработке_персональных_данных_2.pdf'),
-                        mode:  Platform.isAndroid
-                                  ? LaunchMode.externalNonBrowserApplication
-                                  : LaunchMode.inAppWebView,
-                      )) {
-                        throw 'Could not launch';
-                      }
-                    },
-                    child: Center(
-                      child: CustomText(
-                        title: 'Политика конфиденциальности',
-                        fontSize: 16.h,
+                        // child: SvgPicture.asset(
+                        //   SvgImg.studies,
+                        //   height: 25.h,
+                        //   width: 40.w,
+                        // ),
+                        child: SvgPicture.asset(
+                          SvgImg.logo,
+                          height: 25.h,
+                          width: 40.w,
+                        ),
+                        // child: Image.asset(
+                        //   Img.neurodom,
+                        //   fit: BoxFit.contain,
+                        // ),
                       ),
-                    ),
+                      EntryWidget(
+                        controllerNumberOrEmail: controllerNumberOrEmail,
+                        controllerPassword: controllerPassword,
+                      ),
+                      SizedBox(
+                        height: 30.h,
+                      ),
+                      CustomButton(
+                        title: 'Войти',
+                        accentText: true,
+                        onTap: () => context.read<SignInCubit>().signIn(
+                              emailOrPhoneNumber:
+                                  controllerNumberOrEmail.text,
+                              password: controllerPassword.text,
+                              onSuccess: () {
+                                if (mounted) {
+                                  return Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    '/HomeView',
+                                    (route) => false,
+                                  );
+                                }
+                              },
+                            ),
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      CustomButton(
+                        title: 'Регистрация',
+                        outLined: true,
+                        accentText: true,
+                        onTap: () => Navigator.pushNamed(context, '/SignUp'),
+                      ),
+                      SizedBox(height: 15.h),
+                      GestureDetector(
+                        onTap: () async {
+                          if (!await launchUrl(
+                            Uri.parse(
+                                'http://158.160.44.207:9001/project_info/03_Положение_по_защите_и_обработке_персональных_данных_2.pdf'),
+                            mode: Platform.isAndroid
+                                ? LaunchMode.externalNonBrowserApplication
+                                : LaunchMode.inAppWebView,
+                          )) {
+                            throw 'Could not launch';
+                          }
+                        },
+                        child: Center(
+                          child: CustomText(
+                            title: 'Политика конфиденциальности',
+                            fontSize: 16.h,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

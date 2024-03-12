@@ -17,9 +17,11 @@ class VideoEntiti {
   final CourseEntiti? course;
   final int points;
   final String preview;
-  final bool viewed;
   final String duration;
   final String videoUrl;
   final DateTime createdAt;
   final String description;
+  // final bool viewed;
+  // Пожалуйста подскажите на сколько верное решение 
+  bool viewed;
 }

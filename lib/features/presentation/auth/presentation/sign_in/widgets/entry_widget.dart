@@ -74,7 +74,7 @@ class _EntryWidgetState extends State<EntryWidget> {
               textCapitalization: TextCapitalization.none,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration.collapsed(
-                hintText: 'Email',
+                hintText: 'Email или телефон',
                 hintStyle: TextStyle(
                   fontSize: 20.sp,
                   fontFamily: 'Mons',

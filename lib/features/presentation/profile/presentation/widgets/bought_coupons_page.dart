@@ -47,7 +47,7 @@ class _BoughtCouponsPageState extends State<BoughtCouponsPage> {
             separatorBuilder: (context, index) => const SizedBox(
               height: 18,
             ),
-            padding: const EdgeInsets.only(top: 15),
+            padding: const EdgeInsets.only(top: 15, bottom: 15),
             itemCount: widget.coupons.length,
             itemBuilder: (context, index) => Container(
               width: double.infinity,
@@ -110,7 +110,7 @@ class _BoughtCouponsPageState extends State<BoughtCouponsPage> {
                               ),
                               child: CustomText(
                                 title:
-                                    '${widget.coupons[index].quantity} баллов',
+                                    '${widget.coupons[index].pointsRequired} баллов',
                                 fontSize: 15.sp,
                                 fontWeight: FontWeight.w800,
                                 color: ColorsStyles.whiteColor,

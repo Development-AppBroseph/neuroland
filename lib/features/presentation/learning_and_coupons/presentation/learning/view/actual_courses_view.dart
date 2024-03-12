@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:grow_food/core/constants/colors.dart';
 import 'package:grow_food/core/helpers/widgets/custom_text.dart';
 import 'package:grow_food/core/helpers/widgets/my_behavior.dart';
@@ -10,6 +11,7 @@ import 'package:grow_food/features/presentation/learning_and_coupons/presentatio
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/controller/actual_courses_state.dart';
 import 'package:grow_food/features/presentation/learning_and_coupons/presentation/learning/widget/curses_card.dart';
 
+import '../../../../../../core/constants/svg_and_img.dart';
 import '../widget/actual_curses_widget.dart';
 
 class StudiesView extends StatefulWidget {
@@ -45,105 +47,115 @@ class _StudiesViewState extends State<StudiesView> {
             child: Builder(builder: (context) {
               tabContext = context;
               return Scaffold(
-                backgroundColor: backgroundColor,
-                body: NestedScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  headerSliverBuilder:
-                      (BuildContext context, bool innerBoxIsScrolled) {
-                    return [
-                      SliverAppBar(
-                        toolbarHeight: 90.h,
-                        backgroundColor: ColorsStyles.backgroundColor,
-                        elevation: 0,
-                        floating: true,
-                        pinned: true,
-                        bottom: PreferredSize(
-                          preferredSize: const Size.fromHeight(60),
-                          child: StreamBuilder(
-                            stream: actualCardController.stream,
-                            initialData: 0,
-                            builder: (context, snapshot) => TabBar(
-                              onTap: (value) {
-                                actualCardController.sink.add(value);
-                              },
-                              physics: const BouncingScrollPhysics(),
-                              indicatorColor: Colors.transparent,
-                              indicatorSize: TabBarIndicatorSize.label,
-                              padding: EdgeInsets.only(
-                                left: 12,
-                                right: 12,
-                                bottom: 15.h,
-                              ),
-                              labelPadding:
-                                  EdgeInsets.symmetric(horizontal: 10.w),
-                              isScrollable: true,
-                              tabs: List.generate(
-                                state.coursesVideoEntiti.directions.length,
-                                (index) => ActualCursesCard(
-                                  title: state.coursesVideoEntiti
-                                      .directions[index].name,
-                                  isSelected:
-                                      snapshot.data == index ? true : false,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        flexibleSpace: FlexibleSpaceBar(
-                          background: SafeArea(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  margin:
-                                      EdgeInsets.only(top: 60.h, left: 24.w),
-                                  child: CustomText(
-                                    title: 'Актуальные курсы',
-                                    fontSize: 24.sp,
-                                    fontWeight: FontWeight.w800,
+                // backgroundColor: backgroundColor,
+                body: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: SvgPicture.asset(
+                        SvgImg.coursesBackground,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    NestedScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      headerSliverBuilder:
+                          (BuildContext context, bool innerBoxIsScrolled) {
+                        return [
+                          SliverAppBar(
+                            toolbarHeight: 90.h,
+                            backgroundColor: Color(0x00000000),
+                            elevation: 0,
+                            floating: true,
+                            pinned: true,
+                            bottom: PreferredSize(
+                              preferredSize: const Size.fromHeight(60),
+                              child: StreamBuilder(
+                                stream: actualCardController.stream,
+                                initialData: 0,
+                                builder: (context, snapshot) => TabBar(
+                                  onTap: (value) {
+                                    actualCardController.sink.add(value);
+                                  },
+                                  physics: const BouncingScrollPhysics(),
+                                  indicatorColor: Colors.transparent,
+                                  indicatorSize: TabBarIndicatorSize.label,
+                                  padding: EdgeInsets.only(
+                                    left: 12,
+                                    right: 12,
+                                    bottom: 15.h,
+                                  ),
+                                  labelPadding:
+                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  isScrollable: true,
+                                  tabs: List.generate(
+                                    state.coursesVideoEntiti.directions.length,
+                                    (index) => ActualCursesCard(
+                                      title: state.coursesVideoEntiti
+                                          .directions[index].name,
+                                      isSelected:
+                                          snapshot.data == index ? true : false,
+                                    ),
                                   ),
                                 ),
-                              ],
+                              ),
+                            ),
+                            flexibleSpace: FlexibleSpaceBar(
+                              background: SafeArea(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                          top: 60.h, left: 24.w),
+                                      child: CustomText(
+                                        title: 'Актуальные курсы',
+                                        fontSize: 24.sp,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    ];
-                  },
-                  body: TabBarView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: List.generate(
-                      state.coursesVideoEntiti.directions.length,
-                      (indexTabs) => ScrollConfiguration(
-                        behavior: MyBehavior(),
-                        child: ListView.separated(
-                          separatorBuilder: (context, index) => SizedBox(
-                            height: 15.h,
-                          ),
-                          padding: EdgeInsets.only(top: 20.h, bottom: 32),
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: state.coursesVideoEntiti.videos.where(
-                            (element) {
-                              return element.course?.direction ==
-                                  state.coursesVideoEntiti.directions[indexTabs]
-                                      .id;
-                            },
-                          ).length,
-                          itemBuilder: (context, index) => CoursesCard(
-                            videoEntiti: state.coursesVideoEntiti.videos
-                                .where((element) =>
-                                    element.course?.direction ==
-                                    state.coursesVideoEntiti
-                                        .directions[indexTabs].id)
-                                .toList()[index],
-                            directionEntiti:
-                                state.coursesVideoEntiti.directions[indexTabs],
+                        ];
+                      },
+                      body: TabBarView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: List.generate(
+                          state.coursesVideoEntiti.directions.length,
+                          (indexTabs) => ScrollConfiguration(
+                            behavior: MyBehavior(),
+                            child: ListView.separated(
+                              separatorBuilder: (context, index) => SizedBox(
+                                height: 15.h,
+                              ),
+                              padding: EdgeInsets.only(top: 20.h, bottom: 32),
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: state.coursesVideoEntiti.videos.where(
+                                (element) {
+                                  return element.course?.direction ==
+                                      state.coursesVideoEntiti
+                                          .directions[indexTabs].id;
+                                },
+                              ).length,
+                              itemBuilder: (context, index) => CoursesCard(
+                                videoEntiti: state.coursesVideoEntiti.videos
+                                    .where((element) =>
+                                        element.course?.direction ==
+                                        state.coursesVideoEntiti
+                                            .directions[indexTabs].id)
+                                    .toList()[index],
+                                directionEntiti: state
+                                    .coursesVideoEntiti.directions[indexTabs],
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               );
             }),

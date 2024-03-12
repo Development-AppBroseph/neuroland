@@ -7,14 +7,15 @@ enum Endpoints {
   profile(endpoint: '/api/users/me/'),
   inviteLink(endpoint: '/api/invite/'),
   addPoints(endpoint: '/api/videos/ viewed/'),
-  useCoupon(endpoint: '/api/coupons/ redeem/'),
+  // useCoupon(endpoint: '/api/coupons/ redeem/'),
+  useCoupon(endpoint: '/api/redeem-coupon/ '),
   partnerCoupons(endpoint: '/api/partner-coupons/');
 
   final String endpoint;
   const Endpoints({required this.endpoint});
 }
 
-const String baseUrl = 'http://130.193.50.69';
+const String baseUrl = 'http://84.201.157.51';
 
 extension EndpointsExtension on Endpoints {
   String get endpoint {
